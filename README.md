@@ -1,27 +1,14 @@
 <h2 align="center"> ━━━━━━  ❖  ━━━━━━ </h2>
 
-## ♥️ Welcome! ♥️
-This is a collection of dotfiles which I use for a bspwm setup. Hope you find something you like!
 
+<h3 align="center">:heart: Welcome! :heart: </h3></br>
+This is a collection of dotfiles which I use with bspwm. If you find something you like, take it and make it your own! </br></br>
 
-### DEPENDENCIES
-> 
-
-|  DETAILS   |  SOFTWARE  |
-|------------|------------|
-| OS         | VOID ♥️     |
-| SHELL      | ZSH        |
-| BAR        | POLYBAR    |
-| TERMINAL   | KITTY      |
-| EDITOR     | HELIX      |
-| COMPOSITOR | PICOM      |
-| LAUNCHER   | ROFI       |
-| PALETTE    | SAGA  ♥️    |
-</br>
+<img src="assets/WALL.png"></br>
 
 Most of these files will work out of the box assuming you have the applications installed. There are however some exceptions:
-- Dotfiles which make use of colour to some extent retrieve these values from `$HOME/.config/colorer/out` and as such [colorer](https://github.com/Kiddae/colorer) is recommended. 
-- zshrc require the `.antigen.zsh file included in order to install plugins.
+- Dotfiles which make use of colour to some extent retrieve these values from `$HOME/.config/colorer/out` and therefore [colorer](https://github.com/Kiddae/colorer) is recommended. 
+- Zshrc require the antigen.zsh file included in order to install plugins.</br>
 
 In addition, some of the bar modules require additional dependencies:
 - CPU modules require lm_sensors.
@@ -29,6 +16,19 @@ In addition, some of the bar modules require additional dependencies:
 - Updates requires the xbps package manager.
 - VPN require Mullvad. 
 - Menu, powermenu & VPN modules make use of Rofi to some extent. 
+
+Here is a complete list of what I use:
+|  TYPE      |  NAME      |
+|------------|------------|
+| OS         | Void ♥️     |
+| Shell      | Zsh        |
+| Bar        | Polybar    |
+| Temrinal   | Kitty      |
+| Editor     | Helix      |
+| Compositor | Picom      |
+| Launcher   | Rofi       |
+| Browser    | Firefox    |
+| Palette    | SAGA  ♥️    |
 
 ## GALLERY </br></br>
 <details>
@@ -60,9 +60,11 @@ With this method all files remain in the BSPDOTS which make updating and handlin
 
 ### NOTES
 - BSPWM includes files for [colorer](https://github.com/kiddae/colorer) to switch colour schemes. To do so install colorer and run `colorer path-to-scheme`. I have included a selection in `~/.config/colorer/flavours`. The default colourscheme is [SAGA](https://github.com/SAGAtheme/SAGA). If you like it there are additional dotfiles which make use of it [here](https://github.com/SAGAtheme/). </br>
+- The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox).
 
 ## ACKNOWLEDGEMENTS
 - [Kiddae](https://github.com/kiddae) for developing colorer.
 - [Siduck](https://github.com/siduck) for inspiration and rofi template.
 - [adi1090x](https://github.com/adi1090x) for the ncmpcpp config.
+
 
