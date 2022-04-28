@@ -1,0 +1,280 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+include-file = ~/.config/colorer/out/polybar
+
+;  _                    
+; | |__   __ _ _ __ ___ 
+; | '_ \ / _` | '__/ __|
+; | |_) | (_| | |  \__ \
+; |_.__/ \__,_|_|  |___/
+
+[bar/base]
+enable-ipc=true
+height = 26
+width = 100%
+offset-x = 0
+offset-y = 0
+padding = 0
+module-margin = 0
+background = ${colors.background}
+foreground = ${colors.foreground}
+bottom = true
+border-color = ${colors.background}
+border-size = 0
+line-size = 0
+line-color = ${colors.color8}
+
+font-0=Iosevka Nerd Font:style=Heavy:size=10;3
+font-1=Material Design Icons:size=13;3
+
+
+wm-restack = bspwm
+override-redirect = false
+
+modules-left = menu cpu cputemp gpu gputemp memory filesystem 
+modules-center =  bspwm
+modules-right = mpd updates date powermenu
+
+;                      _       _           
+;  _ __ ___   ___   __| |_   _| | ___  ___ 
+; | '_ ` _ \ / _ \ / _` | | | | |/ _ \/ __|
+; | | | | | | (_) | (_| | |_| | |  __/\__ \
+; |_| |_| |_|\___/ \__,_|\__,_|_|\___||___/
+
+[module/menu]
+type = custom/text
+content ="󰍜"
+content-padding = 2
+click-left = rofi -show drun
+content-foreground = ${colors.color7}
+
+[module/cpu]
+type = internal/cpu
+interval = 2.5
+format =  <label>
+format-prefix = "󰍛 "
+format-prefix-foreground = ${colors.color1}
+format-padding = 1
+format-background = ${colors.background}
+format-foreground = ${colors.color7}
+label =  %percentage%%
+click-left = kitty --class btm -e btm
+
+[module/cputemp]
+type = custom/script
+exec = sensors | grep "Tctl" | tr -d '+' | tr -d \C | tr -d \Tctl: | tr -d \  | awk -F. '{print ""$1"""°"}'
+interval = 10
+format = <label>
+format-prefix = "󰍛 "
+format-prefix-foreground = ${colors.color2}
+format-padding = 1
+format-background = ${colors.background}
+format-foreground = ${colors.color7}
+click-left = kitty --class btm -e btm
+
+[module/gpu]
+type = custom/script
+exec = nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits | awk '{print ""$1"""%"}'
+interval = 2.5
+format = <label>
+format-prefix = "󰖺 "
+format-prefix-foreground = ${colors.color3}
+format-padding = 1
+format-background = ${colors.background}
+format-foreground = ${colors.color7}
+click-left = kitty --class btm -e btm
+
+[module/gputemp]
+type = custom/script
+exec = nvidia-smi --query-gpu=temperature.gpu --format=nounits,csv,noheader | awk '{print ""$1"""°"}'
+interval = 2.5
+format = <label>
+format-prefix = "󰖺 "
+format-prefix-foreground = ${colors.color4}
+format-padding = 1
+format-background = ${colors.background}
+format-foreground = ${colors.color7}
+click-left = kitty --class btm -e btm
+
+[module/memory]
+type = internal/memory
+format = <label>
+format-prefix = 󰆼
+format-prefix-foreground = ${colors.color5}
+format-prefix-background = ${colors.background}
+label = %percentage_used%%
+label-background = ${colors.background}
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+interval = 10
+format = <label>
+format-mounted-prefix = 󰆼
+format-mounted-prefix-foreground = ${colors.color6}
+format-mounted-padding = 1
+format-mounted-background = ${colors.background}
+format-mounted-foreground = ${colors.color7}
+label-mounted = %percentage_used%%
+
+[module/bspwm]
+type = internal/bspwm
+format = <label-state>
+format-margin = 0
+index-sort = true
+
+
+enable-click = true
+reverse-scroll = false
+enable-scroll = true
+
+label-focused = 󰗝
+label-focused-overline = ${colors.foreground}
+label-focused-foreground = ${colors.color7}
+label-focused-padding = 1
+
+label-empty = 󰝦
+label-empty-padding = 1
+label-empty-foreground = ${colors.color7}
+
+label-occupied = 󰺕
+label-occupied-foreground = ${colors.color7}
+label-occupied-padding = 1
+
+[module/mpd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+format-online = <label-song>
+label-song = "%artist% - %title% "
+format-online-foreground= ${colors.color7}
+
+[module/pipewire]
+type = custom/script
+label = "%output%"
+format-prefix = "󰋋"
+format-prefix-foreground = ${colors.color4}
+exec = ~/.config/polybar/scripts/pipewire
+click-left = ~/.bin/music_terminal &
+click-right =  ~/.config/polybar/scripts/pipewire mute &
+scroll-up =  ~/.config/polybar/scripts/pipewire up &
+scroll-down =  ~/.config/polybar/scripts/pipewire down &
+
+[module/updates]
+type = custom/script
+exec = xbps-install -Mun | wc -l
+format = <label>
+format-prefix = "󰬬"
+format-prefix-foreground = ${colors.color3}
+interval = 4600
+label =%output%
+label-padding = 1
+label-foreground = ${colors.color7}
+label-background = ${colors.background}
+
+[module/vpn]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/vpn_module.sh
+click-right = $HOME/.config/polybar/scripts/vpn_module.sh --toggle-connection &
+click-left = $HOME/.config/polybar/scripts/vpn_module.sh --location-menu &
+click-middle = $HOME/.config/polybar/scripts/vpn_module.sh --ip-address &
+interval = 5
+format = <label>
+format-prefix = "󰖂"
+format-prefix-foreground = ${colors.color2}
+format-background = ${colors.background}
+
+[module/date]
+type = internal/date
+interval = 60
+format = <label>
+format-prefix = "󰔚 "
+format-prefix-foreground = ${colors.color1}
+format-padding = 1
+date = %H:%M%{F-}
+time-alt = %a, %b %d%{F-}
+label = %date%%time%
+
+[module/powermenu]
+type = custom/text
+content ="󰍜"
+content-padding = 2
+click-left = rofi -show powermenu -modi powermenu:$HOME/.config/polybar/scripts/rofi-power-menu
+content-foreground = ${colors.color7}
+
+[module/empty-space]
+type = custom/text
+content = "  "
+
+[module/round-left]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = ${colors.background}
+
+[module/round-right]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = ${colors.background}
+
+[module/roundd-left]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = ${colors.background}
+
+[module/roundd-right]
+type = custom/text
+content = %{T3}%{T-}
+content-foreground = ${colors.background}
+                                         
+[module/launcher]
+type=custom/script
+exec = pgrep rofi >/dev/null && echo "%{F$(colorer -g color8)}♥%{F-}" || echo "%{F$(colorer -g color1)}♥%{F-}"
+tail = true
+content-margin = 1
+click-left=launcher
+content-font = 1
+
+
+
+
+
+[module/spotify]
+type = custom/script
+format-margin = 1
+format =    <label>
+exec = playerctl metadata --format '{{artist}}: {{title}}'
+tail = true
+interval = 1
+click-left = "playerctl play-pause"
+
+[module/playerctl]
+type = custom/script
+format-margin = 1
+exec = playerctl_status playerctld      40
+exec-if = [[ "$(playerctl -l)" != "No players found" ]] && echo 1
+tail = true
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0                      

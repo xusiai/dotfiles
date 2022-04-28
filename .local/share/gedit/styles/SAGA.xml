@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+The MIT License (MIT)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<style-scheme id="SAGA" name="SAGA" version="1.0">
+	<author>Miusaky</author>
+	<_description>A dark theme for Gedit</_description>
+
+	<!-- SAGA -->
+	<color name="background" value="#0A0D0F"/>
+	<color name="current-line" value="#181F25"/>
+	<color name="selection" value="#101519"/>
+	<color name="foreground" value="#FAF8F6"/>
+	<color name="comment" value="#202931"/>
+	<color name="Tiffany Blue" value="#A0E7E5"/>
+	<color name="Magic Mint" value="#B4F8C8"/>
+	<color name="Peach Crayola" value="#FAC898"/>
+	<color name="Hot Pink" value="#FFAEBC"/>
+	<color name="Wisteria" value="#BCA7DD"/>
+	<color name="Vivid Tangerine" value="#FF9E99"/>
+	<color name="Lemon Yellow Crayola" value="#FFFAAD"/>
+
+	<color name="white" value="#FFFFFE"/>
+	<color name="Isabelline" value="#F8F5F2"/>
+	<color name="Eerie Black" value="#181F25"/>
+
+	<style name="text" foreground="Isabelline" background="background"/>
+	<style name="selection" background="selection"/>
+	<style name="cursor" foreground="white" background="white"/>
+	<style name="current-line" foreground="current-line" background="current-line"/>
+	<style name="line-numbers" foreground="Eerie Black" background="background"/>
+	<style name="bracket-match" foreground="Isabelline" background="background" underline="true"/>
+	<style name="search-match" foreground="selection" background="Lemon Yellow Crayola"/>
+        <style name="background-pattern" background="#101519"/>
+
+
+	<style name="def:function" foreground="Magic Mint"/>
+	<style name="def:identifier" foreground="Hot Pink"/>
+	<style name="def:keyword" foreground="Hot Pink"/>
+	<style name="def:number" foreground="Wisteria" />
+	<style name="def:boolean" foreground="Wisteria"/>
+	<style name="def:string" foreground="Lemon Yellow Crayola"/>
+	<style name="def:special-char" foreground="Hot Pink"/>
+	<style name="def:builtin" foreground="Tiffany Blue"/>
+	<style name="def:type" foreground="Magic Mint"/>
+	<style name="def:preprocessor" foreground="Magic Mint"/>
+	<style name="def:comment" foreground="comment"/>
+
+	<!-- Python-specific stuff -->
+	<style name="python:module-handler" foreground="Hot Pink"/>
+	<style name="python:function-name" foreground="Magic Mint"/>
+	<style name="python:decorator" foreground="Magic Mint"/>
+	<style name="python:class-name" foreground="white"/>
+	<style name="python:special-variable" foreground="Tiffany Blue"/>
+	<style name="python:builtin-constant" foreground="Wisteria"/>
+
+
+	<style name="def:specials" foreground="#FAF8F6"/>
+	<style name="def:statement" foreground="Hot Pink"/>
+
+	<style background="#B4F8C8" bold="true" foreground="#FAF8F6" name="diff:added-line"/>
+	<style foreground="#FF9E99" name="diff:removed-line"/>
+	<style background="#0A0D0F" foreground="#FAF8F6" name="diff:changed-line"/>
+
+        <!-- Markup -->
+        <style name="def:emphasis"                italic="true"/>
+        <style name="def:strong-emphasis"         foreground="Wisteria" bold="true"/>
+        <style name="def:inline-code"             foreground="Tiffany Blue"/>
+        <style name="def:insertion"               underline="single"/>
+        <style name="def:deletion"                foreground="Vivid Tangerine" strikethrough="true"/>
+        <style name="def:link-text"               foreground="Peach Crayola"/>
+        <style name="def:link-symbol"             foreground="Peach Crayola" bold="true"/>
+        <style name="def:link-destination"        foreground="Hot Pink" italic="true" underline="single"/>
+        <style name="def:heading"                 foreground="Magic Mint" bold="true"/>
+        <style name="def:thematic-break"          foreground="Magic Mint" bold="true"/>
+        <style name="def:preformatted-section"    foreground="Tiffany Blue"/>
+        <style name="def:list-marker"             foreground="Wisteria" bold="true"/>
+
+</style-scheme>

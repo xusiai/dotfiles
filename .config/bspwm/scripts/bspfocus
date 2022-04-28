@@ -1,0 +1,7 @@
+#!/bin/bash
+
+pull=$1
+while read -r _ _ d n f s; do
+    [[ "$f" = urgent && "$s" = on ]] &&
+        bspc node "$n" ${pull:+-d focused} -f
+done < <(bspc subscribe node_flag)

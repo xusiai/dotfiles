@@ -1,0 +1,147 @@
+# ##############################################################################
+# #                                   KEYBINDS                                 #
+# ##############################################################################
+
+# TOGGLE BAR
+super + b
+    $HOME/.local/bin/tglbar
+
+# KILL FOCUSED WINDOW
+super + c
+    bspc node -c
+
+# TOGGLE FLOATING
+super + space
+  bspc node -t {floating,tiled}
+
+# MOVE TO OR SEND APP TO WORKSPAC
+super + {_,shift + }{1-8}
+	bspc {desktop -f,node -d} '^{1-8}'
+
+# SHUTDOWN SYSTEM
+ctrl + alt + shift + q
+    loginctl poweroff
+
+# RESTART SYSTEM
+ctrl + alt + shift + r
+    loginctl reboot
+
+# LOCK SYSTEM
+ctrl + alt + shift + l
+    $HOME/.local/bin/lck
+
+# OPEN TERMINAL
+super + Return
+    kitty
+
+# OPEN APPMENU
+alt + F1
+    rofi -show drun
+
+# OPEN DASHBOARD
+super + shift + d
+    $HOME/.config/eww/scripts/openDashboard.sh
+
+# OPEN NOTIFICATION CENTER
+super + shift + n
+    $HOME/.local/bin/notifcntr
+
+# OPEN COLOUR PICKER
+super + p
+  $HOME/.local/bin/xcolor-pick
+
+# SCREENSHOT
+# LOCAL
+super + x
+    DATE=$(date '+%b%d-%H-%M.png'); \
+    maim -us "$HOME/SS/$DATE"; \
+    $HOME/.local/bin/viewscr $HOME/SS/$DATE | xclip -selection clipboard -t image/png
+
+# UPLOAD
+super + shift + x
+    DATE=$(date '+%b%d-%H-%M.png'); \
+    maim -us "$HOME/SS/$DATE"; \
+    $HOME/.local/bin/upldscr $HOME/SS/$DATE
+    
+# GIPH
+super + v
+    gif  sel
+
+# RESTART SXHKD
+super + Escape
+    pkill -USR1 -x sxhkd
+
+# RESTART BSPWM
+alt + ctrl + r
+  bspc wm -r
+
+# QUIT BSPWM
+alt + ctrl + q
+  bspc quit
+
+
+# =============================================================================
+
+# OPEN BROWSER
+super + BackSpace
+    firefox
+    
+# SHUFFLE WALLPAPER
+super + shift + @w
+  feh --recursive --bg-fill --randomize ~/.local/share/wallpapers
+  
+# NCMPCPP
+super + m
+  $HOME/.local/bin/music_terminal
+  
+# SEARCH INVIDIOUS
+super + y
+  HOME/.local/bin/yt
+ 
+# OPEN JELLYFIN
+super + j
+  flatpak run com.github.iwalton3.jellyfin-media-player
+  
+# OPEN FM
+super + shift + f
+  Thunar
+
+# REDSHIFT OFF
+super + shift + @r
+  redshift -x
+
+#REDSHIFT ON
+super + r
+  redshift -O 3800K
+  
+# LEAGUE OF LEGENDS
+super + l
+  $HOME/.local/share/leagueoflegends/launchhelper/lol
+  
+# OPEN GEDIT
+super + g 
+  gedit
+  
+# SCRATCHPAD
+super + z
+  $HOME/.config/bspwm/scripts/scratchpad
+  
+# MPD PREVIOUS
+super + F9
+  mpc prev
+
+# MPD TOGGLE
+super + F8
+  mpc toggle
+
+#MPD NEXT
+super + F7
+  mpc next
+
+# MPD VOL UP
+super + button4
+  mpc vol +5
+
+# MPD VOL DOWN
+super + button5
+  mpc vol -5

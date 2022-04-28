@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# ##############################################################################
+# #                                  ENV VARS                                  # 
+# ##############################################################################
+
+export BROWSER=firefox
+export EDITOR=hx
+
+# ##############################################################################
+# #                                  FUNCTIONS                                 # 
+# ##############################################################################
+
+rule() { bspc rule -a "$@" & }
+config() { bspc config "$@" & }
+start() { pkill -x "$1"; { sleep 0.1; "$@" & }; }
+
+# ##############################################################################
+# #                                AUTOSTART APPS                              #
+# ##############################################################################
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+dunst --config $HOME/.config/dunst/dunstrc &
+picom --config $HOME/.config/picom/picom.conf &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+# ##############################################################################
+# #                                 WINDOW RULES                               #
+# ##############################################################################
+
+bspc monitor -d 1 2 3
+
+rule kitty             	             state=floating
+rule mpv                             state=floating
+rule Zathura                         state=floating
+rule Thunar                          state=floating
+rule bpytop                          state=floating
+rule Signal                          state=floating
+rule btm	                     state=floating
+rule music                           desktop=^3
+rule Lutris                          desktop=^2 state=floating
+rule 'riotclientux.exe'              desktop=^2 state=floating
+rule 'league of legends.exe'         desktop=^2
+rule 'leagueclientux.exe'            desktop=^2 state=floating 
+rule 'Logseq'                        desktop=^1 
+rule 'Jellyfin Media Player'         desktop=^3
+
+# ##############################################################################
+# #                            BSPWM CONFIGURATION                             #
+# ##############################################################################
+
+config border_width		    0
+config window_gap                   16
+config right_padding                0
+config split_ratio                  0.62
+config borderless_monocle           true
+config gapless_monocle              true
+
+
+inactive=$(colorer -g bg)
+active=$(colorer -g bg)
+config normal_border_color "$inactive"
+config focused_border_color "$active"
+config presel_feedback_color "$inactive"
+
+# ##############################################################################
+# #                                 MISCELLANEOUS                              #
+# ##############################################################################
+
+# START BAR
+start $HOME/.config/polybar/launch.sh
+
+# PULLS WINDOWS REQUIRING ATTENTION INTO FOCUS REGARDLESS OF WORKSPACE
+start $HOME/.config/bspwm/scripts/bspfocus
+
+# SET WALLPAPER
+feh --randomize --recursive --bg-scale $HOME/.local/share/wallpapers
+
+# MOUSEDRIFT
+xset m 0 0
+
+# CLEAR NOTIFICATIONS
+rm $HOME/.cache/dunst.log
