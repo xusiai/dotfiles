@@ -18,6 +18,7 @@ export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/.local/bin/wtwitch/:$PATH"
 export PATH="/opt/wine-lol/bin/:$PATH"
 export PATH="$HOME/.nvm/node_modules/.bin/:$PATH"
+export AWESOME_IGNORE_LGI=1
 
 # enable completion features
 autoload -Uz compinit
