@@ -3,7 +3,7 @@
 <img src="assets/TILED.png"></br>
 <img src="assets/ROFI.png"></br>
 
-This is a collection of dotfiles which I use with bspwm. If you find something you like, take it and make it yours! :heart: </br>
+This is a collection of dotfiles which I use with bspwm. If you find something you like, clone it and make it your own! :heart: </br>
 
 Most of these files will work out of the box assuming you have the applications installed (there is a list below). The file structure is a replica of the expected $HOME structure so installing them is as simple as cloning and linking (or moving if you prefer but linking keeps all your configs in one place).
 
