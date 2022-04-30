@@ -21,6 +21,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | SXHKD      | ZSH         |
 | PICOM      | COLORER     |
 | ROFI       | FIREFOX     |
+|            | KSUPERKEY   |
 
 
 </br>
@@ -53,9 +54,10 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | MOD + RETURN | KITTY |
 | MOD + BACKSPACE | FIREFOX |
 | MOD + C | KILL CLIENT |
+| ALT_L + F1 | ROFI | 
 
 </br>
-Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. 
+Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. If you think the rofi binding is odd it is because I use [Ksuperkey](https://github.com/hanschen/ksuperkey) so the actual button to open rofi (assuming Ksuperkey is running) is Super and nothing else. Does not disrupt SUPER as a modifier and is an amazing tool. 
 
 ## TODO
 - Adapt rofi to use colorer output instead of color.rasi.
