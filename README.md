@@ -5,12 +5,26 @@
 
 This is a collection of dotfiles which I use with bspwm. If you find something you like, take it and make it yours! :heart: </br>
 
-Most of these files will work out of the box assuming you have the applications installed. The file structure is a replica of the expected $HOME structure so installing them is as simple as cloning and linking (or moving if you prefer but linking keeps all your configs in one place).
+Most of these files will work out of the box assuming you have the applications installed (there is a list below). The file structure is a replica of the expected $HOME structure so installing them is as simple as cloning and linking (or moving if you prefer but linking keeps all your configs in one place).
 
 ```
 git clone https://github.com/Miusaky/bspdots.git $HOME
 cp --remove-destination -as $HOME/bspdots/. $HOME/
 ```
+
+<h3> Dependencies </h3>
+
+| ESSENTIAL  | RECOMMENDED |
+|------------|-------------|
+| BSPWM      | KITTY       |
+| POLYBAR    | HELIX       |
+| SXHKD      | ZSH         |
+| PICOM      | COLORER     |
+| ROFI       | FIREFOX     |
+|------------|-------------|
+
+</br>
+
 
 
 <h3> Additional notes </h3>
@@ -29,27 +43,14 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * If fonts are not rendering make sure you run `fc-cache -v` after linking the files. </br>
 * I use [colorer](https://github.com/kiddae/colorer) to switch colour schemes. [SAGA] is the default palette and if you're satisfied with that you don't need to install colorer as long as you keep its config files ($HOME/.config/colorer). If you do want to test other colours there are quite a few included in $HOME/.config/colorer/flavours. To switch you need to install colorer and run `colorer $HOME/.config/colorer/flavours/schemename`. 
 * Fonts, GTK theme and icons are included but you will have to switch to them (either in the gtk file or using something like lxappearance). Iosevka Term Heavy is my primary font. 
-* The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox). </br>
-
-That's all you need to replicate this setup. However if you're curious about what other software I use (and would recommend) you can find a list below. </br>
-
-|  TYPE      |  NAME      |
-|------------|------------|
-| OS         | Void ♥️     |
-| Shell      | Zsh        |
-| Bar        | Polybar    |
-| Temrinal   | Kitty      |
-| Editor     | Helix & Neovim     |
-| Compositor | Picom      |
-| Launcher   | Rofi       |
-| Browser    | Firefox    |
-| Palette    | SAGA  ♥️    |
-
+* The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox).
+* Wallpaper is included but can be found [here](https://github.com/Miusaky/bspdots/blob/main/.local/share/wallpapers/wallhaven-28691g.png). 
+</br>
 
 ## ACKNOWLEDGEMENTS
 - [Kiddae](https://github.com/kiddae) for the lovely tool that is colorer.
 - [Siduck](https://github.com/siduck) for his amazing dotfiles which I used for inspiration (and at some point served as templates for mine). 
 - [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config.
 
-
-
+## MISCELLANEOUS
+- If you don't like bspwm you should check out [Hypr](https://github.com/vaxerski/Hypr). It is an amazing WM with sleek animations and an active dev who listens to feedback.
