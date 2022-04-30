@@ -42,15 +42,15 @@ line-size = 0
 line-color = ${colors.color8}
 
 font-0=Iosevka Nerd Font:style=Heavy:size=10;3
-font-1=Material Design Icons:size=13;3
+font-1=Material Design Icons Desktop:size=13;3
 
 
 wm-restack = bspwm
 override-redirect = false
 
-modules-left = menu cpu cputemp gpu gputemp memory filesystem 
+modules-left = menu cpu cputemp gpu gputemp memory filesystem
 modules-center =  bspwm
-modules-right = mpd updates date powermenu
+modules-right = flower mpd  mpdd flower updates date powermenu
 
 ;                      _       _           
 ;  _ __ ___   ___   __| |_   _| | ___  ___ 
@@ -145,16 +145,16 @@ enable-click = true
 reverse-scroll = false
 enable-scroll = true
 
-label-focused = 󰗝
+label-focused = 󰅫
 label-focused-overline = ${colors.foreground}
-label-focused-foreground = ${colors.color7}
+label-focused-foreground = ${colors.color1}
 label-focused-padding = 1
 
-label-empty = 󰝦
+label-empty = 󰅫
 label-empty-padding = 1
 label-empty-foreground = ${colors.color7}
 
-label-occupied = 󰺕
+label-occupied = 󰅫
 label-occupied-foreground = ${colors.color7}
 label-occupied-padding = 1
 
@@ -163,14 +163,22 @@ type = internal/mpd
 host = 127.0.0.1
 port = 6600
 format-online = <label-song>
-label-song = "%artist% - %title% "
-format-online-foreground= ${colors.color7}
+label-song = "%artist% "
+format-online-foreground = ${colors.color5}
+
+[module/mpdd]
+type = internal/mpd
+host = 127.0.0.1
+port = 6600
+format-online = <label-song>
+label-song = "%title%"
+format-online-foreground = ${colors.color6}
 
 [module/pipewire]
 type = custom/script
 label = "%output%"
 format-prefix = "󰋋"
-format-prefix-foreground = ${colors.color4}
+format-prefix-foreground = ${colors.color6}
 exec = ~/.config/polybar/scripts/pipewire
 click-left = ~/.bin/music_terminal &
 click-right =  ~/.config/polybar/scripts/pipewire mute &
@@ -181,7 +189,7 @@ scroll-down =  ~/.config/polybar/scripts/pipewire down &
 type = custom/script
 exec = xbps-install -Mun | wc -l
 format = <label>
-format-prefix = "󰬬"
+format-prefix = " 󰬬"
 format-prefix-foreground = ${colors.color3}
 interval = 4600
 label =%output%
@@ -205,8 +213,8 @@ format-background = ${colors.background}
 type = internal/date
 interval = 60
 format = <label>
-format-prefix = "󰔚 "
-format-prefix-foreground = ${colors.color1}
+format-prefix = ""
+format-prefix-foreground = ${colors.color7}
 format-padding = 1
 date = %H:%M%{F-}
 time-alt = %a, %b %d%{F-}
@@ -251,8 +259,15 @@ content-margin = 1
 click-left=launcher
 content-font = 1
 
+[module/flower]
+type = custom/text
+content = " 󰴈 "
+content-foreground = ${colors.color1}
 
-
+[module/heart]
+type = custom/text
+content = " 󰋑 "
+content-foreground = ${colors.color1}
 
 
 [module/spotify]

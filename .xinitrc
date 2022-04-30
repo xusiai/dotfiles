@@ -53,7 +53,7 @@ fi
 ksuperkey &
 pipewire & 
 pipewire-pulse &
-easyeffects --gapplication-service &
+#easyeffects --gapplication-service &
 xfce4-power-manager &
 mpd &
 kdeconnect-cli &
