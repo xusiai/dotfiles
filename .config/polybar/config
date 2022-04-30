@@ -62,7 +62,7 @@ modules-right = flower mpd  mpdd flower updates date powermenu
 type = custom/text
 content ="󰍜"
 content-padding = 2
-click-left = rofi -show drun
+click-left = rofi -show drun -theme theme.rasi
 content-foreground = ${colors.color7}
 
 [module/cpu]
@@ -224,7 +224,7 @@ label = %date%%time%
 type = custom/text
 content ="󰍜"
 content-padding = 2
-click-left = rofi -show powermenu -modi powermenu:$HOME/.config/polybar/scripts/rofi-power-menu
+click-left = $HOME/.config/rofi/powermenu.sh 
 content-foreground = ${colors.color7}
 
 [module/empty-space]
