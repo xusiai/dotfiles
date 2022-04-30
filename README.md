@@ -66,6 +66,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 - [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config.
 - [Manas140](https://github.com/Manas140) for a few scripts.
 - A number of other amazing people who I don't remember. If you see something that's yours and you're not mentioned let me know.  
+- [/r/unixporn](https://teddit.net/r/unixporn) for inspiration over the years.
 
 ## MISCELLANEOUS
 - If you don't like bspwm you should check out [Hypr](https://github.com/vaxerski/Hypr). It is an amazing WM with sleek animations and an active dev who listens to feedback.
