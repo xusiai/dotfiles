@@ -16,5 +16,5 @@ color14 #A0E7E5
 color15 #BCA7DD
 fg #FAF8F6
 bg #0A0D0F
-wp $HOME/.wallpapers/2K/wallhaven-28691g.png
-vim onedark
+wp $HOME/.local/share/wallpapers/wallhaven-28691g.png
+
