@@ -21,7 +21,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | SXHKD      | ZSH         |
 | PICOM      | COLORER     |
 | ROFI       | FIREFOX     |
-|------------|-------------|
+
 
 </br>
 
@@ -46,6 +46,16 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox).
 * Wallpaper is included but can be found [here](https://github.com/Miusaky/bspdots/blob/main/.local/share/wallpapers/wallhaven-28691g.png). 
 </br>
+
+## KEYBINDINGS
+| MOD | SUPER |
+|------------|-------------|
+| MOD + RETURN | KITTY |
+| MOD + BACKSPACE | FIREFOX |
+| MOD + C | KILL CLIENT |
+
+</br>
+Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. 
 
 ## TODO
 - Adapt rofi to use colorer output instead of color.rasi.
