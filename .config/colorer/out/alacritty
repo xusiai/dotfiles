@@ -9,11 +9,11 @@ colors:
     # NOTE: Use '#131613' for the `black` color if you'd like to see
     # black text on the background.
     black: '#101519'
-    red: '#FFAEBC'
-    green: '#FF9E99'
-    yellow: '#B4F8C8'
+    red: '#FF9E99'
+    green: '#FFAEBC'
+    yellow: '#FAC898'
     blue: '#FFFAAD'
-    magenta: '#FAC898'
+    magenta: '#B4F8C8'
     cyan: '#A0E7E5'
     white: '#FAF8F6'
 

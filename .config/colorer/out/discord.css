@@ -29,9 +29,9 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   --background-secondary: #0A0D0F !important;
   --background-secondary-alt: $bgDarker !important;
   --background-tertiary: $bgDarker !important;
-  --background-accent: #FFAEBC !important;
+  --background-accent: #FF9E99 !important;
   --background-floating: $bgDarker !important;
-  --text-link: #FFAEBC !important;
+  --text-link: #FF9E99 !important;
   --focus-primary: #A0E7E5 !important;
   --channeltextarea-background: #0A0D0F !important;
   --activity-card-background: #0A0D0F !important;
@@ -55,13 +55,13 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
 .appMount-3lHmkl 
 .lookFilled-1Gx00P.colorBrand-3pXr91 {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 .lookLink-9FtZy-.colorBrand-3pXr91 {
-  color: #FFAEBC !important;
+  color: #FF9E99 !important;
 }
 .input-cIJ7To.focused-1mmYsC, .input-cIJ7To:focus {
-  border-color: #FFAEBC !important;
+  border-color: #FF9E99 !important;
 }
 //  private call
 .wrapper-2qzCYF.minimum-28Z35l {
@@ -77,10 +77,10 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
   //  discord icon
 .wrapper-1BJsBx.selected-bZ3Lue .childWrapper-anI2G9, .wrapper-1BJsBx:hover .childWrapper-anI2G9 {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 .item-2hkk8m {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 
 //  make '#' in front of channels match text color 
@@ -126,20 +126,20 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 
 //  box around select channel 
 .contentSelectedText-3wUhMi {
-  background: rgba(#FFAEBC, 0.2) !important;
+  background: rgba(#FF9E99, 0.2) !important;
 }
 
 //  box on channel hover 
 .contentHoveredText-2D9B-x,
 .contentHoveredVoice-3p_NEO:active,
 .contentSelectedVoice-1WDIBM:active {
-  background: rgba(#FFAEBC, 0.1) !important;
+  background: rgba(#FF9E99, 0.1) !important;
 }
 
 //  voice connected 
 .container-1UB9sr {
   background-color: $bgDarker !important;
-  border-bottom: 1px solid rgba(#FFAEBC, 0.1) !important;
+  border-bottom: 1px solid rgba(#FF9E99, 0.1) !important;
 }
 
 //  avatar container 
@@ -147,7 +147,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background-color: $bgDarker !important;
   //  buttons 
   .horizontal-1ae9ci button {
-    fill: #FFAEBC !important;
+    fill: #FF9E99 !important;
   }
 }
 
@@ -163,12 +163,12 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 
 //  input form background
 .inner-zqa7da {
-  background-color: rgba(#FFAEBC, 0.1) !important;
+  background-color: rgba(#FF9E99, 0.1) !important;
 }
 
 //  attachment button color 
 .attachButtonPlus-rUdX-B {
-  fill: #FFAEBC !important;
+  fill: #FF9E99 !important;
 }
 //  nitro
   //  nitro page
@@ -187,8 +187,8 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background-color: #0A0D0F !important;
 }
 .lookOutlined-3sRXeN.colorBrand-3pXr91 {
-  color: rgba(#FFAEBC, 0.8) !important;
-  border-color: rgba(#FFAEBC, 0.2) !important;
+  color: rgba(#FF9E99, 0.8) !important;
+  border-color: rgba(#FF9E99, 0.2) !important;
 }
 
 //  messages - form separator 
@@ -206,12 +206,12 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
 
 .jump-to-present-bar {
-  background-color: rgba(#FFAEBC, 0.6) !important;
+  background-color: rgba(#FF9E99, 0.6) !important;
 }
 
 //  edit message box 
 .inner-zqa7da {
-  background-color: rgba(#FFAEBC, 0.1) !important;
+  background-color: rgba(#FF9E99, 0.1) !important;
 }
 
 //  divider is what displays the date for older messages 
@@ -221,10 +221,10 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     background-color: #0A0D0F !important;
   }
   &:not(.red) div {
-    background: rgba(#FFAEBC, 0.3) !important;
+    background: rgba(#FF9E99, 0.3) !important;
   }
   &:not(.red) span {
-    color: rgba(#FFAEBC, 0.6) !important;
+    color: rgba(#FF9E99, 0.6) !important;
   }
   &.divider-red {
     & > span {
@@ -269,12 +269,12 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     color: #FAF8F6 !important;
     //  for code within single backquotes 
     code.inline {
-      background-color: mix(#0A0D0F, #FFAEBC, 85%) !important;
+      background-color: mix(#0A0D0F, #FF9E99, 85%) !important;
     }
     //  for codeblocks (triple backquotes)
     pre {
       code {
-        background-color: mix(#0A0D0F, #FFAEBC, 90%) !important;
+        background-color: mix(#0A0D0F, #FF9E99, 90%) !important;
       }
       border-color: #0A0D0F !important;
     }
@@ -282,7 +282,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 
   //  embed cards 
   .embedInner-1-fpTo {
-    background-color: mix(#0A0D0F, #FFAEBC, 90%) !important;
+    background-color: mix(#0A0D0F, #FF9E99, 90%) !important;
   }
 
   //  message with user mention 
@@ -314,7 +314,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background: #0A0D0F !important;
 }
 .selected-aXhQR6 .layout-2DM8Md {
-  background-color: rgba(#FFAEBC, 0.2) !important; 
+  background-color: rgba(#FF9E99, 0.2) !important; 
 }
 
 //  user typing message 
@@ -326,7 +326,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 .title-3qD0b- {
   background-color: $bgDarker !important;
   .search-bar {
-    background-color: rgba(#FFAEBC, 0.2) !important;
+    background-color: rgba(#FF9E99, 0.2) !important;
   }
 }
 .container-1r6BKw.themed-ANHk51 {
@@ -341,9 +341,9 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
 .guilds-add,
 .circleIconButton-jET_ig {
-  border: 1px dashed rgba(#FFAEBC, 0.3) !important;
+  border: 1px dashed rgba(#FF9E99, 0.3) !important;
   background: inherit !important;
-  color: rgba(#FFAEBC, 0.4) !important;
+  color: rgba(#FF9E99, 0.4) !important;
 }
 .guild .guild-inner,
 .guild-1EfMGQ .guild-inner,
@@ -360,14 +360,14 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 .friends-online,
 .friendsOnline-_wi_fM,
 .friendsOnline-2JkivW {
-  color: #FFAEBC !important;
+  color: #FF9E99 !important;
 }
 
 //  server menu 
 .menu-Sp6bN1 {
   background: #0A0D0F !important;
   .separator-2zcjq8 {
-    background: rgba(#FFAEBC, 0.4) !important;
+    background: rgba(#FF9E99, 0.4) !important;
   }
 }
 
@@ -388,7 +388,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     background-color: #0A0D0F !important;
     //  jump 
     .actionButtons-1sUUug .jumpButton-3DTcS_ {
-      background-color: rgba(#FFAEBC, 0.6) !important;
+      background-color: rgba(#FF9E99, 0.6) !important;
     }
   }
 }
@@ -399,7 +399,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 
 //  spinners 
 .spinner-wandering-cubes .spinner-item {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 
 //  app scrollbars 
@@ -411,7 +411,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     border-color: #0A0D0F !important;
   }
   &::-webkit-scrollbar-thumb {
-    background-color: mix(#0A0D0F, #FFAEBC, 75%) !important;
+    background-color: mix(#0A0D0F, #FF9E99, 75%) !important;
   }
   &::-webkit-scrollbar-track-piece {
     background-color: #0A0D0F !important;
@@ -428,7 +428,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     background-color: $bgDarker !important;
   }
   .thumb-2JwNFC {
-    background-color: rgba(#FFAEBC, 0.1) !important;
+    background-color: rgba(#FF9E99, 0.1) !important;
   }
 }
 
@@ -436,12 +436,12 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   //  box around selected chat 
 .channel.selected a,
 .channel-2QD9_O.selected-1HYmZZ a {
-  background: rgba(#FFAEBC, 0.2) !important;
+  background: rgba(#FF9E99, 0.2) !important;
 }
   //  box on hover 
 .channel:hover a,
 .channel-2QD9_O:hover a {
-  background: rgba(#FFAEBC, 0.1) !important;
+  background: rgba(#FF9E99, 0.1) !important;
 }
   // create dm popup
 .theme-dark .modal-yWgWj- {
@@ -461,18 +461,18 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     background-color: #0A0D0F !important;
     .friends-row:hover,
     .friendsRow-2yicud:hover {
-      background-color: rgba(#FFAEBC, 0.1) !important;
+      background-color: rgba(#FF9E99, 0.1) !important;
     }
     .friends-row,
     .friendsRow-2yicud {
       .friends-column-actions .friends-action {
-        background-color: rgba(#FFAEBC, 0.1) !important;
+        background-color: rgba(#FF9E99, 0.1) !important;
       }
     }
     .friends-row,
     .friendsRow-2yicud {
       .friends-column-actions .friends-action:hover {
-        background-color: rgba(#FFAEBC, 0.2) !important;
+        background-color: rgba(#FF9E99, 0.2) !important;
       }
     }
   }
@@ -490,15 +490,15 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background-color: #0A0D0F !important;
   //  input 
   .input-2VB9rf {
-    background-color: rgba(#FFAEBC, 0.1) !important;
+    background-color: rgba(#FF9E99, 0.1) !important;
   }
   //  focused search result 
   .resultFocused-3aIoYe {
-    background-color: rgba(#FFAEBC, 0.2) !important;
+    background-color: rgba(#FF9E99, 0.2) !important;
   }
   .keybindShortcut-1BD6Z1 span {
     background-color: #A0E7E5 !important;
-    box-shadow: inset 0 -4px 0 rgba(#FFAEBC, 0.6) !important;
+    box-shadow: inset 0 -4px 0 rgba(#FF9E99, 0.6) !important;
   }
 }
 
@@ -507,7 +507,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background-color: $bgDarker !important;
   //  background on hover 
   .option-96V44q.selected-rZcOL- {
-    background-color: rgba(#FFAEBC, 0.1) !important;
+    background-color: rgba(#FF9E99, 0.1) !important;
   }
 }
 .theme-dark .container-3ayLPN {
@@ -537,7 +537,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   background-color: $bgDarker !important;
   //  on hover 
   .selectorSelected-1_M1WV {
-    background-color: rgba(#FFAEBC, 0.1) !important;
+    background-color: rgba(#FF9E99, 0.1) !important;
   }
 }
 
@@ -545,7 +545,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   //  header 
 .headerPlaying-j0WQBV,
 .headerNormal-T_seeN {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 .body-3iLsc4,
 .footer-1fjuF6 {
@@ -553,7 +553,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
   //  send dm from popout 
 .quickMessage-1yeL4E {
-  background-color: rgba(#FFAEBC, 0.1) !important;
+  background-color: rgba(#FF9E99, 0.1) !important;
 }
 
 //  right-click 
@@ -565,13 +565,13 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   }
   //  divider 
   .itemGroup-1tL0uz {
-    border-color: rgba(#FFAEBC, 0.05) !important;
+    border-color: rgba(#FF9E99, 0.05) !important;
   }
   //  volume slider in user popup 
   .bar-2Qqk5Z {
     background-color: #0A0D0F !important;
     .barFill-23-gu- {
-      background-color: #FFAEBC !important;
+      background-color: #FF9E99 !important;
     }
   }
 }
@@ -587,7 +587,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
       background-color: $bgDarker !important;
     }
     &:before {
-      border-color: rgba(#FFAEBC, 0.2) !important;
+      border-color: rgba(#FF9E99, 0.2) !important;
     }
   }
   .search-result {
@@ -595,7 +595,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     &:after {
       background-image: linear-gradient(
         0deg,
-        rgba(#FFAEBC, 0),
+        rgba(#FF9E99, 0),
         $bgDarker
       ) !important;
     }
@@ -613,7 +613,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
     }
   }
   .action-buttons .jump-button {
-    background-color: rgba(#FFAEBC, 0.8) !important;
+    background-color: rgba(#FF9E99, 0.8) !important;
   }
 }
 
@@ -625,7 +625,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   border-color: rgba(#0A0D0F, 0.2) !important;
 }
 .colorDefault-2K3EoJ.focused-3afm-j, .colorDefault-2K3EoJ:hover:not(.hideInteraction-1iHO1O) {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 
 //  new server menu
@@ -661,7 +661,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 }
   //  favourite tint
 .theme-dark .categoryFadeBlurple-1j72_A, .theme-light .categoryFadeBlurple-1j72_A {
-  background-color: rgba(#FFAEBC, 0.8) !important;
+  background-color: rgba(#FF9E99, 0.8) !important;
 }
 
 //  toolbar
@@ -671,10 +671,10 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 
 //  tooltips
 .theme-dark .tooltipBrand-g03Nz8, .theme-light .tooltipBrand-g03Nz8 {
-  background-color: rgba(#FFAEBC, 0.8) !important;
+  background-color: rgba(#FF9E99, 0.8) !important;
 }
 .introductionAction-M1r6AX {
-  color: rgba(#FFAEBC, 0.8) !important;
+  color: rgba(#FF9E99, 0.8) !important;
 }
 .content-3O0wBS {
   background: rgba(#0A0D0F, 0.8) !important;
@@ -683,7 +683,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   color: rgba(#0A0D0F, 0.8) !important;
 }
 .theme-dark .tooltipBrand-g03Nz8 .tooltipPointer-3ZfirK, .theme-light .tooltipBrand-g03Nz8 .tooltipPointer-3ZfirK {
-  border-top-color: rgba(#FFAEBC, 0.8) !important;
+  border-top-color: rgba(#FF9E99, 0.8) !important;
 }
 
 //  settings menu
@@ -697,7 +697,7 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
   border-color: rgba(#0A0D0F, 0.4) !important;
 }
 .themeDefault-24hCdX.valueChecked-m-4IJZ {
-  background-color: #FFAEBC !important;
+  background-color: #FF9E99 !important;
 }
 .theme-dark .codeRedemptionRedirect-1wVR4b {
   background-color: rgba($bgDarker, 0.8) !important;
@@ -710,13 +710,13 @@ $bgDarker: mix(#0A0D0F, #000000, 90%);
 //  public server browser
   //  highlight
 .categoryPill-34fszg.selected-1dONk0 {
-  background-color: rgba(#FFAEBC, 0.6) !important;
+  background-color: rgba(#FF9E99, 0.6) !important;
 }   //  search panel
 .searchPage-3GKAdT .search-1iTphC {
   background-color: rgba($bgDarker, 0.4) !important;
 }
 .searchPage-3GKAdT .search-1iTphC .searchBox-2_mAlO:focus, .searchPage-3GKAdT .search-1iTphC .searchBox-2_mAlO:focus-within {
-  border-color: rgba(#FFAEBC, 0.6) !important;
+  border-color: rgba(#FF9E99, 0.6) !important;
 }
   //  language panel
 .css-1b86x2o-control {

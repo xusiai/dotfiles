@@ -4,19 +4,19 @@
 *color0:  #101519
 *color8:  #BCA7DD
 ! DarkRed + Red
-*color1:  #FFAEBC
+*color1:  #FF9E99
 *color9:  #FFAEBC
 ! DarkGreen + Green
-*color2:  #FF9E99
+*color2:  #FFAEBC
 *color10: #FF9E99
 ! DarkYellow + Yellow
-*color3:  #B4F8C8
+*color3:  #FAC898
 *color11: #B4F8C8
 ! DarkBlue + Blue
 *color4:  #FFFAAD
 *color12: #FFFAAD
 ! DarkMagenta + Magenta
-*color5:  #FAC898
+*color5:  #B4F8C8
 *color13: #FAC898
 ! DarkCyan + Cyan
 *color6:  #A0E7E5

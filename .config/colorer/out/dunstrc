@@ -27,7 +27,7 @@
     sort = yes
     idle_threshold = 120
 
-    highlight = "#FFAEBC"
+    highlight = "#FF9E99"
     progress_bar_frame_width = 0
 
     ### Text ###
@@ -91,6 +91,6 @@
 
 [urgency_critical]
     background = "#0A0D0F"
-    frame_color = "#FFAEBC"
+    frame_color = "#FF9E99"
     timeout = 0
 

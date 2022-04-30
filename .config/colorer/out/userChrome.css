@@ -42,7 +42,7 @@
   --urlbar-separator-color: transparent !important;
 
   --autocomplete-popup-highlight-color: #101519 !important;
-  --autocomplete-popup-highlight-background: #B4F8C8 !important;
+  --autocomplete-popup-highlight-background: #FAC898 !important;
 
   --arrowpanel-background: var(--mff-bg) !important;
   --arrowpanel-color: var(--foreground) !important;
@@ -217,7 +217,7 @@ hbox.tab-content[pinned="true"] .tab-text {
 }
 
 .urlbarView-row[type="switchtab"] > span {
-  color: #B4F8C8 !important;
+  color: #FAC898 !important;
 }
 
 .urlbarView-url,

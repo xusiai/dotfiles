@@ -2,6 +2,7 @@
 <img src="assets/WALL.png"></br>
 <img src="assets/TILED.png"></br>
 <img src="assets/ROFI.png"></br>
+<img src="assets/POWERMENU.png"></br>
 
 This is a collection of dotfiles which I use with bspwm. If you find something you like, clone it and make it your own! :heart: </br>
 

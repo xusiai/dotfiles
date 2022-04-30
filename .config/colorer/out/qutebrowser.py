@@ -4,12 +4,12 @@ base04 = "#A0E7E5"
 base05 = "#FAF8F6"
 base07 = "#BCA7DD"
 base08 = "#FFAEBC"
-base09 = "#FF9E99"
+base09 = "#FFAEBC"
 base0A = "#B4F8C8"
 base0B = "#FF9E99"
 base0C = "#A0E7E5"
 base0D = "#FFFAAD"
-base0E = "#FAC898"
+base0E = "#B4F8C8"
 
 # set qutebrowser colors
 
@@ -284,8 +284,8 @@ c.colors.tabs.selected.even.bg = base0D
 c.colors.webpage.bg = base07
 
 # Set the colors of duckduckgo
-c.url.default_page = "https://start.duckduckgo.com/?kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FF9E99&kt=SF+Pro+Text"
-c.url.start_pages = "https://start.duckduckgo.com/?kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FF9E99&kt=SF+Pro+Text"
-c.url.searchengines = { "DEFAULT": "https://duckduckgo.com/?q={}&kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FF9E99&kt=SF+Pro+Text" }
+c.url.default_page = "https://start.duckduckgo.com/?kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FFAEBC&kt=SF+Pro+Text"
+c.url.start_pages = "https://start.duckduckgo.com/?kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FFAEBC&kt=SF+Pro+Text"
+c.url.searchengines = { "DEFAULT": "https://duckduckgo.com/?q={}&kak=-1&kal=-1&kao=-1&kaq=-1&k7=#0A0D0F&kae=d&kj=#0A0D0F&k21=#0A0D0F&k9=#A0E7E5&kaa=#FFFAAD&k8=#FAF8F6&kx=#FFAEBC&kt=SF+Pro+Text" }
 
 
