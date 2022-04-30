@@ -47,6 +47,9 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * Wallpaper is included but can be found [here](https://github.com/Miusaky/bspdots/blob/main/.local/share/wallpapers/wallhaven-28691g.png). 
 </br>
 
+## TODO
+- Adapt rofi to use colorer output instead of color.rasi.
+
 ## ACKNOWLEDGEMENTS
 - [Kiddae](https://github.com/kiddae) for the lovely tool that is colorer.
 - [Siduck](https://github.com/siduck) for his amazing dotfiles which I used for inspiration (and at some point served as templates for mine). 
