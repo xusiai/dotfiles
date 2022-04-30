@@ -57,7 +57,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | ALT_L + F1 | ROFI | 
 
 </br>
-Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. If you think the rofi binding is odd it is because I use Ksuperkey so the actual button to open rofi (assuming Ksuperkey is running) is Super and nothing else. It does not disrupt Super as a modifier and is an amazing tool. You can find it [here](https://github.com/hanschen/ksuperkey).
+Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. If you have Ksuperkey installed rofi can be opened with Super alone without disrupting its use as a modifier.
 
 ## TODO
 - Adapt rofi to use colorer output instead of color.rasi.
