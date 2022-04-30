@@ -27,7 +27,7 @@ CONFIRMATION_OPT="Available Options: [y/yes] [n/no]"
 LPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # Rofi config
-rofi_cmd="rofi -theme $LPATH/powermenu.rasi"
+rofi_cmd="rofi -theme $HOME/.config/colorer/out/powermenu.rasi"
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
 

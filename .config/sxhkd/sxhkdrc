@@ -36,7 +36,7 @@ super + Return
 
 # OPEN APPMENU
 alt + F1
-    rofi -show drun -theme theme.rasi
+    rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi 
 
 # OPEN DASHBOARD
 super + shift + d
