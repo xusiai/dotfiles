@@ -23,7 +23,8 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | PICOM      | COLORER     |
 | ROFI       | FIREFOX     |
 |            | KSUPERKEY   |
-
+|            | MPD         |
+|            | NCMPCPP     |
 
 </br>
 
