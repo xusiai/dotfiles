@@ -33,9 +33,9 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * If you like the colour scheme you can find it [here](https://github.com/SAGAtheme/SAGA) and *some* pre-written themes [here](https://github.com/SAGAtheme/).
 * Some bar modules require additional dependencies to work:
     * CPU modules require lm_sensors.
-    * Pipewire (available but not enabled out of the box) require pamixer.
-    * Update module require the xbps package manager (Void Linux). If you're on Arch you can install [this pkg](https://aur.archlinux.org/packages/checkupdates+aur) and replace the command in the config. 
-    * VPN module (available not but enabled) require Mullvad but can be adapted to other providers.
+    * Pipewire (available but not enabled out of the box) requires pamixer.
+    * Update module requires the xbps package manager (Void Linux). If you're on Arch you can install [this pkg](https://aur.archlinux.org/packages/checkupdates+aur) and replace the command in the config. 
+    * VPN module (available not but enabled) requires Mullvad but can be adapted to other providers.
     * Menus and VPN modules make use of rofi to some extent. 
     * GPU modules require an Nvidia card (and the their drivers).
 * The rofi powermenu uses loginctl. If it doesn't work for you can replace all occurrences of it in powermenu.sh with systemctl. 
@@ -64,6 +64,8 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 - [Kiddae](https://github.com/kiddae) for the lovely tool that is colorer.
 - [Siduck](https://github.com/siduck) for his amazing dotfiles which I used for inspiration (and at some point served as templates for mine). 
 - [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config.
+- [Manas140](https://github.com/Manas140) for a few scripts.
+- A number of other amazing people who I don't remember. If you see something that's yours and you're not mentioned let me know.  
 
 ## MISCELLANEOUS
 - If you don't like bspwm you should check out [Hypr](https://github.com/vaxerski/Hypr). It is an amazing WM with sleek animations and an active dev who listens to feedback.
