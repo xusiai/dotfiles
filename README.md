@@ -84,7 +84,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  ##### HELIX
  <img src="assets/HELIX.png"></br> 
  ##### NCMPCPP
-![](assets/COLOUR_SAMPLES.gif) </br>
+![](assets/NCMPCPP.gif) </br>
 </details>
 
 ## TODO
