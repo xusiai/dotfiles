@@ -75,21 +75,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  #### NORD DARK
  <img src="assets/NORD_DARK.png"></br>
  
- #### ELLY
- <img src="assets/ELLY.png"></br>
- 
- #### DRACULA
- <img src="assets/DRACULA.png"></br>
- 
- #### GRUVBOX
- <img src="assets/GRUVBOX.png"></br>
- 
- #### NORD 
- <img src="assets/NORD.png"></br>
-  
- #### UNIKITTY LIGHT
- <img src="assets/UNIKITTY_LIGHT.png"></br>
-
+ #### A few more samples
 ![](assets/sample_colours.gif) </br>
 
 </details>
