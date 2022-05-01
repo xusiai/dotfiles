@@ -55,7 +55,8 @@ config right_padding                0
 config split_ratio                  0.62
 config borderless_monocle           true
 config gapless_monocle              true
-
+config focus_follow_mouse           true
+config focus_follows_pointer        true
 
 inactive=$(colorer -g bg)
 active=$(colorer -g bg)
