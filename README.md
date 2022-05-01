@@ -1,4 +1,4 @@
-<h1 align="center">:white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: Welcome! :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: </h1></br>
+<h2 align="center">:white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: Welcome! :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: </h2></br>
 
 ![](assets/sample_colours.gif) </br>
 
