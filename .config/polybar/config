@@ -1,36 +1,23 @@
-;==========================================================
-;
-;
-;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
-;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
-;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
-;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
-;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
-;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
-;
-;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/polybar/polybar
-;
-;   The README contains a lot of information
-;
-;==========================================================
+############################################
+#	       POLYBAR CONFIG 		   #
+############################################
+[settings]
+screenchange-reload = true
+pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0      
 
 [colors]
 include-file = ~/.config/colorer/out/polybar
 
-;  _                    
-; | |__   __ _ _ __ ___ 
-; | '_ \ / _` | '__/ __|
-; | |_) | (_| | |  \__ \
-; |_.__/ \__,_|_|  |___/
-
 [bar/base]
 enable-ipc=true
-height = 26
-width = 100%
-offset-x = 0
-offset-y = 0
+height = 36
+width = 100%:-20
+offset-x = 10
+offset-y = 10
 padding = 0
 module-margin = 0
 background = ${colors.background}
@@ -40,23 +27,19 @@ border-color = ${colors.background}
 border-size = 0
 line-size = 0
 line-color = ${colors.color8}
+wm-restack = bspwm
+override-redirect = false
 
 font-0=Iosevka Nerd Font:style=Heavy:size=10;3
 font-1=Material Design Icons Desktop:size=13;3
 
-
-wm-restack = bspwm
-override-redirect = false
-
 modules-left = menu cpu cputemp gpu gputemp memory filesystem
 modules-center =  bspwm
-modules-right = flower mpd  mpdd flowerr updates date powermenu
+modules-right = flower mpd mpdd flowerr updates date powermenu
 
-;                      _       _           
-;  _ __ ___   ___   __| |_   _| | ___  ___ 
-; | '_ ` _ \ / _ \ / _` | | | | |/ _ \/ __|
-; | | | | | | (_) | (_| | |_| | |  __/\__ \
-; |_| |_| |_|\___/ \__,_|\__,_|_|\___||___/
+############################################
+#  	        MODULES LEFT               #
+############################################
 
 [module/menu]
 type = custom/text
@@ -134,12 +117,15 @@ format-mounted-background = ${colors.background}
 format-mounted-foreground = ${colors.color7}
 label-mounted = %percentage_used%%
 
+############################################
+#  	      MODULES CENTER               #
+############################################
+
 [module/bspwm]
 type = internal/bspwm
 format = <label-state>
 format-margin = 0
 index-sort = true
-
 
 enable-click = true
 reverse-scroll = false
@@ -158,6 +144,10 @@ label-occupied = 󰅫
 label-occupied-foreground = ${colors.color7}
 label-occupied-padding = 1
 
+############################################
+#  	       MODULES RIGHT               #
+############################################
+
 [module/mpd]
 type = internal/mpd
 host = 127.0.0.1
@@ -174,17 +164,6 @@ format-online = <label-song>
 label-song = "%title%"
 format-online-foreground = ${colors.color2}
 
-[module/pipewire]
-type = custom/script
-label = "%output%"
-format-prefix = "󰋋"
-format-prefix-foreground = ${colors.color6}
-exec = ~/.config/polybar/scripts/pipewire
-click-left = ~/.bin/music_terminal &
-click-right =  ~/.config/polybar/scripts/pipewire mute &
-scroll-up =  ~/.config/polybar/scripts/pipewire up &
-scroll-down =  ~/.config/polybar/scripts/pipewire down &
-
 [module/updates]
 type = custom/script
 exec = xbps-install -Mun | wc -l
@@ -196,18 +175,6 @@ label =%output%
 label-padding = 1
 label-foreground = ${colors.color7}
 label-background = ${colors.background}
-
-[module/vpn]
-type = custom/script
-exec = $HOME/.config/polybar/scripts/vpn_module.sh
-click-right = $HOME/.config/polybar/scripts/vpn_module.sh --toggle-connection &
-click-left = $HOME/.config/polybar/scripts/vpn_module.sh --location-menu &
-click-middle = $HOME/.config/polybar/scripts/vpn_module.sh --ip-address &
-interval = 5
-format = <label>
-format-prefix = "󰖂"
-format-prefix-foreground = ${colors.color2}
-format-background = ${colors.background}
 
 [module/date]
 type = internal/date
@@ -226,6 +193,10 @@ content ="󰍜"
 content-padding = 2
 click-left = $HOME/.local/bin/rofi-powermenu.sh  
 content-foreground = ${colors.color7}
+
+############################################
+#  	       MISCELLANEOUS               #
+############################################
 
 [module/empty-space]
 type = custom/text
@@ -251,14 +222,6 @@ type = custom/text
 content = %{T3}%{T-}
 content-foreground = ${colors.background}
                                          
-[module/launcher]
-type=custom/script
-exec = pgrep rofi >/dev/null && echo "%{F$(colorer -g color8)}♥%{F-}" || echo "%{F$(colorer -g color1)}♥%{F-}"
-tail = true
-content-margin = 1
-click-left=launcher
-content-font = 1
-
 [module/flower]
 type = custom/text
 content = " 󰴈 "
@@ -272,16 +235,56 @@ content-foreground = ${colors.color6}
 [module/heart]
 type = custom/text
 content = " 󰋑 "
-content-foreground = ${colors.color1}
+content-foreground = ${colors.color2}
 
+[module/heartt]
+type = custom/text
+content = " 󰋑 "
+content-foreground = ${colors.color6}
+
+############################################
+#  	         UNUSED	                   #
+############################################
+
+[module/vpn]
+type = custom/script
+exec = $HOME/.config/polybar/scripts/vpn_module.sh
+click-right = $HOME/.config/polybar/scripts/vpn_module.sh --toggle-connection &
+click-left = $HOME/.config/polybar/scripts/vpn_module.sh --location-menu &
+click-middle = $HOME/.config/polybar/scripts/vpn_module.sh --ip-address &
+interval = 5
+format = <label>
+format-prefix = "󰖂"
+format-prefix-foreground = ${colors.color2}
+format-background = ${colors.background}
+
+[module/pipewire]
+type = custom/script
+label = "%output%"
+format-prefix = "󰋋"
+format-prefix-foreground = ${colors.color6}
+exec = ~/.config/polybar/scripts/pipewire
+click-left = ~/.bin/music_terminal &
+click-right =  ~/.config/polybar/scripts/pipewire mute &
+scroll-up =  ~/.config/polybar/scripts/pipewire up &
+scroll-down =  ~/.config/polybar/scripts/pipewire down &
+
+[module/launcher]
+type=custom/script
+exec = pgrep rofi >/dev/null && echo "%{F$(colorer -g color8)}♥%{F-}" || echo "%{F$(colorer -g color1)}♥%{F-}"
+tail = true
+content-margin = 1
+click-left=launcher
+content-font = 1
 
 [module/spotify]
 type = custom/script
 format-margin = 1
 format =    <label>
-exec = playerctl metadata --format '{{artist}}: {{title}}'
+exec = playerctl metadata --format '{{artist}} {{title}}'
 tail = true
 interval = 1
+label-foreground = ${colors.color3}
 click-left = "playerctl play-pause"
 
 [module/playerctl]
@@ -291,10 +294,4 @@ exec = playerctl_status playerctld      40
 exec-if = [[ "$(playerctl -l)" != "No players found" ]] && echo 1
 tail = true
 
-[settings]
-screenchange-reload = true
-pseudo-transparency = false
-
-[global/wm]
-margin-top = 0
-margin-bottom = 0                      
+                

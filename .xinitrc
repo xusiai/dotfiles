@@ -62,5 +62,6 @@ kdeconnect-cli &
 setxkbmap se &
 xsetroot -cursor_name left_ptr &
 feh --recursive --randomize --bg-scale $HOME/.local/share/wallpapers/* &
+mpDris2 & 
 
 exec dbus-run-session bspwm

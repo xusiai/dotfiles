@@ -1,6 +1,6 @@
 <h2 align="center">:white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: Welcome! :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: </h2></br>
 
-![](assets/sample_colours.gif) </br>
+![](assets/COLOUR_SAMPLES.gif) </br>
 
 <h3 align="center"> :white_flower: :cherry_blossom: :white_flower: Scroll down for screenshots :white_flower: :cherry_blossom: :white_flower: </h3> </br> </br>
 
@@ -68,43 +68,33 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
   <summary>Click to expand.</summary>
   
  #### SAGA
- <img src="assets/SAGA.png"></br> 
-  
- <img src="assets/WALL.png"></br>
- 
- <img src="assets/ROFI.png"></br>
- 
- <img src="assets/POWERMENU.png"></br>
- 
- <img src="assets/TILED.png"></br>
- 
- #### ROSÉPINE
- <img src="assets/ROSÉPINE.png"></br>
-
- #### NORD DARK
- <img src="assets/NORD_DARK.png"></br>
- 
- #### ELLY
- <img src="assets/ELLY.png"></br>
- 
- #### GRUVBOX
- <img src="assets/GRUVBOX.png"></br>
- 
- #### DRACULA
- <img src="assets/DRACULA.png"></br>
- 
- #### UNIKITTY LIGHT
- <img src="assets/UNIKITTY_LIGHT.png"></br>
+ ##### WALL
+ <img src="assets/WALL.png"></br> 
+ ##### ROFI
+ <img src="assets/ROFI.png"></br> 
+ <img src="assets/POWERMENU.png"></br> 
+ ##### GEDIT
+ <img src="assets/GEDIT.png"></br> 
+ ##### FIREFOX
+ <img src="assets/FOX.png"></br> 
+ ##### GTK
+ <img src="assets/GTK.png"></br> 
+ ##### LOGSEQ
+ <img src="assets/LOGSEQ.png"></br> 
+ ##### HELIX
+ <img src="assets/HELIX.png"></br> 
+ ##### NCMPCPP
+![](assets/COLOUR_SAMPLES.gif) </br>
 </details>
 
 ## TODO
 
 ## ACKNOWLEDGEMENTS
-- [Kiddae](https://github.com/kiddae) for the lovely tool that is colorer.
-- [Siduck](https://github.com/siduck) for his amazing dotfiles which I used for inspiration (and at some point served as templates for mine). 
-- [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config.
-- [Manas140](https://github.com/Manas140) for a few scripts.
-- [/r/unixporn](https://teddit.net/r/unixporn) for inspiration over the years.
+- [Kiddae](https://github.com/kiddae) for developing colorer :heart:
+- [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :white_flower:
+- [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config :heart:
+- [Manas140](https://github.com/Manas140) for a few scripts. :white_flower:
+- And last but not least a thanks to all the wonderful people on [/r/unixporn](https://teddit.net/r/unixporn) who make dotfiles a lot more fun and provide an endless source of inspiration :heart:
 
 
 ## MISCELLANEOUS
