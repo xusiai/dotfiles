@@ -61,6 +61,37 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 </br>
 Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. If you have Ksuperkey installed rofi can be opened with Super alone without disrupting its use as a modifier.
 
+
+## GALLERY
+<details>
+  <summary>click to expand</summary>
+  
+ #### SAGA
+ <img src="assiets/SAGA.png"></br> 
+  
+ #### ROSÉPINE
+ <img src="assets/ROSÉPINE.png"></br>
+ 
+ #### NORD DARK
+ <img src="assets/NORD_DARK.png"></br>
+ 
+ #### ELLY
+ <img src="assets/ELLY.png"></br>
+ 
+ #### DRACULA
+ <img src="assets/DRACULA.png"></br>
+ 
+ #### GRUVBOX
+ <img src="assets/GRUVBOX.png"></br>
+ 
+ #### NORD 
+ <img src="assets/NORD.png"></br>
+  
+ #### UNIKITTY LIGHT
+ <img src="assets/UNIKITTY_LIGHT.png"></br>
+
+</details>
+
 ## TODO
 - Adapt rofi to use colorer output instead of color.rasi.
 
@@ -74,3 +105,4 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 ## MISCELLANEOUS
 - If you don't like bspwm you should check out [Hypr](https://github.com/vaxerski/Hypr). It is an amazing WM with sleek animations and an active dev who listens to feedback.
+
