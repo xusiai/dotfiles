@@ -45,7 +45,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * The rofi powermenu uses loginctl. If it doesn't work for you can replace all occurrences of it in powermenu.sh with systemctl. 
 * The included .zshrc depends on the (also included) antigen file to automatically install plugins. Do not use one without the other. 
 * If fonts are not rendering make sure you run `fc-cache -v` after linking the files. </br>
-* I use [colorer](https://github.com/kiddae/colorer) to switch colour schemes. [SAGA] is the default palette and if you're satisfied with that you don't need to install colorer as long as you keep its config files ($HOME/.config/colorer). If you do want to test other colours there are quite a few included in $HOME/.config/colorer/flavours. To switch you need to install colorer and run `colorer $HOME/.config/colorer/flavours/schemename`. 
+* I use [colorer](https://github.com/kiddae/colorer) to switch colour schemes. [SAGA](https://github.com/SAGAtheme/SAGA) is the default palette and if you're satisfied with that you don't need to install colorer as long as you keep its config files ($HOME/.config/colorer). If you do want to test other colours there are quite a few included in $HOME/.config/colorer/flavours. To switch you need to install colorer and run `colorer $HOME/.config/colorer/flavours/schemename`. 
 * Fonts, GTK theme and icons are included but you will have to switch to them (either in the gtk file or using something like lxappearance). Iosevka Term Heavy is my primary font. 
 * The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox).
 * Wallpaper is included but can be found [here](https://github.com/Miusaky/bspdots/blob/main/.local/share/wallpapers/wallhaven-28691g.png). 
