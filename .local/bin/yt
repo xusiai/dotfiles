@@ -22,7 +22,7 @@
 # ~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·~·
 
 # Playlist file
-playlist_file=/home/kaisa/.config/mpv/mpvtube_playlists
+playlist_file=/home/miu/.config/mpv/mpvtube_playlists
 # playlist_file=/path/to/your/mpvtube_playlists
 
 # Arguments that will be passed to mpv
@@ -47,7 +47,7 @@ get_playlists() {
 
 main() {
     # Get choice from rofi
-    choice=$( (get_playlists) | rofi -dmenu -i -fuzzy -p "$rofi_prompt" )
+    choice=$( (get_playlists) | rofi -dmenu -theme $HOME/.config/colorer/out/rofi.rasi -i -fuzzy -p "$rofi_prompt" )
 
   # If user has not picked anything, exit
   if [[ -z "${choice// }" ]]; then

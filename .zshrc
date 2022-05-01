@@ -174,6 +174,8 @@ alias po="loginctl poweroff"
 alias rb="loginctl reboot"
 alias xl="xbps-query -m"
 
+alias rel="xrdb merge $HOME/.Xresources && kill -USR1 $(pidof st)"
+alias clr="$HOME/.local/bin/colshuffle >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
 # prompt
 SPACESHIP_USER_SHOW="always"
 SPACESHIP_PROMPT_SEPARATE_LINE="false"

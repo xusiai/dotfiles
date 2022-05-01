@@ -95,8 +95,12 @@ super + m
   $HOME/.local/bin/music_terminal
   
 # SEARCH INVIDIOUS
+super + t
+  $HOME/.local/bin/colshuffle
+  
+# SEARCH INVIDIOUS
 super + y
-  HOME/.local/bin/yt
+  $HOME/.local/bin/yt
  
 # OPEN JELLYFIN
 super + j
