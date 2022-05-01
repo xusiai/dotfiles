@@ -52,12 +52,12 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 </br>
 
 ## KEYBINDINGS
-| MOD | SUPER |
+|MOD = SUPERKEY |  |
 |------------|-------------|
-| MOD + RETURN | KITTY |
-| MOD + BACKSPACE | FIREFOX |
-| MOD + C | KILL CLIENT |
-| ALT_L + F1 | ROFI | 
+| Mod + Return | Kitty |
+| Mod + BackSpace | Firefox |
+| Mod + c | Kill focused client |
+| Alt_L + F1 | Rofi | 
 
 </br>
 Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. If you have Ksuperkey installed rofi can be opened with Super alone without disrupting its use as a modifier.
