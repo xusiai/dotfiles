@@ -108,5 +108,5 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 
 ## MISCELLANEOUS
-- If you don't like bspwm you should check out [Hypr](https://github.com/vaxerski/Hypr). It is an amazing WM with sleek animations and an active dev who listens to feedback.
+- If you don't like bspwm you can substitute it with most WMs. I recommend [Hypr](https://github.com/vaxerski/Hypr) - a tiling WM with sleek animations and an active developer who listens to feedback. 
 
