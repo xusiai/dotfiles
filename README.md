@@ -1,9 +1,8 @@
-<h2 align="center">:white_flower: :heart: :cherry_blossom: :heart: :cherry_blossom: :heart: :cherry_blossom: Welcome! :cherry_blossom: :heart: :cherry_blossom: :heart: :cherry_blossom: :heart: :white_flower:</h2></br>
+<h2 align="center">:white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: Welcome! :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: :cherry_blossom: :white_flower: </h2></br>
 
 ![](assets/sample_colours.gif) </br>
 
-
-
+<h3 align="center"> :white_flower: :cherry_blossom: :white_flower: Scroll down for screenshots. :white_flower: :cherry_blossom: :white_flower: </h3> </br> </br>
 
 
 This is a collection of dotfiles which I use with bspwm. Hope you find something you like! :heart: </br>
