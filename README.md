@@ -64,10 +64,10 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 ## GALLERY
 <details>
-  <summary>click to expand</summary>
+  <summary>Click to expand. GIF at the bottom.</summary>
   
  #### SAGA
- <img src="assiets/SAGA.png"></br> 
+ <img src="assets/SAGA.png"></br> 
   
  #### ROSÉPINE
  <img src="assets/ROSÉPINE.png"></br>
