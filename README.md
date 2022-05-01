@@ -1,8 +1,10 @@
 <h2 align="center">:white_flower: :heart: :cherry_blossom: :heart: :cherry_blossom: :heart: :cherry_blossom: Welcome! :cherry_blossom: :heart: :cherry_blossom: :heart: :cherry_blossom: :heart: :white_flower:</h2></br>
-<img src="assets/WALL.png"></br>
-<img src="assets/TILED.png"></br>
-<img src="assets/ROFI.png"></br>
-<img src="assets/POWERMENU.png"></br>
+
+![](assets/sample_colours.gif) </br>
+
+
+
+
 
 This is a collection of dotfiles which I use with bspwm. Hope you find something you like! :heart: </br>
 
@@ -64,24 +66,39 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 ## GALLERY
 <details>
-  <summary>Click to expand. GIF at the bottom.</summary>
+  <summary>Click to expand.</summary>
   
  #### SAGA
  <img src="assets/SAGA.png"></br> 
   
+ <img src="assets/WALL.png"></br>
+ 
+ <img src="assets/ROFI.png"></br>
+ 
+ <img src="assets/POWERMENU.png"></br>
+ 
+ <img src="assets/TILED.png"></br>
+ 
  #### ROSÉPINE
  <img src="assets/ROSÉPINE.png"></br>
- 
+
  #### NORD DARK
  <img src="assets/NORD_DARK.png"></br>
  
- #### A few more samples
-![](assets/sample_colours.gif) </br>
-
+ #### ELLY
+ <img src="assets/ELLY.png"></br>
+ 
+ #### GRUVBOX
+ <img src="assets/GRUVBOX.png"></br>
+ 
+ #### DRACULA
+ <img src="assets/DRACULA.png"></br>
+ 
+ #### UNIKITTY LIGHT
+ <img src="assets/UNIKITTY_LIGHT.png"></br>
 </details>
 
 ## TODO
-- Adapt rofi to use colorer output instead of color.rasi.
 
 ## ACKNOWLEDGEMENTS
 - [Kiddae](https://github.com/kiddae) for the lovely tool that is colorer.
