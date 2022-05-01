@@ -90,6 +90,8 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  #### UNIKITTY LIGHT
  <img src="assets/UNIKITTY_LIGHT.png"></br>
 
+![](sample_colours.gif) </br>
+
 </details>
 
 ## TODO
