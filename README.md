@@ -91,9 +91,9 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 ## ACKNOWLEDGEMENTS
 - [Kiddae](https://github.com/kiddae) for developing colorer :heart:
-- [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :white_flower:
+- [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :heart:
 - [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config :heart:
-- [Manas140](https://github.com/Manas140) for a few scripts. :white_flower:
+- [Manas140](https://github.com/Manas140) for a few scripts :heart:
 - [Elenapan](https://github.com/elenapan) for the rofi-yt script :heart:
 
 ## MISCELLANEOUS
