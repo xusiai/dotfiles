@@ -94,8 +94,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 - [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :white_flower:
 - [adi1090x](https://github.com/adi1090x) for the beautiful ncmpcpp config :heart:
 - [Manas140](https://github.com/Manas140) for a few scripts. :white_flower:
-- And last but not least a thanks to all the wonderful people on [/r/unixporn](https://teddit.net/r/unixporn) who make dotfiles a lot more fun and provide an endless source of inspiration :heart:
-
+- [Elenapan](https://github.com/elenapan) for the rofi-yt script :heart:
 
 ## MISCELLANEOUS
 - If you don't like bspwm you can substitute it with most WMs. I recommend [Hypr](https://github.com/vaxerski/Hypr) - a tiling WM with sleek animations and an active developer who listens to feedback. 

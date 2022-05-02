@@ -1,19 +1,2 @@
-! SAGA Xresources palette
-*.foreground: #FAF8F6
-*.background: #0A0D0F
-*.color0:     #0A0D0F
-*.color8:     #101519
-*.color1:     #FFFAAD
-*.color9:     #FFFAAD
-*.color2:     #B4F8C8
-*.color10:    #B4F8C8
-*.color3:     #FF9E99
-*.color11:    #FF9E99
-*.color4:     #A0E7E5
-*.color12:    #A0E7E5
-*.color5:     #FFAEBC
-*.color13:    #FFAEBC
-*.color6:     #BCA7DD
-*.color14:    #BCA7DD
-*.color7:     #FAF8F6
-*.color15:    #FAF8F6
+#include ".config/colorer/out/Xresources"
+Xft.dpi: 93

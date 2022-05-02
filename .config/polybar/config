@@ -191,7 +191,7 @@ label = %date%%time%
 type = custom/text
 content ="󰍜"
 content-padding = 2
-click-left = $HOME/.local/bin/rofi-powermenu.sh  
+click-left = $HOME/.config/polybar/scripts/rofi-powermenu
 content-foreground = ${colors.color7}
 
 ############################################

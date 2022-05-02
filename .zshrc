@@ -12,39 +12,39 @@ setopt MENU_COMPLETE       # Automatically highlight first element of completion
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
-# env
-export ZSH="$HOME/.oh-my-zsh"
+# ENV
 export PATH="$HOME/.local/bin/:$PATH"
 export PATH="$HOME/.local/bin/wtwitch/:$PATH"
 export PATH="/opt/wine-lol/bin/:$PATH"
 export PATH="$HOME/.npm/node_modules/.bin/:$PATH"
-export AWESOME_IGNORE_LGI=1
+export PATH=$PATH:/home/miu/.spicetify
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# enable completion features
+# COMPLETION
 autoload -Uz compinit
 compinit -i
 
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case insensitive tab completion
-
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$HOME/.config/zsh/.zcompcache"
 
-# Define completers
+# COMPLETERS
 zstyle ':completion:*' completer _extensions _complete _approximate
 
 zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
 zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
 zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
 zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
-
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# Only display some tags for the command cd
+# ONLY DISPLAY SOME TAGS FOR CD
 zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
 
-# History configurations
+# HISTORY
 HISTFILE="$HOME/.cache/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=20000
@@ -54,7 +54,7 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-# source plugins
+# SOURCE PLUGINS
 source $HOME/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
@@ -76,14 +76,14 @@ antigen bundle ael-code/zsh-colored-man-pages
 antigen theme spaceship-prompt/spaceship-prompt
 antigen apply
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#484E5B,underline"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#181F25,underline"
 
-# tty
+# TTY
 if [ "$TERM" = "linux" ] ; then
     echo -en "\e]P0232323"
 fi
 
-# custom function
+# CUSTOM FUNCTION
 toppy() {
     history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n 21
 }
@@ -97,7 +97,7 @@ mcd () {
     cd $1
 }
 
-# alias
+# ALIAS
 alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias mtar='tar -zcvf' # mtar <archive_compress>
 alias utar='tar -zxvf' # utar <archive_decompress> <file_list>
@@ -137,7 +137,7 @@ alias gcm='git commit -m "$(date)"'
 alias gsetup="git remote set-url origin"
 alias gge="git config --global user.email"
 alias ggn="git config --global user.name"
-alias miud="git clone https://github.com/Miusaky/DT.git"
+alias miud="git clone https://github.com/Miusaky/bspdots.git"
 
 alias wtr="curl wttr.in/"
 alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
@@ -155,33 +155,24 @@ alias td="tb -d"
 alias tbc="tb --clear"
 alias tba="tb --archive"
 
-alias mirror-update='sudo reflector --verbose -c Sweden -c Finland -c Norway --sort rate --save /etc/pacman.d/mirrorlist'
-alias pacs="pacman -Slq | fzf -m --preview 'cat <(pacman -Si {1}) <(pacman -Fl {1} | awk \"{print \$2}\")' | xargs -ro sudo pacman -S"
-alias pars="paru -Slq | fzf -m --preview 'cat <(paru -Si {1}) <(paru -Fl {1} | awk \"{print \$2}\")' | xargs -ro  paru -S"
-alias pacr="pacman -Qq | fzf --multi --preview 'pacman -Qi {1}' | xargs -ro sudo pacman -Rns"
-alias p="pacman -Q | fzf"
-
 alias xi="sudo xbps-install"
 alias xr="sudo xbps-remove -Ro"
 alias xu="sudo xbps-install -Su"
 alias xq="xbps-query"
 alias xs="xbps-query -Rs"
-alias xss="ls ~/VP/srcpkgs | fzf"
-alias xsi="~/VP/./xbps-src -E pkg"
+alias xss="ls ~/.local/VP/srcpkgs | fzf"
+alias xsi="~/.local/VP/./xbps-src -E pkg"
 alias xin="sudo xbps-install --repository hostdir/binpkgs"
-alias xuu="cd ~/VP/ && ./xbps-src bootstrap-update"
+alias xuu="cd ~/.local/VP/ && ./xbps-src bootstrap-update"
 alias po="loginctl poweroff"
 alias rb="loginctl reboot"
 alias xl="xbps-query -m"
 
-alias rel="xrdb merge $HOME/.Xresources && kill -USR1 $(pidof st)"
-alias clr="$HOME/.local/bin/colshuffle >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
-# prompt
+alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
+
+# PROMPT
 SPACESHIP_USER_SHOW="always"
 SPACESHIP_PROMPT_SEPARATE_LINE="false"
 SPACESHIP_CHAR_SYMBOL=" "
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export PATH=$PATH:/home/miu/.spicetify
+

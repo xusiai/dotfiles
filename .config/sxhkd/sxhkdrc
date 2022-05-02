@@ -55,7 +55,7 @@ super + shift + @w
   
 # NCMPCPP
 super + m
-  $HOME/.local/bin/music_terminal
+  kitty --class music -e ncmpcpp
   
 # SEARCH INVIDIOUS
 super + y
