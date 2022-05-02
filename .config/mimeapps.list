@@ -1,10 +1,20 @@
 [Added Associations]
-text/plain=org.gnome.gedit.desktop;mpv.desktop;
-application/x-wine-extension-ini=org.gnome.gedit.desktop;
+text/plain=org.gnome.gedit.desktop;
 application/x-shellscript=org.gnome.gedit.desktop;
-image/jpeg=feh.desktop;
-image/png=feh.desktop;
-image/gif=mpv.desktop;
-video/H265=mpv.desktop
-video/H264=mpv.desktop
+application/x-genesis-rom=org.gnome.gedit.desktop;
+application/xml=org.gnome.gedit.desktop;
+application/zip=org.gnome.FileRoller.desktop;
+audio/x-wav=mpv.desktop;
+application/vnd.debian.binary-package=org.gnome.FileRoller.desktop;
+video/mp4=mpv.desktop;
+application/pdf=evince.desktop;
+application/x-cd-image=org.gnome.FileRoller.desktop;
+application/json=org.gnome.gedit.desktop;
+image/jpeg=org.gnome.eog.desktop;
+image/webp=org.gnome.eog.desktop;
+image/png=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;
+text/x-csrc=org.gnome.gedit.desktop;
+
+
 
