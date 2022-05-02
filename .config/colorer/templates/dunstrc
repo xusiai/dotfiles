@@ -3,13 +3,10 @@
 	foreground = "{fg}"
 
 [global]
-    ### Display ###
     follow = mouse
-
-    /* geometry = "360-10-40" */
     width = 300
-    origin = top-center
-    offset = 0x47
+    origin = bottom-right
+    offset = 10x56
     indicate_hidden = yes
     shrink = no
     transparency = 0
@@ -17,35 +14,23 @@
     separator_height = 1
     padding = 24
     horizontal_padding = 24
-    frame_width = 1
+    frame_width = 6
     outer_frame_width = 10
-    corner_radius = 6
-
-    frame_color = "{color8}"
+    corner_radius = 3
+    frame_color = "{color0}"
     outer_frame_color = "{bg}"
-    separator_color = "{color8}"
+    separator_color = "{color0}"
     sort = yes
     idle_threshold = 120
-
     highlight = "{color1}"
     progress_bar_frame_width = 0
 
-    ### Text ###
-    font = SF Pro Text Light 11
+########################################
+#                TEXT                  #
+########################################
+    font = Iosevka 12
     line_height = 1
-
     markup = full
-
-    # The format of the message.  Possible variables are:
-    #   %a  appname
-    #   %s  summary
-    #   %b  body
-    #   %i  iconname (including its path)
-    #   %I  iconname (without its path)
-    #   %p  progress value if set ([  0%] to [100%]) or nothing
-    #   %n  progress value if set without any extra characters
-    #   %%  Literal %
-    # Markup is allowed
     format = "<b>%s </b>\n%b"
     alignment = center
     show_age_threshold = 60
@@ -56,16 +41,18 @@
     hide_duplicate_count = false
     show_indicators = yes
 
-    ### Icons ###
+########################################
+#                ICONS                 #
+########################################
     icon_position = left
     max_icon_size = 100
-    icon_path = .icons/flattrcolor/status/24:.icons/flattrcolor/devices/48:.icons/flattrcolor/apps/scalable:.icons/flattrcolor/actions/scalable
-
-    ### History ###
+    icon_path= .local/share/icons/SAGACONS/status/scalable:.local/share/icons/SAGACONS/devices/scalable:.local/share/icons/SAGACONS/apps/scalable:.local/share/icons/SAGACONS/actions/scalable
+    
+########################################
+#            MISCELLANEOUS             #
+########################################
     sticky_history = yes
     history_length = 20
-
-    ### Misc/Advanced ###
     dmenu = /usr/bin/rofi -show run
     browser = /usr/bin/firefox
     always_run_script = true
@@ -81,16 +68,16 @@
 
 [urgency_low]
     background =  "{bg}"
-    frame_color = "{color8}"
+    frame_color = "{color0}"
     timeout = 10
 
 [urgency_normal]
     background =  "{bg}"
-    frame_color = "{color8}"
+    frame_color = "{color0}"
     timeout = 10
 
 [urgency_critical]
     background = "{bg}"
-    frame_color = "{color1}"
+    frame_color = "{color0}"
     timeout = 0
 

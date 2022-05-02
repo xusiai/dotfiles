@@ -16,5 +16,5 @@ mkfifo "$FIFO_UEBERZUG" >/dev/null
 trap cleanup EXIT 2>/dev/null
 tail --follow "$FIFO_UEBERZUG" | ueberzug layer --silent --parser simple >/dev/null 2>&1 &
 
-ncmpcpp -c ~/.ncmpcpp/config-art
+ncmpcpp -c ~/.config/ncmpcpp/config-art
 cleanup

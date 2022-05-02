@@ -269,29 +269,6 @@ click-right =  ~/.config/polybar/scripts/pipewire mute &
 scroll-up =  ~/.config/polybar/scripts/pipewire up &
 scroll-down =  ~/.config/polybar/scripts/pipewire down &
 
-[module/launcher]
-type=custom/script
-exec = pgrep rofi >/dev/null && echo "%{F$(colorer -g color8)}♥%{F-}" || echo "%{F$(colorer -g color1)}♥%{F-}"
-tail = true
-content-margin = 1
-click-left=launcher
-content-font = 1
 
-[module/spotify]
-type = custom/script
-format-margin = 1
-format =    <label>
-exec = playerctl metadata --format '{{artist}} {{title}}'
-tail = true
-interval = 1
-label-foreground = ${colors.color3}
-click-left = "playerctl play-pause"
-
-[module/playerctl]
-type = custom/script
-format-margin = 1
-exec = playerctl_status playerctld      40
-exec-if = [[ "$(playerctl -l)" != "No players found" ]] && echo 1
-tail = true
 
                 

@@ -1,13 +1,10 @@
 echo "Applying changes"
 cp  ~/.config/colorer/out/dunstrc ~/.config/dunst/dunstrc
 cp  ~/.config/colorer/out/kitty ~/.config/kitty/colors
-#cp  ~/.config/colorer/out/userChrome.css ~/.mozilla/firefox/c6xdm17d.default-release/chrome/userChrome.css
 cp  ~/.config/colorer/out/zathurarc ~/.config/zathura/zathurarc
 echo "Reloading everything"
 xrdb -merge ~/.config/colorer/out/Xresources
-# pkill -USR1 polybar
 killall dunst && dunst &
-feh --bg-scale {wp}
+#feh --bg-scale {wp}
 bspc wm -r
-# echo "Generating GTK theme..."
-# oomox-cli /opt/oomox/scripted_colors/xresources/xresources-reverse -t ~/.local/share/themes/ -m all -d true &
+

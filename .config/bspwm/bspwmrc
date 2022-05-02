@@ -4,9 +4,6 @@
 # #                                  ENV VARS                                  # 
 # ##############################################################################
 
-export BROWSER=firefox
-export EDITOR=hx
-
 # ##############################################################################
 # #                                  FUNCTIONS                                 # 
 # ##############################################################################
@@ -20,7 +17,7 @@ start() { pkill -x "$1"; { sleep 0.1; "$@" & }; }
 # ##############################################################################
 
 pgrep -x sxhkd > /dev/null || sxhkd &
-dunst --config $HOME/.config/dunst/dunstrc &
+dunst --config $HOME/.config/colorer/out/dunstrc &
 picom --config $HOME/.config/picom/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 easyeffects --gapplication-service & 

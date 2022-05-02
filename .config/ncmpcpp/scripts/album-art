@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-## Cover art script for ncmpcpp
-
 # SETTINGS
 music_library="/mnt/SCND/MUSIC"
 padding_top=3
@@ -69,7 +67,7 @@ find_cover_image() {
 
     # If we still failed to find a cover image, we use the fallback
     if [ -z "$cover_path" ]; then
-        cover_path="$HOME/.ncmpcpp/scripts/music.png"
+        cover_path="$HOME/.config/ncmpcpp/scripts/music.png"
     fi
 }
 
