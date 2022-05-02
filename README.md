@@ -73,18 +73,18 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  ##### ROFI
  <img src="assets/ROFI.png"></br> 
  <img src="assets/POWERMENU.png"></br> 
- ##### GEDIT
- <img src="assets/GEDIT.png"></br> 
  ##### FIREFOX
  <img src="assets/FOX.png"></br> 
  ##### GTK
  <img src="assets/GTK.png"></br> 
  ##### LOGSEQ
  <img src="assets/LOGSEQ.png"></br> 
- ##### HELIX
- <img src="assets/HELIX.png"></br> 
  ##### NCMPCPP
 ![](assets/NCMPCPP.gif) </br>
+ ##### GEDIT
+ <img src="assets/GEDIT.png"></br> 
+ ##### HELIX
+ <img src="assets/HELIX.png"></br> 
 </details>
 
 ## TODO
