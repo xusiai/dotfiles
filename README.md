@@ -48,7 +48,6 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 * I use [colorer](https://github.com/kiddae/colorer) to switch colour schemes. [SAGA](https://github.com/SAGAtheme/SAGA) is the default palette and if you're satisfied with that you don't need to install colorer as long as you keep its config files ($HOME/.config/colorer). If you do want to test other colours there are quite a few included in $HOME/.config/colorer/flavours. To switch you need to install [colorer](https://github.com/Kiddae/colorer) and run `colorer $HOME/.config/colorer/flavours/schemename`. 
 * Fonts, GTK theme and icons are included but you will have to switch to them (either via the config file or something like lxappearance). The font I use is Iosevka Term Heavy.
 * The Firefox theme is not included but can be found [here](https://github.com/SAGAtheme/Firefox).
-* Wallpaper is included but can also be found [here](https://github.com/Miusaky/bspdots/blob/main/.local/share/wallpapers/wallhaven-28691g.png). 
 </br>
 
 ## KEYBINDINGS
