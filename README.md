@@ -18,14 +18,14 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 
 | ESSENTIAL  | RECOMMENDED |
 |------------|-------------|
-| BSPWM      | KITTY       |
-| POLYBAR    | HELIX       |
-| SXHKD      | ZSH         |
-| PICOM      | COLORER     |
-| ROFI       | FIREFOX     |
-|            | KSUPERKEY   |
-|            | MPD         |
-|            | NCMPCPP     |
+| bspwm      | Kitty       |
+| sxhkd    | zsh       |
+| Polybar      | Colorer         |
+| Picom      | Firefox     |
+| Rofi       | Ksuperkey     |
+|            | Mpd   |
+|            | Ncmpcpp         |
+
 
 </br>
 
