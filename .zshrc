@@ -108,6 +108,8 @@ alias ..="cd .."
 alias b="../"
 alias x="exit"
 alias c="clear"
+alias xdq="xdg-mime query filetype"
+alias xds="xdg-mime default"
 
 alias dl="cd ~/DL"
 alias dt="cd ~/DT"

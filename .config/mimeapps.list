@@ -1,0 +1,10 @@
+[Added Associations]
+text/plain=org.gnome.gedit.desktop;mpv.desktop;
+application/x-wine-extension-ini=org.gnome.gedit.desktop;
+application/x-shellscript=org.gnome.gedit.desktop;
+image/jpeg=feh.desktop;
+image/png=feh.desktop;
+image/gif=mpv.desktop;
+video/H265=mpv.desktop
+video/H264=mpv.desktop
+

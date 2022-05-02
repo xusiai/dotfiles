@@ -87,15 +87,15 @@ super + z
   
 # MPD PREVIOUS
 super + F9
-  mpc prev
+  playerctl previous
 
 # MPD TOGGLE
 super + F8
-  mpc toggle
+  playerctl play-pause
 
 # MPD NEXT
 super + F7
-  mpc next
+  playerctl next
 
 # MPD VOL UP
 super + button4
