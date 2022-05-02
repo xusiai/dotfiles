@@ -42,7 +42,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
     * VPN module (available not but enabled) requires Mullvad but can be adapted to other providers.
     * Menus and VPN modules make use of rofi to some extent. 
     * GPU modules require an Nvidia card (and the their drivers).
-* The rofi powermenu uses loginctl. If it doesn't work for you can replace all occurrences of it in powermenu.sh with systemctl. 
+* The rofi powermenu uses loginctl. Replace the config entries with systemctl if you're using systemd. 
 * The included .zshrc depends on the (also included) antigen file to automatically install plugins. Do not use one without the other. 
 * If fonts are not rendering make sure you run `fc-cache -v` after linking the files. </br>
 * I use [colorer](https://github.com/kiddae/colorer) to switch colour schemes. [SAGA](https://github.com/SAGAtheme/SAGA) is the default palette and if you're satisfied with that you don't need to install colorer as long as you keep its config files ($HOME/.config/colorer). If you do want to test other colours there are quite a few included in $HOME/.config/colorer/flavours. To switch you need to install [colorer](https://github.com/Kiddae/colorer) and run `colorer $HOME/.config/colorer/flavours/schemename`. 
