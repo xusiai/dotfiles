@@ -7,7 +7,7 @@ pseudo-transparency = false
 
 [global/wm]
 margin-top = 0
-margin-bottom = 0      
+margin-bottom = 0
 
 [colors]
 include-file = ~/.config/colorer/out/polybar
@@ -45,7 +45,7 @@ modules-right = flower mpd mpdd flowerr updates date powermenu
 type = custom/text
 content ="󰍜"
 content-padding = 2
-click-left = rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi 
+click-left = rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi
 content-foreground = ${colors.color7}
 
 [module/cpu]
@@ -133,7 +133,7 @@ enable-scroll = true
 
 label-focused = 󰅫
 label-focused-overline = ${colors.foreground}
-label-focused-foreground = ${colors.color2}
+label-focused-foreground = ${colors.color1}
 label-focused-padding = 1
 
 label-empty = 󰅫
@@ -169,7 +169,7 @@ type = custom/script
 exec = xbps-install -Mun | wc -l
 format = <label>
 format-prefix = " 󰬬"
-format-prefix-foreground = ${colors.color3}
+format-prefix-foreground = ${colors.color5}
 interval = 4600
 label =%output%
 label-padding = 1
@@ -221,7 +221,7 @@ content-foreground = ${colors.background}
 type = custom/text
 content = %{T3}%{T-}
 content-foreground = ${colors.background}
-                                         
+
 [module/flower]
 type = custom/text
 content = " 󰴈 "
@@ -268,7 +268,3 @@ click-left = ~/.bin/music_terminal &
 click-right =  ~/.config/polybar/scripts/pipewire mute &
 scroll-up =  ~/.config/polybar/scripts/pipewire up &
 scroll-down =  ~/.config/polybar/scripts/pipewire down &
-
-
-
-                

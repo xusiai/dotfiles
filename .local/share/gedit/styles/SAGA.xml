@@ -28,21 +28,21 @@ SOFTWARE.
 
 	<!-- SAGA -->
 	<color name="background" value="#0A0D0F"/>
-	<color name="current-line" value="#181F25"/>
-	<color name="selection" value="#101519"/>
-	<color name="foreground" value="#FAF8F6"/>
-	<color name="comment" value="#202931"/>
-	<color name="Tiffany Blue" value="#A0E7E5"/>
+	<color name="current-line" value="#0F1214"/>
+	<color name="selection" value="#141719"/>
+	<color name="foreground" value="#FFFCFF"/>
+	<color name="comment" value="#191C1E"/>
+	<color name="Tiffany Blue" value="#BFFBF9"/>
 	<color name="Magic Mint" value="#B4F8C8"/>
-	<color name="Peach Crayola" value="#FAC898"/>
-	<color name="Hot Pink" value="#FFAEBC"/>
-	<color name="Wisteria" value="#BCA7DD"/>
-	<color name="Vivid Tangerine" value="#FF9E99"/>
-	<color name="Lemon Yellow Crayola" value="#FFFAAD"/>
+	<color name="Peach Crayola" value="#FFDCAC"/>
+	<color name="Hot Pink" value="#FFBDCB"/>
+	<color name="Wisteria" value="#D2C5E8"/>
+	<color name="Vivid Tangerine" value="#FFB2AD"/>
+	<color name="Lemon Yellow Crayola" value="#FFFFC1"/>
 
-	<color name="white" value="#FFFFFE"/>
-	<color name="Isabelline" value="#F8F5F2"/>
-	<color name="Eerie Black" value="#181F25"/>
+	<color name="white" value="#FFFCFF"/>
+	<color name="Isabelline" value="#FFF2FF"/>
+	<color name="Eerie Black" value="#141719"/>
 
 	<style name="text" foreground="Isabelline" background="background"/>
 	<style name="selection" background="selection"/>

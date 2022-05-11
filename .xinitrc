@@ -32,18 +32,16 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-ksuperkey &
+ksuperkey 
 pipewire & 
-pipewire-pulse &
-#easyeffects --gapplication-service &
+pipewire-pulse & 
 xfce4-power-manager &
-mpd &
+mpd 
 kdeconnect-cli &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 /usr/libexec/xdg-desktop-portal-gtk &
-setxkbmap se &
-xsetroot -cursor_name left_ptr &
-feh --recursive --randomize --bg-scale $HOME/.local/share/wallpapers/* &
-mpDris2 & 
-
+setxkbmap se 
+xsetroot -cursor_name left_ptr 
+feh --recursive --randomize --bg-scale $HOME/.local/share/wallpapers 
+mpDris2 &
 exec dbus-run-session bspwm

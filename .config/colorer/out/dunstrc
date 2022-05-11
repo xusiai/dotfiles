@@ -1,6 +1,6 @@
 [colors]
 	background = "#0A0D0F"
-	foreground = "#FAF8F6"
+	foreground = "#FFFCFF"
 
 [global]
     follow = mouse
@@ -17,12 +17,12 @@
     frame_width = 6
     outer_frame_width = 10
     corner_radius = 3
-    frame_color = "#101519"
+    frame_color = "#0F1214"
     outer_frame_color = "#0A0D0F"
-    separator_color = "#101519"
+    separator_color = "#0F1214"
     sort = yes
     idle_threshold = 120
-    highlight = "#FF9E99"
+    highlight = "#FFBDCB"
     progress_bar_frame_width = 0
 
 ########################################
@@ -68,16 +68,16 @@
 
 [urgency_low]
     background =  "#0A0D0F"
-    frame_color = "#101519"
+    frame_color = "#0F1214"
     timeout = 10
 
 [urgency_normal]
     background =  "#0A0D0F"
-    frame_color = "#101519"
+    frame_color = "#0F1214"
     timeout = 10
 
 [urgency_critical]
     background = "#0A0D0F"
-    frame_color = "#101519"
+    frame_color = "#0F1214"
     timeout = 0
 

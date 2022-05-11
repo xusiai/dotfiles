@@ -19,8 +19,8 @@ start() { pkill -x "$1"; { sleep 0.1; "$@" & }; }
 pgrep -x sxhkd > /dev/null || sxhkd &
 dunst --config $HOME/.config/colorer/out/dunstrc &
 picom --config $HOME/.config/picom/picom.conf &
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-easyeffects --gapplication-service & 
+easyeffects --gapplication-service & # because xinit won't for some reason. 
+
 # ##############################################################################
 # #                                 WINDOW RULES                               #
 # ##############################################################################
@@ -70,9 +70,6 @@ start $HOME/.config/polybar/launch.sh
 
 # PULLS WINDOWS REQUIRING ATTENTION INTO FOCUS REGARDLESS OF WORKSPACE
 start $HOME/.config/bspwm/scripts/bspfocus
-
-# SET WALLPAPER
-feh --randomize --recursive --bg-scale $HOME/.local/share/wallpapers
 
 # MOUSEDRIFT
 xset m 0 0

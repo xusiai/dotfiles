@@ -26,6 +26,10 @@ ctrl + alt + shift + r
 super + Return
     kitty
 
+# TOGGLE FULLSCREEN OR MONACLE
+super + f
+    bspc node -t "~"fullscreen
+
 # OPEN APPMENU
 alt + F1
     rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi 
@@ -105,3 +109,14 @@ super + button4
 super + button5
   mpc vol -5
 
+# COLOUR PICKER HEX
+super + p 
+  xcolor -s -f HEX
+
+# COLOUR PICKER RGB
+super + shift + p
+  xcolor -s -f rgb
+
+# LUTRIS
+super + l
+  lutris
