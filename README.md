@@ -69,6 +69,8 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  #### SAGA
  ##### WALL
  <img src="assets/WALL.png"></br> 
+ ##### DUNST
+ <img src="assets/DUNST.png"></br> 
  ##### ROFI
  <img src="assets/ROFI.png"></br> 
  <img src="assets/POWERMENU.png"></br> 
