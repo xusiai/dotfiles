@@ -25,6 +25,7 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 | Rofi       | Ksuperkey     |
 |            | Mpd   |
 |            | Ncmpcpp         |
+|            | fzf         |
 
 
 </br>
