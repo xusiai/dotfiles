@@ -112,7 +112,7 @@ alias c="clear"
 alias xdq="xdg-mime query filetype"
 alias xds="xdg-mime default"
 
-alias dl="cd ~/DL"
+alias dl="cd ~/.config/XDG/DL/"
 alias dt="cd ~/DT"
 alias cfg="cd ~/.config/"
 alias d1="cd /mnt/D1"
