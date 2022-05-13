@@ -1,0 +1,80 @@
+configuration {
+	font:							"Material Design Icons Desktop 30";
+    disable-history:            	false;
+	sidebar-mode: 					false;
+	show-icons:                     false;
+}
+
+* {
+    active-background: #FFAEBC;
+    active-foreground: #FAF8F6;
+    normal-background: #0A0D0F;
+    normal-foreground: #FAF8F6;
+    urgent-background: #0A0D0F;
+    urgent-foreground: #FAF8F6;
+
+    alternate-active-background: #0A0D0F;
+    alternate-active-foreground: #FAF8F6;
+    alternate-normal-background: #0A0D0F;
+    alternate-normal-foreground: #FAF8F6;
+    alternate-urgent-background: #0A0D0F;
+    alternate-urgent-foreground: #FAF8F6;
+
+    selected-active-background: #FF9E99;
+    selected-active-foreground: #FAF8F6;
+    selected-normal-background: #FAF8F6;
+    selected-normal-foreground: #0A0D0F;
+    selected-urgent-background: #FAC898;
+    selected-urgent-foreground: #FAF8F6;
+
+    background-color: #0A0D0F;
+    background: #0A0D0F;
+    foreground: #FAF8F6;
+    border-color: #FAF8F6;
+    spacing: 2;
+}
+
+window {
+    transparency:                   "real";
+    border-radius:                  4px;
+    location:                       center;
+	width:							600px;
+}
+
+listview {
+    columns:						5;
+    lines:							1;
+    spacing:                        12px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    children:                       [ listview ];
+    spacing:                        20px;
+    margin:                         20px;
+}
+
+element {
+    background-color:               @active-background;
+    border-radius:                  4px;
+}
+
+element-text {
+    background-color: 				inherit;
+    text-color:       				inherit;
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         20px 15px 20px 15px;
+}
+
+element selected {
+	text-color: 					@background;
+	background-color:               @selected-urgent-background;
+	border-radius:                  4px;
+}
+
+
+
