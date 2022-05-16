@@ -1,4 +1,4 @@
-wtwitch(1) ["Version 2.3.4"]
+wtwitch(1) ["Version 2.4.0"]
 
 # NAME
 
@@ -66,6 +66,10 @@ e.g. wtwitch *u* _dratnos_ _emongg_ _sleepy_
 *c*, *check*
 	View your player/quality settings and the status of the streamers you are subscribed to.++
 e.g. wtwitch *c*
+
+*o*
+	View all online streamers you are subscribed to, and optionally open streams, with fzf. You must have fzf installed to use this feature.++
+e.g. wtwitch *o*
 
 ## Configuration options
 

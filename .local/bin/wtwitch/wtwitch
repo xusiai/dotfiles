@@ -4,7 +4,7 @@
 #    Homepage: https://github.com/krathalan/wtwitch
 #
 # Copyright (C) 2019-2020:
-readonly CONTRIBUTORS="krathalan, nycko123, Léo Villeveygoux, René de Hesselle, incompetentcoder"
+readonly CONTRIBUTORS="krathalan, nycko123, Léo Villeveygoux, René de Hesselle, incompetentcoder, yazgoo"
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ set -Eeuo pipefail
 
 # Script (self) information
 readonly SCRIPT_NAME="${0##*/}"
-readonly VERSION="2.3.4"
+readonly VERSION="2.4.0"
 
 # Subscription check cache
 readonly CACHE_EXPIRY_TIME="60" # In seconds
@@ -463,6 +463,12 @@ TRANSLATIONS="$(cat <<EOF
     "de": "No more streamers",
     "es": "No more streamers",
     "fr": "No more streamers"
+  },
+  "install_fzf_first": {
+    "en": "You need to install fzf to use this feature.",
+    "de": "You need to install fzf to use this feature.",
+    "es": "You need to install fzf to use this feature.",
+    "fr": "You need to install fzf to use this feature."
   }
 }
 EOF
@@ -867,10 +873,33 @@ cache_online_subscription_json()
 }
 
 #######################################
+# Select and open online streams with FZF.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+open_selected_stream()
+{
+  if ! command -v "fzf" &> /dev/null; then
+    exit_script_on_failure "$(get_translation install_fzf_first)"
+  fi
+
+  stream="$(check_twitch_streams --online-only | fzf --ansi | cut -d: -f1 | sed 's/ *//')"
+
+  if [ -n "$stream" ]; then
+    watch_stream "$stream"
+  else
+    exit_script_on_failure "$(get_translation flags_no_streamer)"
+  fi
+}
+
+#######################################
 # Checks to see which subscribed Twitch streams
 # are online and prints the user's settings.
 # Arguments:
-#   none
+#   $1: optional argument. if passed with value of "--online-only",
+#       all output will be omitted except for a list of online streamers.
 # Returns:
 #   none
 #######################################
@@ -893,7 +922,10 @@ check_twitch_streams()
   if [[ ${#userSubscriptions[@]} -eq 1 ]] && [[ -z "${userSubscriptions[0]}" ]]; then
     exit_script_on_failure "${localizedStrings[5]}"
   else
-    printf "\n %s:" "${localizedStrings[0]}"
+    # Only print header for wtwitch [c], not wtwitch [o]
+    if [[ "${1:-}" != "--online-only" ]]; then
+      printf "\n %s:" "${localizedStrings[0]}"
+    fi
   fi
 
   # Get a cache of the current online streamers
@@ -951,6 +983,15 @@ check_twitch_streams()
 
   # Wait for all background processes, offline and online, to finish
   wait
+
+  # Only print online streamers for wtwitch [o]
+  if [[ "${1:-}" == "--online-only" ]]; then
+    sort "${TMP_ONLINE_TEXT_FILE}" 2> /dev/null
+    # Fix issue with /tmp dir not deleting on exit/sigint when check_twitch_streams()
+    # is executed in a subshell, such as with wtwitch [o]
+    clean_up_tmp
+    return
+  fi
 
   printf "\n"
 
@@ -1396,6 +1437,22 @@ search_channels()
   wait
 
   cat "${TMP_SEARCH_TEXT_FILE}" 2> /dev/null || printf " %s.\n" "$(get_translation no_results)"
+}
+
+#######################################
+# Watch stream by name of streamer. Wrapper function for stream()
+# Arguments:
+#   $1: name of streamer to watch
+# Returns:
+#   none
+#######################################
+watch_stream()
+{
+  if [[ "${userQuality}" == "audio_only" ]] || [[ "${DEBUGGING}" == "on" ]]; then
+    stream "$1"
+  else
+    stream "$1" &> /dev/null &
+  fi
 }
 
 #######################################
@@ -1979,7 +2036,7 @@ glob "$1" '[q]*' && [[ -z "${2:-}" ]] &&
   exit_script_on_failure "$(get_translation flags_no_streamer)"
 
 # If using a command that requires the Twitch API, update token
-if glob "$1" '[cengtv]*'; then
+if glob "$1" '[cengtvo]*'; then
   # If the API token is empty, OR
   # If the API token is null (e.g. there is no token), OR
   # If the API token is expired
@@ -1992,6 +2049,7 @@ fi
 case "$1" in
   -h|--help|h*) print_help ;;
   c*) check_twitch_streams ;;
+  o*) open_selected_stream ;;
   g*) list_streamers_of_game "$2" ;;
   e*) search_categories "$2" ;;
   t*) list_top ;;
@@ -2005,13 +2063,7 @@ case "$1" in
   b*) block "$@" ;;
   version) print_version ;;
   v*) list_vods "$@" ;;
-  w*)
-    if [[ "${userQuality}" == "audio_only" ]] || [[ "${DEBUGGING}" == "on" ]]; then
-      stream "$2"
-    else
-      stream "$2" &> /dev/null &
-    fi
-  ;;
+  w*) watch_stream "$2" ;;
   *) print_help ;;
 esac
 
