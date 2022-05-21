@@ -22,8 +22,7 @@
 
 <img src="assets/WALL2.png"></br> 
 
-<div align="center">  <H3>  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ </H3> </div>
-
+<div align="center">  <H3>  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ </H3> </br> ** Welcome!** </br> </div>
 
 **This repo hosts a collection of dotfiles for bspwm and various applications I use with it.** </br>
 
