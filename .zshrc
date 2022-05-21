@@ -18,7 +18,7 @@ export PATH="$HOME/.local/bin/wtwitch/:$PATH"
 export PATH="/opt/wine-lol/bin/:$PATH"
 export PATH="$HOME/.npm/node_modules/.bin/:$PATH"
 export PATH=$PATH:/home/miu/.spicetify
-
+export TODO_PATH=$HOME/.cache/todofile
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -173,6 +173,8 @@ alias xl="xbps-query -m"
 
 alias mb="kitty +kitten ssh root@192.168.1.253"
 alias img="kitty +kitten icat" 
+
+alias rname="mnamer --no-overwrite --no-guess --batch --recurse"
 
 alias xfd="xfsdump -l 0 -L -f /mnt/SCND /"
 

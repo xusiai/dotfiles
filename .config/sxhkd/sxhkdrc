@@ -33,7 +33,7 @@ super + f
 # OPEN APPMENU
 alt + F1
     rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi 
-    
+
 # RESTART SXHKD
 super + Escape
     pkill -USR1 -x sxhkd
