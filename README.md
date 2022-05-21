@@ -47,10 +47,6 @@ cp --remove-destination -as $HOME/bspdots/. $HOME/
 
 In addition there are a number of utilities I use which make life easier such as fzf, redshift and colorer. You can pick and choose the ones you want but please see the additional notes section below for hard dependencies. 
 
-</br>
-
-
-
 <h3> Additional notes </h3>
 
 
@@ -81,7 +77,6 @@ In addition there are a number of utilities I use which make life easier such as
 | **MOD + R** | **ENABLE REDSHIFT** |
 | **MOD + SHIFT + R** | **DISABLE REDSHIFT** |
 
-</br>
 Look in sxhkdrc for the rest. The above should allow you to adjust the setup to your own preferrences. MOD is Mod4 or what is commonly referred to as the Windows key. If you have https://github.com/hanschen/ksuperkey installed pressing mod4 once will open rofi whilst still functioning as the main modifier. Highly recommend it. 
 
 
