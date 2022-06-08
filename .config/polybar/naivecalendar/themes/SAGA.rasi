@@ -1,0 +1,10 @@
+/************************************************
+ * ROFI Color theme
+ * User: Daguhh
+ * Copyright: 2020 Daguhh
+ ***********************************************/
+
+@import "common/theme_SAGA.rasi"
+@import "common/position.rasi"
+@import "common/shape_classic_sparse.rasi"
+

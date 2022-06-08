@@ -1,0 +1,60 @@
+
+#window {
+    fullscreen:             false;
+    hide-scrollbar:         true;
+    line-padding:           10;
+    padding:                10px;
+    width:                  300px;
+}
+#mainbox {
+    border:  0;
+    padding: 0;
+}
+#message {
+    padding:   0px   1px 10px ;
+}
+#listview {
+    fixed-height: 0;
+    border:       2px 0px 0px ;
+    spacing:      3px;
+    scrollbar:    false;
+    padding:      1px 1px 1px ;
+    columns:      7;
+    lines:        8;
+}
+#element {
+    border:  0;
+    padding: 8px 0px 0px ;
+    horizontal-align: true;
+}
+#mode-switcher {
+    border:       0px 0px 0px ;
+}
+#button {
+    spacing:    0;
+}
+#button.selected {
+}
+#inputbar {
+    spacing:    0;
+    padding:    1px ;
+}
+#case-indicator {
+    spacing:    0;
+}
+#entry {
+    spacing:    0;
+}
+#prompt {
+    spacing:    0;
+}
+#inputbar {
+    children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+#textbox-prompt-colon {
+    expand:     false;
+    str:        ":";
+    margin:     0px 0.3em 0em 0em ;
+}
+
+

@@ -30,12 +30,12 @@ line-color = ${colors.color8}
 wm-restack = bspwm
 override-redirect = false
 
-font-0=Iosevka Nerd Font:style=Heavy:size=10;3
+font-0=SAGA Heavy:size=10;3
 font-1=Material Design Icons Desktop:size=13;3
 
 modules-left = menu cpu cputemp gpu gputemp memory filesystem
 modules-center =  bspwm
-modules-right = flower mpd mpdd flowerr updates date powermenu
+modules-right = flower mpd mpdd flowerr updates clickdate powermenu
 
 ############################################
 #  	        MODULES LEFT               #
@@ -166,7 +166,9 @@ format-online-foreground = ${colors.color2}
 
 [module/updates]
 type = custom/script
-exec = xbps-install -Mun | wc -l
+#exec = xbps-install -Mun | wc -l
+exec = $HOME/.config/polybar/scripts/archupdates
+tail = true
 format = <label>
 format-prefix = " 󰬬"
 format-prefix-foreground = ${colors.color5}
@@ -186,6 +188,18 @@ format-padding = 1
 date = %H:%M%{F-}
 time-alt = %a, %b %d%{F-}
 label = %date%%time%
+
+
+
+[module/clickdate]
+type = custom/script
+format-prefix = "" 
+format-prefix-foreground = ${colors.accent}
+exec = date +%R
+tail = false
+interval = 5
+click-left = $HOME/.config/polybar/naivecalendar/naivecalendar.sh --theme SAGA
+click-right = 
 
 [module/powermenu]
 type = custom/text

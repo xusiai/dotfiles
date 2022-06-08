@@ -1,0 +1,7 @@
+
+@import "shape_base.rasi"
+
+#listview {
+    columns:      7;
+    lines:        8;
+}

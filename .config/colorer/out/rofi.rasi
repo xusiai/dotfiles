@@ -29,7 +29,7 @@
 
 // Main config
 configuration {
-    font: 						"Iosevka Heavy 11";
+    font:  						"SAGA Heavy 11";
     fixed-num-lines: 					true;
     show-icons: 					true;
     icon-theme:                     "Dracula";

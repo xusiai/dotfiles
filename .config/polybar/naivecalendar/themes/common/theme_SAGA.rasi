@@ -1,0 +1,17 @@
+@import "theme_base.rasi"
+
+
+* {
+    foreground:                  #FAEDFF;
+    background:                  #0A0D0F;
+    foreground-normal:           @foreground;
+    background-normal:           @background;
+    foreground-active:           #FFBDCB;
+    background-active:           #0A0D0F;
+    foreground-urgent:           #FFBDCB;
+    background-urgent:           #0A0D0F;
+    foreground-select:           #FFBDCB;
+    background-select:           #0A0D0F;
+    font:                       "FontAwesome 12";
+}
+

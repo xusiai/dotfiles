@@ -1,0 +1,98 @@
+#window {
+    border-color:           @border;
+    background-color:       @background;
+    text-color:             @foreground;
+}
+#mainbox {
+    background-color:   @background;
+}
+#message {
+    border-color: @background;
+    background-color:   @background;
+}
+#textbox {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#listview {
+    border-color: @background;
+    background-color:   @background;
+}
+#element {
+    background-color:   @background;
+}
+#element.normal.normal {
+    background-color: @background-normal;
+    text-color:       @foreground-normal;
+}
+#element.normal.urgent {
+    background-color: @background-urgent;
+    text-color:       @foreground-urgent;
+}
+#element.normal.active {
+    background-color: @background-active;
+    text-color:       @foreground-active;
+}
+#element.selected.normal {
+    background-color: @background-select;
+    text-color:       @foreground-select;
+}
+#element.selected.urgent {
+    background-color: @background-select;
+    text-color:       @foreground-select;
+}
+#element.selected.active {
+    background-color: @background-select;
+    text-color:       @foreground-select;
+}
+#element.alternate.normal {
+    background-color: @background-normal;
+    text-color:       @foreground-normal;
+}
+#element.alternate.urgent {
+    background-color: @background-urgent;
+    text-color:       @foreground-urgent;
+}
+#element.alternate.active {
+    background-color: @background-active;
+    text-color:       @foreground-active;
+}
+#mode-switcher {
+    border-color: @background;
+    foreground-color:   @background;
+    background-color:   @background;
+}
+#button {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#button.selected {
+    background-color: @background;
+    text-color:       @foreground;
+}
+#inputbar {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#case-indicator {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#entry {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#prompt {
+    text-color: @foreground;
+    background-color:   @background;
+}
+#textbox-prompt-colon {
+    text-color: @foreground;
+    background-color:   @background;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
+}
+

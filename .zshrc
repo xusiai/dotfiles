@@ -14,14 +14,9 @@ setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
 # ENV
 export PATH="$HOME/.local/bin/:$PATH"
-export PATH="$HOME/.local/bin/wtwitch/:$PATH"
-export PATH="/opt/wine-lol/bin/:$PATH"
-export PATH="$HOME/.npm/node_modules/.bin/:$PATH"
-export PATH=$PATH:/home/miu/.spicetify
-export TODO_PATH=$HOME/.cache/todofile
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# SAGA FZF
+export FZF_DEFAULT_OPTS='--color=bg+:#0A0D0F,bg:#0F1214,spinner:#FFFFC1,hl:#FFBDCB --color=fg:#FFFCFF,header:#FFBDCB,info:#D2C5E8,pointer:#FFDCAC --color=marker:#FFDCAC,fg+:#F5D0D0,prompt:#D2C5E8,hl+:#FFBDCB'
 
 # COMPLETION
 autoload -Uz compinit
@@ -34,7 +29,6 @@ zstyle ':completion:*' cache-path "$HOME/.config/zsh/.zcompcache"
 
 # COMPLETERS
 zstyle ':completion:*' completer _extensions _complete _approximate
-
 zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
 zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
 zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
@@ -77,18 +71,9 @@ antigen bundle ael-code/zsh-colored-man-pages
 antigen theme spaceship-prompt/spaceship-prompt
 antigen apply
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#181F25,underline"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#1e2123,underline"
 
-# TTY
-if [ "$TERM" = "linux" ] ; then
-    echo -en "\e]P0232323"
-fi
-
-# CUSTOM FUNCTION
-toppy() {
-    history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n 21
-}
-
+# CUSTOM FUNCTIONS
 cd() {
 	builtin cd "$@" && command ls --group-directories-first --color=auto -F
 }
@@ -98,40 +83,42 @@ mcd () {
     cd $1
 }
 
-# ALIAS
-alias grub-update='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+# TOOLBOX ALIASES
 alias mtar='tar -zcvf' # mtar <archive_compress>
 alias utar='tar -zxvf' # utar <archive_decompress> <file_list>
 alias z='zip -r' # z <archive_compress> <file_list>
 alias uz='unzip' # uz <archive_decompress> -d <dir>
 alias sr='source ~/.zshrc'
-alias ..="cd .."
-alias b="../"
-alias x="exit"
-alias c="clear"
-alias xdq="xdg-mime query filetype"
-alias xds="xdg-mime default"
-
-alias dl="cd ~/.config/XDG/DL/"
-alias dt="cd ~/DT"
-alias cfg="cd ~/.config/"
-alias d1="cd /mnt/D1"
-alias d2="cd /mnt/D2"
-alias d3="cd /mnt/D3"
-alias tm="cd /mnt/D1/TM/completed"
-
-alias mkdir="mkdir -p"
-alias fm='xplr'
-
 alias l="ls -l"
 alias la="ls -a"
 alias lla="ls -la"
 alias lt="ls --tree"
 alias grep='grep --color=auto'
-alias v='nvim'
 alias mv='mv -v'
 alias cp='cp -vr'
 alias rm='rm -vr'
+alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
+alias diskspace='du -cha --max-depth=1 / | grep -E "M|G"'
+alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > playlist.m3u"'
+
+
+# NAVIGATION ALIASES
+alias ..="cd .."
+alias b="../"
+alias dl="cd ~/.config/XDG/DL/"
+alias dt="cd ~/.bspdots"
+alias cfg="cd ~/.config/"
+alias d1="cd /mnt/D1"
+alias d2="cd /mnt/D2"
+alias d3="cd /mnt/D3"
+alias d4="cd /mnt/D4"
+alias d5="cd /mnt/D5"
+alias d6="cd /mnt/D6"
+alias tm="cd /mnt/D1/TM/completed"
+alias x="exit"
+alias c="clear"
+
+# GIT ALIASES
 alias gc="git clone"
 alias gp="git push"
 alias ga="git add ."
@@ -140,24 +127,21 @@ alias gcm='git commit -m "$(date)"'
 alias gsetup="git remote set-url origin"
 alias gge="git config --global user.email"
 alias ggn="git config --global user.name"
-alias miud="git clone https://github.com/Miusaky/bspdots.git"
+alias bspd="git clone https://github.com/Miusaky/bspdots.git"
 
-alias wtr="curl wttr.in/"
-alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
-alias diskspace='du -cha --max-depth=1 / | grep -E "M|G"'
-alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > playlist.m3u"'
+# APPLICATION ALIASES
 alias mdl="megadl --path /mnt/D1/TM/completed/"
 alias ydl="yt-dlp -o /mnt/D1/TM/completed/%(title)s-%(id)s.%(ext)s"
 alias wwc="wtwitch c"
 alias ww="wtwitch w"
-alias tl="tb -l"
-alias ta="tb -t"
-alias ts="tb -s"
-alias tc="tb -c"
-alias td="tb -d"
-alias tbc="tb --clear"
-alias tba="tb --archive"
+alias mb="kitty +kitten ssh root@192.168.1.253"
+alias img="kitty +kitten icat" 
+alias rname="mnamer --no-overwrite --no-guess --batch --recurse"
+alias v='nvim'
+alias wtr="curl wttr.in/"
+alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
 
+# VOID ALIASES
 alias xi="sudo xbps-install"
 alias xr="sudo xbps-remove -Ro"
 alias xu="sudo xbps-install -Su"
@@ -171,14 +155,13 @@ alias po="loginctl poweroff"
 alias rb="loginctl reboot"
 alias xl="xbps-query -m"
 
-alias mb="kitty +kitten ssh root@192.168.1.253"
-alias img="kitty +kitten icat" 
-
-alias rname="mnamer --no-overwrite --no-guess --batch --recurse"
-
-alias xfd="xfsdump -l 0 -L -f /mnt/SCND /"
-
-alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
+# ARCH ALIASES
+# alias xi="paru -S"
+# alias xr="paru -Rs"
+# alias xu="paru -Syu"
+# alias xq="paru"
+# alias po="systemctl poweroff"
+# alias rb="systemctl reboot"
 
 # PROMPT
 SPACESHIP_USER_SHOW="always"
