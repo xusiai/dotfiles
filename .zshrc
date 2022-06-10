@@ -157,6 +157,11 @@ alias xq="paru"
 alias po="systemctl poweroff"
 alias rb="systemctl reboot"
 
+# MCONNECT
+alias send="mconnectctl share-file /org/mconnect/device/0"
+alias sendurl="mconnectctl share-url /org/mconnect/device/0"
+alias sendtext="mconnectctl share-text /org/mconnect/device/0"
+
 # PROMPT
 #SPACESHIP_USER_SHOW="always"
 #SPACESHIP_PROMPT_SEPARATE_LINE="false"

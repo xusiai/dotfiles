@@ -909,3 +909,5 @@ Jun 10 04:34 : client: [9] command "close" during idle
 Jun 10 04:58 : client: [0] command "close" during idle
 Jun 10 04:59 : client: [1] command "close" during idle
 Jun 10 05:01 : client: [2] command "close" during idle
+Jun 10 06:19 : client: [3] command "close" during idle
+Jun 10 07:00 : client: [0] command "close" during idle

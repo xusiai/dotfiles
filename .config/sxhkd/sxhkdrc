@@ -26,7 +26,12 @@ super + space
 
 # MOVE TO OR SEND APP TO WORKSPACE
 super + {_,shift + }{1-8}
-	bspc {desktop -f,node -d} '^{1-8}'
+	bspc {desktop -f,node -d} '^{2-4}'
+	
+super + {_,shift + } q
+  bspc {desktop -f,node -d} q
+super + {_,shift + } e
+  bspc {desktop -f,node -d} e
 
 # TAB BETWEEN WORKSPACES
 super + {_,shift + } Tab
@@ -35,7 +40,6 @@ super + {_,shift + } Tab
 # TAB BETWEEN APPLICATIONS
 alt + {_,shift +} Tab
     bspc node -f {next,prev}
-
 
 # SHUTDOWN SYSTEM
 ctrl + alt + shift + q

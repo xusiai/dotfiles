@@ -52,6 +52,9 @@ mpDris2 &
 # POLKIT
 [ -n "$(pidof polkit-gnome-authentication-agent-1)" ] || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+# MCONNECT
+mconnect -d & 
+
 # WALLPAPER
 $HOME/.fehbg &
 
@@ -89,7 +92,7 @@ config external_rules_command "$HOME/.config/bspwm/scripts/spotifyrule.sh"
 # #                           GENERAL CONFIG                            #
 # #######################################################################
 
-bspc monitor -d 1 2 3 4 5 
+bspc monitor -d q 1 2 3 e 
 
 config border_width            6
 config window_gap              10
