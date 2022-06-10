@@ -52,8 +52,11 @@ mpDris2 &
 # POLKIT
 [ -n "$(pidof polkit-gnome-authentication-agent-1)" ] || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-# MCONNECT
-mconnect -d & 
+# KDE CONNECT
+[ -n "$(pidof kdeconnectd)" ] || kdeconnectd &
+[ -n "$(pidof spotify)" ] || spotify &
+[ -n "$(pidof obsidian)" ] || obsidian &
+[ -n "$(pidof xfce4-power-manager)" ] || xfce4-power-manager & 
 
 # WALLPAPER
 $HOME/.fehbg &
@@ -61,9 +64,9 @@ $HOME/.fehbg &
 # PULL APPS REQUIRING ATTENTION INTO FOCUS
 $HOME/.config/bspwm/scripts/bspfocus &
 
-# #######################################################################
-# #                               RULES                                 #
-# ####################################################################### 
+#########################################################################
+#                                 RULES                                 #
+######################################################################### 
 
 rule Alacritty                       state=floating
 rule kitty                           state=floating
@@ -77,15 +80,16 @@ rule Gpick                           state=floating
 rule Lxappearance                    state=floating 
 rule feh                             state=floating
 rule Genymotion                      state=floating
-rule obsidian                        desktop=^1
-rule librewolf                       desktop=^1  
-rule Lutris                          desktop=^2 state=floating
-rule 'riotclientux.exe'              desktop=^2 state=floating
-rule 'league of legends.exe'         desktop=^2 state=fullscreen
-rule 'leagueclientux.exe'            desktop=^2 state=floating  
-rule 'Genymotion Player'             desktop=^2 state=floating
-rule 'Genymotion'                    desktop=^2 state=floating
+rule obsidian                        desktop=^2
+rule librewolf                       desktop=^2  
+rule Lutris                          desktop=^3 state=floating
+rule 'riotclientux.exe'              desktop=^3 state=floating
+rule 'league of legends.exe'         desktop=^3 state=fullscreen
+rule 'leagueclientux.exe'            desktop=^3 state=floating  
+rule 'Genymotion Player'             desktop=^3 state=floating
+rule 'Genymotion'                    desktop=^3 state=floating
 rule 'Jellyfin Media Player'         desktop=^5
+rule FreeTube                        desktop=^5
 config external_rules_command "$HOME/.config/bspwm/scripts/spotifyrule.sh"
 
 # #######################################################################
