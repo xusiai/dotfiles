@@ -22,7 +22,7 @@
 
 <img src="assets/wall.png"></br> 
 
-<div align="center">  <H3>  ━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━ </H3> </br> <H3>Welcome!</H3> <H4>This repo hosts a collection of dotfiles for bspwm and various applications I use with it.</H4> </div>
+<div align="center">  <H3>  ━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━ </H3> <H3>Welcome!</H3> <H4>This repo hosts a collection of dotfiles for bspwm and various applications I use with it.</H4> </div>
 
 Most of these files will work out of the box assuming you have the applications installed (there is a list below). The file structure is a replica of the expected $HOME structure so installing them is as simple as cloning and linking (or moving if you prefer but linking keeps all your configs in one place). </br>
 
