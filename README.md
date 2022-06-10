@@ -80,8 +80,6 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 ## GALLERY
 <details>
   <summary>Click to expand.</summary>
-  
- #### SAGA
  ##### WALL
  <img src="assets/wall.png"></br> 
  ##### DUNST
@@ -89,12 +87,12 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  ##### ROFI
  <img src="assets/rofi.png"></br> 
  <img src="assets/pmenu.png"></br> 
+ ##### OBSIDIAN
+ <img src="assets/obsidian.png"></br>
  ##### FIREFOX
- <img src="assets/fox_zathura_nvim.png"></br> 
+ <img src="assets/fox_zathura_nvim.png"></br>  
  ##### GTK
  <img src="assets/GTK.png"></br> 
- ##### OBSIDIAN
- <img src="assets/obsidian.png"></br> 
 </details>
 
 ## TODO
