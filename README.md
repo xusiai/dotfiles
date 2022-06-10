@@ -105,7 +105,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
 
 ## ACKNOWLEDGEMENTS
 - [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :heart:
-- [saimoomedits](https://github.com/saimoomedits) for the beautiful ncmpcpp config :heart:
+- [Saimoomedits](https://github.com/saimoomedits) for the beautiful ncmpcpp config :heart:
 - [Manas140](https://github.com/Manas140) for a few scripts :heart:
 - [Elenapan](https://github.com/elenapan) for the rofi-yt script :heart:
 
