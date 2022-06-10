@@ -26,13 +26,8 @@ super + space
 
 # MOVE TO OR SEND APP TO WORKSPACE
 super + {_,shift + }{1-8}
-	bspc {desktop -f,node -d} '^{2-4}'
+	bspc {desktop -f,node -d} '^{1-5}'
 	
-super + {_,shift + } q
-  bspc {desktop -f,node -d} q
-super + {_,shift + } e
-  bspc {desktop -f,node -d} e
-
 # TAB BETWEEN WORKSPACES
 super + {_,shift + } Tab
     bspc desktop -f {next,prev}
@@ -118,16 +113,16 @@ super + g
 super + z
   $HOME/.config/bspwm/scripts/bspscratchpad
   
-# MPD PREVIOUS
-super + F9
+# PREVIOUS TRACK
+F9
   playerctl previous
 
-# MPD TOGGLE
-super + F8
+# TOGGLE TRACK
+F8
   playerctl play-pause
 
-# MPD NEXT
-super + F7
+# NEXT TRACK
+F7
   playerctl next
 
 # VOL UP

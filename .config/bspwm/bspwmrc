@@ -80,14 +80,14 @@ rule Gpick                           state=floating
 rule Lxappearance                    state=floating 
 rule feh                             state=floating
 rule Genymotion                      state=floating
-rule obsidian                        desktop=^2
-rule librewolf                       desktop=^2  
-rule Lutris                          desktop=^3 state=floating
-rule 'riotclientux.exe'              desktop=^3 state=floating
-rule 'league of legends.exe'         desktop=^3 state=fullscreen
-rule 'leagueclientux.exe'            desktop=^3 state=floating  
-rule 'Genymotion Player'             desktop=^3 state=floating
-rule 'Genymotion'                    desktop=^3 state=floating
+rule obsidian                        desktop=^1
+rule librewolf                       desktop=^1  
+rule Lutris                          desktop=^2 state=floating
+rule 'riotclientux.exe'              desktop=^2 state=floating
+rule 'league of legends.exe'         desktop=^2 state=fullscreen
+rule 'leagueclientux.exe'            desktop=^2 state=floating  
+rule 'Genymotion Player'             desktop=^2 state=floating
+rule 'Genymotion'                    desktop=^2 state=floating
 rule 'Jellyfin Media Player'         desktop=^5
 rule FreeTube                        desktop=^5
 config external_rules_command "$HOME/.config/bspwm/scripts/spotifyrule.sh"
@@ -96,7 +96,7 @@ config external_rules_command "$HOME/.config/bspwm/scripts/spotifyrule.sh"
 # #                           GENERAL CONFIG                            #
 # #######################################################################
 
-bspc monitor -d q 1 2 3 e 
+bspc monitor -d 1 2 3 4 5 
 
 config border_width            6
 config window_gap              10
