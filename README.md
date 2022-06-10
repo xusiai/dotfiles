@@ -94,7 +94,7 @@ Look in sxhkdrc for the rest. The above should allow you to adjust the setup to 
  ##### OBSIDIAN
  <img src="assets/obsidian.png"></br>
  
- ##### FIREFOX
+ ##### ZATHURA + FIREFOX + NVIM
  <img src="assets/fox_zathura_nvim.png"></br>  
  
  ##### GTK
