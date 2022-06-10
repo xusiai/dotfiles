@@ -1,0 +1,57 @@
+#!/bin/bash
+
+DIR="$HOME/.config/dunst/icons"
+
+function get_volume {
+      pamixer --get-volume 
+}
+
+function is_mute {
+      pamixer --get-volume 
+}
+
+function send_notification {
+  volume=`get_volume`
+  if [ "$volume" = "0" ]; then
+    icon_name="$DIR/notification-audio-volume-muted.svg"
+  else
+    if [  "$volume" -lt "30" ]; then
+      icon_name="$DIR/notification-audio-volume-low.svg"
+    else
+      if [ "$volume" -lt "80" ]; then
+        icon_name="$DIR/notification-audio-volume-medium.svg"
+      else
+          icon_name="$DIR/notification-audio-volume-high.svg"
+      fi
+    fi
+  fi 
+  # Send the notification
+  dunstify "$volume%  " -i $icon_name -r 5555 -u low -h int:value:$(($volume)) 
+}
+
+case $1 in
+  up)
+    # Unmute
+	  pamixer --unmute > /dev/null
+	  # +2%
+	  pamixer --increase 2 > /dev/null
+    send_notification
+    ;;
+  down)
+    # Unmute
+	  pamixer --unmute > /dev/null
+    # -2%
+	  pamixer --decrease 2 > /dev/null
+    send_notification
+    ;;
+  toggle)
+    # Toggle mute
+	  pamixer --toggle-mute > /dev/null
+    if is_mute ; then
+      icon_name="$DIR/notification-audio-volume-muted.svg"
+      dunstify "Muted   " -i $icon_name -r 5555 -u low -h string:synchronous:audio-volume
+    else
+      send_notification
+    fi
+    ;;
+esac

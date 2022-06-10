@@ -5,8 +5,8 @@
 [global]
     follow = mouse
     width = 300
-    origin = bottom-right
-    offset = 10x56
+    origin = top-right
+    offset = 20x56
     indicate_hidden = yes
     shrink = no
     transparency = 0
@@ -28,7 +28,7 @@
 ########################################
 #                TEXT                  #
 ########################################
-    font = Iosevka 12
+    font = Sarasa Mono CL Semibold 11
     line_height = 1
     markup = full
     format = "<b>%s </b>\n%b"

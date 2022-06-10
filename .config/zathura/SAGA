@@ -1,38 +1,40 @@
-set default-fg 			    "#FFFCFF"
-set default-bg 			    "#0A0D0F"
+# Light/Default mode settings:
 
-set completion-bg		    "#0F1214"
-set completion-fg		    "#FFFCFF"
-set completion-highlight-bg	"#191C1E"
-set completion-highlight-fg	"#FFFCFF"
-set completion-group-bg		"#0F1214"
-set completion-group-fg		"#BFFBF9"
+set notification-error-bg       "#FFBDCB" # Red
+set notification-error-fg       "#FFFCFF" # Foreground
+set notification-warning-bg     "#FFDCAC" # Orange
+set notification-warning-fg     "#191919" # Selection
+set notification-bg             "#0A0D0F" # Background
+set notification-fg             "#FFFCFF" # Foreground
 
-set statusbar-fg		    "#FFFCFF"
-set statusbar-bg		    "#0F1214"
+set completion-bg               "#0A0D0F" # Background
+set completion-fg               "#191C1E" # Comment
+set completion-group-bg         "#0A0D0F" # Background
+set completion-group-fg         "#191C1E" # Comment
+set completion-highlight-bg     "#191919" # Selection
+set completion-highlight-fg     "#FFFCFF" # Foreground
 
-set notification-bg		    "#0F1214"
-set notification-fg		    "#FFFCFF"
-set notification-error-bg	"#0F1214"
-set notification-error-fg	"#FFBDCB"
-set notification-warning-bg	"#0F1214"
-set notification-warning-fg	"#FFDCAC"
+set index-bg                    "#0A0D0F" # Background
+set index-fg                    "#FFFCFF" # Foreground
+set index-active-bg             "#191919" # Current Line
+set index-active-fg             "#FFFCFF" # Foreground
 
-set inputbar-fg			    "#FFFCFF"
-set inputbar-bg 		    "#0F1214"
+set inputbar-bg                 "#0A0D0F" # Background
+set inputbar-fg                 "#FFFCFF" # Foreground
+set statusbar-bg                "#0A0D0F" # Background
+set statusbar-fg                "#FFFCFF" # Foreground
 
-set recolor-lightcolor		"#0A0D0F"
-set recolor-darkcolor		"#FFFCFF"
+set highlight-color             "#B4F8C8" # Green
+set highlight-active-color      "#FFBDCB" # Pink
 
-set index-fg			    "#FFFCFF"
-set index-bg			    "#0A0D0F"
-set index-active-fg		    "#FFFCFF"
-set index-active-bg		    "#0F1214"
+set default-bg                  "#0A0D0F" # Background
+set default-fg                  "#FFFCFF" # Foreground
 
-set render-loading-bg		"#0A0D0F"
-set render-loading-fg		"#FFFCFF"
+set render-loading              true
+set render-loading-fg           "#0A0D0F" # Background
+set render-loading-bg           "#FFFCFF" # Foreground
 
-set highlight-color		    "#191C1E"
-set highlight-fg            "#FFBDCB"
-set highlight-active-color	"#FFBDCB"
+# Recolor mode settings
 
+set recolor-lightcolor          "#0A0D0F" # Background
+set recolor-darkcolor           "#FFFCFF" # Foreground

@@ -188,6 +188,7 @@ ip_address_to_clipboard() {
 # finds your IP and copies to clipboard
 	ip_address=$(ip_address_lookup)
 	echo "$ip_address" | xclip -selection clipboard
+
 }
 
 

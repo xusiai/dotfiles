@@ -27,7 +27,7 @@ CONFIRMATION_OPT="Available Options: [y/yes] [n/no]"
 LPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
 # Rofi config
-rofi_cmd="rofi -theme $HOME/.config/colorer/out/powermenu.rasi"
+rofi_cmd="rofi -theme $HOME/.config/rofi/powermenu/powermenu.rasi"
 options="$shutdown\n$reboot\n$lock\n$suspend\n$logout"
 
 
@@ -37,13 +37,14 @@ confirm_option() {
         -i\
         -no-fixed-num-lines\
         -p "$CONFIRMATION_MSG"\
-        -theme $LPATH/rasi/confirm.rasi
+        -theme $HOME/.config/rofi/powermenu/confirm.rasi
 }
 
 # Message
 msg() {
-    rofi -theme "$LPATH/rasi/message.rasi" \
+    rofi -theme "$HOME/.config/rofi/powermenu/message.rasi" \
     -e "$CONFIRMATION_OPT"
+    
 }
 
 
@@ -82,7 +83,7 @@ case $chosen in
               $confirm == "y" || \
               $confirm == "Y" ]]; \
         then
-            loginctl poweroff
+            systemctl poweroff
         elif [[ $confirm == "no" || \
                 $confirm == "NO" || \
                 $confirm == "n" || \
@@ -101,7 +102,7 @@ case $chosen in
               $confirm == "y" || \
               $confirm == "Y" ]]; \
         then
-            loginctl reboot
+            systemctl reboot
         elif [[ $confirm == "no" || \
                 $confirm == "NO" || \
                 $confirm == "n" || \
@@ -122,7 +123,7 @@ case $chosen in
         then
             mpc -q pause &
             amixer set Master mute &
-            loginctl suspend
+            systemctl suspend
         elif [[ $confirm == "no" || \
                 $confirm == "NO" || \
                 $confirm == "n" || \
@@ -141,7 +142,7 @@ case $chosen in
               $confirm == "y" || \
               $confirm == "Y" ]]; \
         then
-            loginctl terminate-session ${XDG_SESSION_ID-}	
+            systemctl terminate-session ${XDG_SESSION_ID-}	
         elif [[ $confirm == "no" || \
                 $confirm == "NO" || \
                 $confirm == "n" || \

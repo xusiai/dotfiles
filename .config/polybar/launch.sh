@@ -1,10 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
-# Terminate already running instances
-killall -q polybar
-
-# Wait until the processes have been shut down
-while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
-
-polybar -r base &
-echo "bar launched"
+if ! pgrep -x polybar; then
+    polybar -c ~/.config/polybar/config.ini base &
+else
+    pkill -USR1 polybar
+fi

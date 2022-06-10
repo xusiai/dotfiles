@@ -1,0 +1,214 @@
+* {
+    active-background: #0A0D0F;
+    active-foreground: #FFBDCB;
+    normal-background: #0A0D0F;
+    normal-foreground: #FFFCFF;
+    urgent-background: #0A0D0F;
+    urgent-foreground: #FFBDCB;
+
+    alternate-active-background: #0A0D0F;
+    alternate-active-foreground: #FFBDCB;
+    alternate-normal-background: #0A0D0F;
+    alternate-normal-foreground: #FFFCFF;
+    alternate-urgent-background: #0A0D0F;
+    alternate-urgent-foreground: #FFBDCB;
+
+    selected-active-background: #FFBDCB;
+    selected-active-foreground: #FFFCFF;
+    selected-normal-background: #F5D0D0;
+    selected-normal-foreground: #FFFCFF;
+    selected-urgent-background: #FFFFC1;
+    selected-urgent-foreground: #FFBDCB;
+
+    background-color: #0A0D0F;
+    background: #0A0D0F;
+    foreground: #FFFCFF;
+    border-color: #F5D0D0;
+    spacing: 2;
+}
+
+// Main config
+configuration {
+    font:  						"SAGA Heavy 11";
+    fixed-num-lines: 					true;
+    show-icons: 					true;
+    icon-theme:                     "Dracula";
+    sidebar-mode: 					false;
+    scroll-method: 					0;
+    window-format: 					"[{w}] ··· {c} ···   {t}";
+    click-to-exit: 					true;
+    combi-hide-mode-prefix: 				false;
+    display-window: 					"";
+    display-windowcd: 					"";
+    display-run: 					"";
+    display-ssh: 					"";
+    display-drun: 					"";
+    display-combi: 					"";
+}
+
+// bg color
+* {
+    background-color:             	@background;
+}
+
+// setup
+window {
+    border: 						0px;
+    border-color: 					@active-foreground;
+    border-radius: 					10px;
+    padding: 						0;
+    width: 						20%;
+    height:						20%;
+}
+
+prompt {
+    spacing: 						0;
+    border: 						0;
+    background-color:               @background;
+    font:                           "Iosevka Nerd Font 12";
+    text-color: 					@foreground;
+}
+
+textbox-prompt-colon {
+    expand: 						false;
+    str: 							"";
+    background-color:               @background;
+    text-color: 					inherit;
+}
+
+entry {
+    spacing:    					10;
+    background-color:               @background;
+    text-color: 					@foreground;
+}
+
+case-indicator {
+    spacing:    					4;
+    text-color: 					@foreground;
+}
+
+inputbar {
+    spacing:    					0px;
+    text-color: 					@foreground;
+    padding:    					20px;
+    background-color:               @background;
+    children: 						[ textbox-prompt-colon,entry,prompt ];
+}
+
+mainbox {
+    border: 						0px;
+    border-color: 					@active-foreground;
+    padding: 						0;
+}
+
+listview {
+    lines:							15;
+    columns:						1;
+    fixed-height: 					0;
+    border: 						0px;
+    border-color: 					@active-foreground;
+    spacing: 						4px;
+    scrollbar: 						false;
+    padding: 						25px;
+}
+
+// element properties
+element-text, element-icon {
+    background-color: #00000000;
+    text-color:       inherit;
+}
+
+element {
+    border: 						0px;
+    border-radius: 					5px;
+    padding: 						10px;
+}
+element normal.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element normal.urgent {
+    background-color: 				@background;
+    text-color:       				@red;
+}
+element normal.active {
+    background-color: 				@background;
+    text-color:       				@green;
+}
+element selected.normal {
+    background-color: 				@active-foreground;
+    text-color:       				@background;
+}
+element selected.urgent {
+    background-color: 				@background;
+    text-color:       				@red;
+}
+element selected.active {
+    background-color: 				@foreground;
+    text-color:       				@background;
+}
+element alternate.normal {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.urgent {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+element alternate.active {
+    background-color: 				@background;
+    text-color:       				@foreground;
+}
+
+sidebar {
+    border:       					0px;
+    border-color: 					@active-foreground;
+    border-radius: 					0px;
+}
+
+button {
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    background-color:             	@foreground;
+    margin: 						5px;
+    padding: 						5px;
+    text-color: 					@background;
+    border: 						0px;
+    border-radius: 					4px;
+    border-color: 					@foreground;
+}
+
+button selected {
+    background-color:             	@active-foreground;
+    text-color: 					@foreground;
+    border: 						0px;
+    border-radius: 					4px;
+    border-color: 					@foreground;
+}
+
+scrollbar {
+    width:        					4px;
+    border:       					0px;
+    handle-color: 					@foreground;
+    handle-width: 					8px;
+    padding:      					0;
+}
+
+message {
+    border: 						0px;
+    border-color: 					@active-foreground;
+    padding: 						1px;
+}
+
+textbox {
+    text-color: 					@active-foreground;
+}
+
+// if you use icons
+element-icon {
+    size: 24;
+    margin: 0 10px 0 0;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+
+}

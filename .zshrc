@@ -12,12 +12,6 @@ setopt MENU_COMPLETE       # Automatically highlight first element of completion
 setopt AUTO_LIST           # Automatically list choices on ambiguous completion.
 setopt COMPLETE_IN_WORD    # Complete from both ends of a word.
 
-# ENV
-export PATH="$HOME/.local/bin/:$PATH"
-
-# SAGA FZF
-export FZF_DEFAULT_OPTS='--color=bg+:#0A0D0F,bg:#0F1214,spinner:#FFFFC1,hl:#FFBDCB --color=fg:#FFFCFF,header:#FFBDCB,info:#D2C5E8,pointer:#FFDCAC --color=marker:#FFDCAC,fg+:#F5D0D0,prompt:#D2C5E8,hl+:#FFBDCB'
-
 # COMPLETION
 autoload -Uz compinit
 compinit -i
@@ -142,30 +136,33 @@ alias wtr="curl wttr.in/"
 alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
 
 # VOID ALIASES
-alias xi="sudo xbps-install"
-alias xr="sudo xbps-remove -Ro"
-alias xu="sudo xbps-install -Su"
-alias xq="xbps-query"
-alias xs="xbps-query -Rs"
-alias xss="ls ~/.local/VP/srcpkgs | fzf"
-alias xsi="~/.local/VP/./xbps-src -E pkg"
-alias xin="sudo xbps-install --repository hostdir/binpkgs"
-alias xuu="cd ~/.local/VP/ && ./xbps-src bootstrap-update"
-alias po="loginctl poweroff"
-alias rb="loginctl reboot"
-alias xl="xbps-query -m"
+#alias xi="sudo xbps-install"
+#alias xr="sudo xbps-remove -Ro"
+#alias xu="sudo xbps-install -Su"
+#alias xq="xbps-query"
+#alias xs="xbps-query -Rs"
+#alias xss="ls ~/.local/VP/srcpkgs | fzf"
+#alias xsi="~/.local/VP/./xbps-src -E pkg"
+#alias xin="sudo xbps-install --repository hostdir/binpkgs"
+#alias xuu="cd ~/.local/VP/ && ./xbps-src bootstrap-update"
+#alias po="loginctl poweroff"
+#alias rb="loginctl reboot"
+#alias xl="xbps-query -m"
 
 # ARCH ALIASES
-# alias xi="paru -S"
-# alias xr="paru -Rs"
-# alias xu="paru -Syu"
-# alias xq="paru"
-# alias po="systemctl poweroff"
-# alias rb="systemctl reboot"
+alias xi="paru -S"
+alias xr="paru -Rs"
+alias xu="paru -Syu"
+alias xq="paru"
+alias po="systemctl poweroff"
+alias rb="systemctl reboot"
 
 # PROMPT
-SPACESHIP_USER_SHOW="always"
-SPACESHIP_PROMPT_SEPARATE_LINE="false"
-SPACESHIP_CHAR_SYMBOL=" "
+#SPACESHIP_USER_SHOW="always"
+#SPACESHIP_PROMPT_SEPARATE_LINE="false"
+#SPACESHIP_CHAR_SYMBOL=" "
 
-
+# init starship
+eval "$(starship init zsh)"
+# setup starship custom prompt
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml

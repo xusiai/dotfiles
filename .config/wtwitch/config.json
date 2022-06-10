@@ -1,0 +1,12 @@
+{
+  "player": "mpv",
+  "quality": "best",
+  "colors": "true",
+  "printOfflineSubscriptions": "true",
+  "subscriptions": [
+    {
+      "streamer": "rush"
+    }
+  ],
+  "lastSubscriptionUpdate": "null"
+}

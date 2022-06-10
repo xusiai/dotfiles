@@ -6,7 +6,7 @@
  ***********************************************/
 
 #window {
-    location:               south east;
+    location:               north east;
     x-offset:               -1%;
-    y-offset:               -4%;
+    y-offset:               4%;
 }

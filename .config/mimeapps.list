@@ -10,10 +10,10 @@ video/mp4=mpv.desktop;
 application/pdf=evince.desktop;
 application/x-cd-image=org.gnome.FileRoller.desktop;
 application/json=org.gnome.gedit.desktop;
-image/jpeg=org.gnome.eog.desktop;
-image/webp=org.gnome.eog.desktop;
-image/png=org.gnome.eog.desktop;
-image/gif=org.gnome.eog.desktop;
+image/jpeg=feh.desktop;
+image/webp=feh.desktop;
+image/png=feh.desktop;
+image/gif=feh.desktop;
 text/x-csrc=org.gnome.gedit.desktop;
 
 

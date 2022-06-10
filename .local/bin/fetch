@@ -1,77 +1,39 @@
-#!/bin/sh
+#!/bin/bash
 
-# COLORS
-c() { printf "\033[%s;%sm" "$1" "$2"; }
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+d=$'\e[1m'
+t=$'\e[0m'
+v=$'\e[7m'
 
-# IMPORT INFO
-. /etc/os-release
+# Items
+sep=
+s=$d$f0$sep$t
 
-# GET INFO
-Name() {
-  read -r host < /etc/hostname;
-  printf "%s@%s" "$USER" "$host";
-}
-Os() { printf "%s" "$NAME"; }
-Kernel() {
-  read -r _ _ kern _ < /proc/version;
-  printf "%s" "$kern";
-}
-Uptime() {
-  IFS=. read -r up _ < /proc/uptime;
-  printf "%dD %dH %dM" "$((up / 60 / 60 / 24))" "$((up / 60 / 60 % 24))" "$((up / 60 % 60))";
-}
-Shell() { printf "%s" "${SHELL##*/}"; }
-Desktop() {
-  if [ "$DESKTOP_SESSION" != "" ]; then
-    printf "%s\n" "$DESKTOP_SESSION"
-  elif [ "$XDG_CURRENT_DESKTOP" != "" ]; then
-    printf "%s\n" "$XDG_CURRENT_DESKTOP"
-  else
-    for i in /proc/*/comm; do
-      read -r p < "$i"
-      case "$p" in
-        awesome|xmonad*|qtile|sway|i3|[bfo]*box|*wm*) printf "%s" "${p%%-*}"; break;;
-      esac
-    done
-  fi
-}
-Memory() {
-  while IFS=':k ' read -r mem1 mem2 _; do
-    case "$mem1" in
-      MemTotal)
-        memt="$(( mem2 / 1024 ))";;
-      MemAvailable)
-        memu="$(( memt - mem2 / 1024))";;
-    esac;
-  done < /proc/meminfo;
-  printf "%dMib / %dMib" "$memu" "$memt";
-}
+ds=󰠄
+distro="$(uname -o | awk -F '"' '/PRETTY_NAME/ { print $2 }' /etc/os-release)"
 
-help() { printf "Usage: fetch [ -c config | -h ]
-Report issue at: https://github.com/manas140/fetch\n\n" && exit; }
+h=󰕮
+wmname="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"{print $5}') -notype -f _NET_WM_NAME 8t | grep "WM_NAME" | cut -f2 -d \")"
 
-# IMPORT CONF
-if [ -f "$HOME"/.config/fetch/conf ]; then
-  . "$HOME"/.config/fetch/conf
-else
-  # DEFAULT CONF
-conf() {
-  printf "
-  $(c 1 31) $(Name)
-  $(c 1 32) Os: $(Os)
-  $(c 1 33) Kernel: $(Kernel)
-  $(c 1 34) Uptime: $(Uptime)
-  $(c 1 35) Shell: $(Shell)
-  $(c 1 36) DE/WM: $(Desktop)
-  $(c 1 37) Memory: $(Memory)
-  \n"
-}
-fi
+k=󰻀
+kernel="$(uname -r | cut -d '-' -f1)"
 
-case "$1" in
-  *-c*) [ -f "$2" ] && . "$2" ;;
-  *-h*) help;;
-esac
+p=󰮯
+packages="$(pacman -Q | wc -l)"
 
-conf
+sh=󰨊
+shell=$(basename $SHELL)
 
+tput clear
+cat << EOF
+             $f6$ds  $t$distro
+   (\ /)     $f4$k  $t$kernel
+   ( $d. .$t)    $f3$p  $t$packages
+   c($f1"$t)($f1"$t)   $d$f2$h  $t$wmname
+             $f1$sh  $t$shell
+EOF

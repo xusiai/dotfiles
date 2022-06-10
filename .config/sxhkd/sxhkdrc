@@ -1,3 +1,17 @@
+# vim:ft=conf                                                       
+#                                                      
+#        ██████ ▒██   ██▒ ██░ ██  ██ ▄█▀▓█████▄        
+#      ▒██    ▒ ▒▒ █ █ ▒░▓██░ ██▒ ██▄█▒ ▒██▀ ██▌      
+#      ░ ▓██▄   ░░  █   ░▒██▀▀██░▓███▄░ ░██   █▌       
+#        ▒   ██▒ ░ █ █ ▒ ░▓█ ░██ ▓██ █▄ ░▓█▄   ▌       
+#      ▒██████▒▒▒██▒ ▒██▒░▓█▒░██▓▒██▒ █▄░▒████▓        
+#      ▒ ▒▓▒ ▒ ░▒▒ ░ ░▓ ░ ▒ ░░▒░▒▒ ▒▒ ▓▒ ▒▒▓  ▒       
+#      ░ ░▒  ░ ░░░   ░▒ ░ ▒ ░▒░ ░░ ░▒ ▒░ ░ ▒  ▒        
+#      ░  ░  ░   ░    ░   ░  ░░ ░░ ░░ ░  ░ ░  ░        
+#            ░   ░    ░   ░  ░  ░░  ░      ░             
+#                                        ░             
+#                                                      
+
 # ##############################################################################
 # #                                   KEYBINDS                                 #
 # ##############################################################################
@@ -14,17 +28,26 @@ super + space
 super + {_,shift + }{1-8}
 	bspc {desktop -f,node -d} '^{1-8}'
 
+# TAB BETWEEN WORKSPACES
+super + {_,shift + } Tab
+    bspc desktop -f {next,prev}
+    
+# TAB BETWEEN APPLICATIONS
+alt + {_,shift +} Tab
+    bspc node -f {next,prev}
+
+
 # SHUTDOWN SYSTEM
 ctrl + alt + shift + q
-    loginctl poweroff
+    systemctl poweroff
 
 # RESTART SYSTEM
 ctrl + alt + shift + r
-    loginctl reboot
+    systemctl reboot
 
 # OPEN TERMINAL
 super + Return
-    kitty
+    alacritty
 
 # TOGGLE FULLSCREEN OR MONACLE
 super + f
@@ -32,7 +55,7 @@ super + f
 
 # OPEN APPMENU
 alt + F1
-    rofi -show drun -theme  $HOME/.config/colorer/out/rofi.rasi 
+    rofi -show drun -theme  $HOME/.config/rofi/config.rasi
 
 # RESTART SXHKD
 super + Escape
@@ -46,15 +69,17 @@ alt + ctrl + r
 alt + ctrl + q
   bspc quit
 
-
-# =============================================================================
+ =============================================================================
 
 # OPEN BROWSER
 super + BackSpace
-    firefox
+    librewolf
+    
+super + shift + w
+    librewolf
     
 # SHUFFLE WALLPAPER
-super + shift + @w
+ctrl + alt + @w
   feh --recursive --bg-fill --randomize ~/.local/share/wallpapers
   
 # NCMPCPP
@@ -67,7 +92,7 @@ super + y
  
 # OPEN JELLYFIN
 super + j
-  flatpak run com.github.iwalton3.jellyfin-media-player
+  jellyfinmediaplayer
   
 # OPEN FM
 super + shift + f
@@ -101,22 +126,22 @@ super + F8
 super + F7
   playerctl next
 
-# MPD VOL UP
+# VOL UP
 super + button4
-  mpc vol +5
+  volume up
 
-# MPD VOL DOWN
+# VOL DOWN
 super + button5
-  mpc vol -5
+  volume down
 
 # COLOUR PICKER HEX
 super + p 
-  xcolor -s -f HEX
+  colorpicker
+  
+# SCREENSHOT
+super + x
+  shot crop
 
-# COLOUR PICKER RGB
-super + shift + p
-  xcolor -s -f rgb
-
-# LUTRIS
+# LEAGUE
 super + l
-  lutris
+  bash -c "{ leagueoflegends run /opt/wine-lol/bin/wine $HOME/.local/share/leagueoflegends/launchhelper/lhinjector.exe; } & leagueoflegends start"
