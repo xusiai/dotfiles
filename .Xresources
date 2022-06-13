@@ -10,7 +10,7 @@ Xft.dpi: 93
 
 ! Special
 *.foreground: #f0f0f0
-*.background: #0f0f0f
+*.background: #05080a
 
 ! Black
 *.color0:     #262626

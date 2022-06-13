@@ -1,0 +1,13 @@
+[Unit]
+Description=easyeffects daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Environment="G_MESSAGES_DEBUG=easyeffects"
+ExecStart=/usr/bin/easyeffects --gapplication-service
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
+

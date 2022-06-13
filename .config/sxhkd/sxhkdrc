@@ -144,3 +144,6 @@ super + x
 # LEAGUE
 super + l
   bash -c "{ leagueoflegends run /opt/wine-lol/bin/wine $HOME/.local/share/leagueoflegends/launchhelper/lhinjector.exe; } & leagueoflegends start"
+
+super + shift + l 
+  leagueoflegends kill

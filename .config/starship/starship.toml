@@ -4,7 +4,7 @@ command_timeout = 2000
 
 [character]
 error_symbol = "[󰋔](bold red)"
-success_symbol = "[󰋑](bold green)"
+success_symbol = "[󰋑](bold pink)"
 vicmd_symbol = "[󰮭](bold yellow)"
 format = "$symbol [󰄾](bold bright-black) "
 
@@ -27,7 +27,7 @@ symbol = "[󰢱 ](blue) "
 disabled = false
 format = "[$symbol$branch]( $style ) "
 symbol = "󱃷  "
-style = "bold yellow"
+style = "bold green"
 
 [git_status]
 conflicted = "󰈻 "

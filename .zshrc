@@ -94,7 +94,7 @@ alias rm='rm -vr'
 alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
 alias diskspace='du -cha --max-depth=1 / | grep -E "M|G"'
 alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > playlist.m3u"'
-
+alias sd="sudo"
 
 # NAVIGATION ALIASES
 alias ..="cd .."
