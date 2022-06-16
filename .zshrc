@@ -94,7 +94,7 @@ alias rm='rm -vr'
 alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
 alias diskspace='du -cha --max-depth=1 / | grep -E "M|G"'
 alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > playlist.m3u"'
-alias sd="sudo"
+alias s="sudo"
 
 # NAVIGATION ALIASES
 alias ..="cd .."
@@ -136,26 +136,18 @@ alias wtr="curl wttr.in/"
 alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
 
 # VOID ALIASES
-#alias xi="sudo xbps-install"
-#alias xr="sudo xbps-remove -Ro"
-#alias xu="sudo xbps-install -Su"
-#alias xq="xbps-query"
-#alias xs="xbps-query -Rs"
-#alias xss="ls ~/.local/VP/srcpkgs | fzf"
-#alias xsi="~/.local/VP/./xbps-src -E pkg"
-#alias xin="sudo xbps-install --repository hostdir/binpkgs"
-#alias xuu="cd ~/.local/VP/ && ./xbps-src bootstrap-update"
-#alias po="loginctl poweroff"
-#alias rb="loginctl reboot"
-#alias xl="xbps-query -m"
-
-# ARCH ALIASES
-alias xi="paru -S"
-alias xr="paru -Rs"
-alias xu="paru -Syu"
-alias xq="paru"
-alias po="systemctl poweroff"
-alias rb="systemctl reboot"
+alias xi="sudo xbps-install"
+alias xr="sudo xbps-remove -Ro"
+alias xu="sudo xbps-install -Su"
+alias xq="xbps-query"
+alias xs="xbps-query -Rs"
+alias xss="ls ~/.local/VP/srcpkgs | fzf"
+alias xsi="~/.local/VP/./xbps-src -E pkg"
+alias xin="sudo xbps-install --repository ~/.local/VP/hostdir/binpkgs"
+alias xuu="cd ~/.local/VP/ && ./xbps-src bootstrap-update"
+alias po="loginctl poweroff"
+alias rb="loginctl reboot"
+alias xl="xbps-query -m"
 
 # MCONNECT
 alias send="mconnectctl share-file /org/mconnect/device/0"
@@ -171,3 +163,4 @@ alias sendtext="mconnectctl share-text /org/mconnect/device/0"
 eval "$(starship init zsh)"
 # setup starship custom prompt
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
+export PATH=$PATH:/home/neko/.spicetify

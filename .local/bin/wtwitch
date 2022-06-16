@@ -1,0 +1,2070 @@
+#!/usr/bin/env bash
+#
+# Description: Browse and watch Twitch without being tracked.
+#    Homepage: https://github.com/krathalan/wtwitch
+#
+# Copyright (C) 2019-2020:
+readonly CONTRIBUTORS="krathalan, nycko123, Léo Villeveygoux, René de Hesselle, incompetentcoder, yazgoo"
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# This file incorporates work from https://github.com/dylanaraps/pash,
+# covered by the following copyright and permission notice:
+#
+#     Copyright (c) 2016-2019, Dylan Araps
+#
+#     Permission is hereby granted, free of charge, to any person obtaining a copy
+#     of this software and associated documentation files (the "Software"), to deal
+#     in the Software without restriction, including without limitation the rights
+#     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#     copies of the Software, and to permit persons to whom the Software is
+#     furnished to do so, subject to the following conditions:
+#
+#     The above copyright notice and this permission notice shall be included in all
+#     copies or substantial portions of the Software.
+#
+#     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#     SOFTWARE.
+
+# -----------------------------------------
+# -------------- Guidelines ---------------
+# -----------------------------------------
+
+# This script follows the Google Shell Style Guide:
+# https://google.github.io/styleguide/shell.xml
+
+# This script uses shellcheck: https://www.shellcheck.net/
+
+# Many functions in this script spawn subshell processes
+trap "clean_up && kill 0" SIGINT
+trap "clean_up_tmp" EXIT
+
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+
+# -----------------------------------------
+# ----------- Program variables -----------
+# -----------------------------------------
+
+# Script (self) information
+readonly SCRIPT_NAME="${0##*/}"
+readonly VERSION="2.4.0"
+
+# Subscription check cache
+readonly CACHE_EXPIRY_TIME="60" # In seconds
+readonly CACHE_FILE_DIRECTORY="${XDG_CACHE_HOME:-${HOME}/.cache}/${SCRIPT_NAME}"
+readonly LAST_SEEN_DIRECTORY="${CACHE_FILE_DIRECTORY}/lastSeen"
+readonly CACHE_CHECK_JSON_TEXT_FILE="${CACHE_FILE_DIRECTORY}/subscription-cache.json"
+readonly CACHE_ONLINE_SUBS_TEXT_FILE="${CACHE_FILE_DIRECTORY}/online-subs"
+
+# Used to reduce strain on Twitch API; see get_game_name() and get_user_id()
+readonly CACHE_GAME_ID_FILE="${CACHE_FILE_DIRECTORY}/gameids.json"
+readonly CACHE_USER_ID_FILE="${CACHE_FILE_DIRECTORY}/userids.json"
+
+# Config
+readonly CONFIG_FILE_DIRECTORY="${XDG_CONFIG_HOME:-${HOME}/.config}/${SCRIPT_NAME}"
+readonly CONFIG_FILE="${CONFIG_FILE_DIRECTORY}/config.json"
+readonly BLOCKLIST_FILE="${CONFIG_FILE_DIRECTORY}/blocklist"
+
+# If exists, source this for additional environment setup.
+# Used primarily on macOS.
+readonly ENVIRONMENT_FILE="${CONFIG_FILE_DIRECTORY}/environment.sh"
+
+# Twitch API information
+# This API key is intended to be used for wtwitch only -- do not use this API
+# key for any other reason!
+readonly TWITCH_API_URL="https://api.twitch.tv/helix"
+readonly TWITCH_ID_URL="https://id.twitch.tv/oauth2/token"
+readonly TWITCH_API_KEY="cotxsalhlctv8z572f7fant4b0sc3u"
+readonly TWITCH_API_SECRET="gaofxvult280l3sbz8n6btvk5fdswp"
+
+# Number of characters always present in print_game_info() output
+# 5 spaces, 1 colon, 2 parantheses
+readonly TITLE_CHARACTERS="8"
+
+# -----------------------------------------
+# ------------- Translations --------------
+# -----------------------------------------
+
+TRANSLATIONS="$(cat <<EOF
+{
+  "change_player_not_found": {
+    "en": "media player not found",
+    "de": "Mediaplayer nicht gefunden",
+    "es": "reproductor de vídeo no encontrado",
+    "fr": "lecteur vidéo non trouvé"
+  },
+  "change_player_warning": {
+    "en": "Warning",
+    "de": "Warnung",
+    "es": "Advertencia",
+    "fr": "Attention"
+  },
+  "change_player_player": {
+    "en": "player",
+    "de": "Mediaplayer",
+    "es": "reproductor",
+    "fr": "lecteur"
+  },
+  "change_player_warning_text": {
+    "en": "may not work properly with Streamlink",
+    "de": "funktioniert möglicherweise nicht richtig mit Streamlink",
+    "es": "puede no funcionar correctamente con Streamlink",
+    "fr": "peut ne pas fonctionner correctement avec Streamlink"
+  },
+  "change_player_success": {
+    "en": "Changed player to",
+    "de": "Mediaplayer geändert zu",
+    "es": "Changed player to",
+    "fr": "Lecteur changé à"
+  },
+  "change_quality_error": {
+    "en": "is not an acceptable quality. 1080p60, 720p60, 720p, 480p, 360p, 160p, best, worst, and audio_only are acceptable qualities. You can specify fallback qualities separated by a comma, e.g. \"720p,480p,worst\"",
+    "de": "ist keine verfügbare Qualitätsstufe. 1080p60, 720p60, 720p, 480p, 360p, 160p, best, worst, und audio_only sind die verfügbaren Optionen. Du kannst auch eine kommaseparierte Liste angeben (absteigende Prioriät), z.B. \"720p,480p,worst\"",
+    "es": "is not an acceptable quality. 1080p60, 720p60, 720p, 480p, 360p, 160p, best, worst, and audio_only are acceptable qualities. You can specify fallback qualities separated by a comma, e.g. \"720p,480p,worst\"",
+    "fr": "n'est pas une qualité acceptable. 1080p60, 720p60, 720p, 480p, 360p, 160p, best, worst, et audio_only sont les qualités acceptables. Vous pouvez spécifier des qualités de repli séparées par des virgules, par exemple : \"720p,480p,worst\""
+  },
+  "change_quality_success": {
+    "en": "Changed quality to",
+    "de": "Qualität geändert zu",
+    "es": "Changed quality to",
+    "fr": "Qualité changée à"
+  },
+  "check_online": {
+    "en": "Live channels",
+    "de": "Live Kanäle",
+    "es": "Canales en directo",
+    "fr": "Chaînes en direct"
+  },
+  "check_offline": {
+    "en": "Offline",
+    "de": "Offline",
+    "es": "Desconectado",
+    "fr": "Déconnecté"
+  },
+  "check_settings": {
+    "en": "Settings",
+    "de": "Einstellungen",
+    "es": "Ajuste",
+    "fr": "Configuration"
+  },
+  "check_player": {
+    "en": "Player set to",
+    "de": "Mediaplayer ist eingestellt auf",
+    "es": "Reproductor de vídeo configurado en",
+    "fr": "Lecteur configuré à"
+  },
+  "check_quality": {
+    "en": "Quality set to",
+    "de": "Qualität ist eingestellt auf",
+    "es": "Calidad configurado en",
+    "fr": "Qualité configurée à"
+  },
+  "top_games": {
+    "en": "Top games",
+    "de": "Beliebteste Spiele",
+    "es": "Juegos más populares",
+    "fr": "Jeux les plus populaires"
+  },
+  "top_streams": {
+    "en": "Top channels",
+    "de": "Beliebteste Kanäle",
+    "es": "Canales más populares",
+    "fr": "Chaînes les plus populaires"
+  },
+  "viewers": {
+    "en": "viewers",
+    "de": "Zuschauer",
+    "es": "espectadores",
+    "fr": "spectateurs"
+  },
+  "channels": {
+    "en": "channels",
+    "de": "Kanäle",
+    "es": "Canales de",
+    "fr": "Chaînes de"
+  },
+  "no_channels": {
+    "en": "No one is streaming",
+    "de": "Niemand streamt gerade.",
+    "es": "No one is streaming",
+    "fr": "Personne n'est en direct"
+  },
+  "error": {
+    "en": "Error",
+    "de": "Fehler",
+    "es": "Error",
+    "fr": "Érreur"
+  },
+  "print_help": {
+    "en": "View the man page at",
+    "de": "Lese die man page unter",
+    "es": "View the man page at",
+    "fr": "Voir le manuel à"
+  },
+  "stream_failure_player_one": {
+    "en": "Player",
+    "de": "Mediaplayer",
+    "es": "Reproductor",
+    "fr": "Lecteur"
+  },
+  "stream_failure_player_two": {
+    "en": "not found",
+    "de": "nicht gefunden",
+    "es": "no encontrado",
+    "fr": "non trouvé"
+  },
+  "stream_failure_offline_one": {
+    "en": "Streamer",
+    "de": "Streamer",
+    "es": "Streamer",
+    "fr": "La chaîne"
+  },
+  "stream_failure_offline_two": {
+    "en": "is not online",
+    "de": "ist nicht online",
+    "es": "is not online",
+    "fr": "n'est pas en ligne"
+  },
+  "stream_failure_quality": {
+    "en": "stream does not support quality",
+    "de": "Stream unterstützt die angegebene Qualität nicht.",
+    "es": "stream does not support quality",
+    "fr": "n'est pas diffusé dans la qualité"
+  },
+  "stream_failure_one": {
+    "en": "watching",
+    "de": "Beobachtung von",
+    "es": "viendo",
+    "fr": "le visionnage de"
+  },
+  "stream_failure_two": {
+    "en": "failed",
+    "de": "fehlgeschlagen",
+    "es": "falló",
+    "fr": "a échoué"
+  },
+  "stream_watching": {
+    "en": "Watching",
+    "de": "zuschauen",
+    "es": "Viendo",
+    "fr": "Visionnage de"
+  },
+  "stream_on_twitch": {
+    "en": "on Twitch",
+    "de": "auf Twitch",
+    "es": "en Twitch",
+    "fr": "sur Twitch"
+  },
+  "subscribe_failure": {
+    "en": "You are already subscribed to",
+    "de": "Du abonnierst bereits",
+    "es": "You are already subscribed to",
+    "fr": "Vous êtes déjà abonné à"
+  },
+  "subscribe_success": {
+    "en": "Subscribed to",
+    "de": "Abonniert",
+    "es": "Subscribed to",
+    "fr": "Abonné à"
+  },
+  "unsubscribe_failure": {
+    "en": "You are not subscribed to",
+    "de": "Du hast kein Abo für",
+    "es": "You are not subscribed to",
+    "fr": "Vous n'êtes pas abonné à"
+  },
+  "unsubscribe_success": {
+    "en": "Unsubscribed from",
+    "de": "Abo gecancelt",
+    "es": "Unsubscribed from",
+    "fr": "Désabonné de"
+  },
+  "colors_off": {
+    "en": "Turned colors off",
+    "de": "keine Farben benutzen",
+    "es": "Apagó los colores",
+    "fr": "Couleurs désactivées"
+  },
+  "colors_on": {
+    "en": "Turned colors on",
+    "de": "Farben benutzen",
+    "es": "Encendió los colores",
+    "fr": "Couleurs activées"
+  },
+  "offline_subs_off": {
+    "en": "Turned printing offline subscriptions with [c]heck off",
+    "de": "Offline Abos bei [c]heck anzeigen deaktiviert",
+    "es": "Turned printing offline subscriptions with [c]heck off",
+    "fr": "Turned printing offline subscriptions with [c]heck off"
+  },
+  "offline_subs_on": {
+    "en": "Turned printing offline subscriptions with [c]heck on",
+    "de": "Offline Abos bei [c]heck anzeigen aktiviert",
+    "es": "Turned printing offline subscriptions with [c]heck on",
+    "fr": "Turned printing offline subscriptions with [c]heck on"
+  },
+  "flags_no_game": {
+    "en": "No game specified",
+    "de": "Kein Spiel angegeben",
+    "es": "No se especifica ningún juego",
+    "fr": "Pas de jeu spécifié"
+  },
+  "flags_no_player": {
+    "en": "No player specified",
+    "de": "Kein Spieler angegeben",
+    "es": "No se especifica el reproductor de vídeo",
+    "fr": "Pas de lecteur vidéo spécifié"
+  },
+  "flags_no_quality": {
+    "en": "No quality specified",
+    "de": "Keine Qualität angegeben",
+    "es": "No se especifica la calidad",
+    "fr": "Pas de qualité spécifiée"
+  },
+  "flags_no_streamer": {
+    "en": "No streamer specified",
+    "de": "Kein Kanal angegeben",
+    "es": "No se especifica ningún canal",
+    "fr": "Pas de chaîne spécifiée"
+  },
+  "flags_no_search_term": {
+    "en": "No search term specified",
+    "de": "Keine Suchbegriff angegeben",
+    "es": "No search term specified",
+    "fr": "Aucun terme de recherche spécifié"
+  },
+  "no_subs": {
+    "en": "You aren't subscribed to any channels",
+    "de": "Du hast keine Kanäle aboniert.",
+    "es": "You aren't subscribed to any channels",
+    "fr": "Vous n'êtes abonné à aucune chaîne"
+  },
+  "twitch_api_limit": {
+    "en": "Twitch API rate limit reached, or game/streamer does not exist",
+    "de": "Twitch API Limit erreicht, oder Spiel/Streamer existiert nicht",
+    "es": "Twitch API rate limit reached, or game/streamer does not exist",
+    "fr": "Limite de débit de l'API Twitch atteinte, or game/streamer does not exist"
+  },
+  "last_seen": {
+    "en": "last seen online",
+    "de": "Zuletzt Online gesehen",
+    "es": "last seen online",
+    "fr": "vu en ligne pour la dernière fois"
+  },
+  "removed": {
+    "en": "Removed",
+    "de": "Entfernt",
+    "es": "Removed",
+    "fr": ""
+  },
+  "added": {
+    "en": "Added",
+    "de": "Hinzugefügt",
+    "es": "Added",
+    "fr": ""
+  },
+  "from_blocklist": {
+    "en": "from blocklist",
+    "de": "Von Blockliste",
+    "es": "from blocklist",
+    "fr": "supprimé de la liste de blocage"
+  },
+  "to_blocklist": {
+    "en": "to blocklist",
+    "de": "Zu Blockliste",
+    "es": "to blocklist",
+    "fr": "ajouté à la liste de blocage"
+  },
+  "blocklist": {
+    "en": "Blocklist",
+    "de": "Blockliste",
+    "es": "Blocklist",
+    "fr": "Liste de blocage"
+  },
+  "api_token_fetch_failure": {
+    "en": "Failed to fetch API token",
+    "de": "API token beziehen fehlgeschlagen",
+    "es": "Failed to fetch API token",
+    "fr": "Échec de l'obtention du jeton d'API"
+  },
+  "info_fetch_failure": {
+    "en": "Failed to fetch information from the Twitch API",
+    "de": "Information von Twitch API beziehen fehlgeschlagen",
+    "es": "Failed to fetch information from the Twitch API",
+    "fr": "Échec de la récupération d'informations depuis l'API Twitch"
+  },
+  "check_internet": {
+    "en": "Check your internet connection and try again",
+    "de": "Überprüfe Internetverbindung und versuche es erneut",
+    "es": "Check your internet connection and try again",
+    "fr": "Vérifiez votre connexion Internet et réessayez"
+  },
+  "search_results": {
+    "en": "Search results",
+    "de": "Suchergebnisse",
+    "es": "Search results",
+    "fr": "Résultats de la recherche"
+  },
+  "no_results": {
+    "en": "No results",
+    "de": "Keine Ergebnisse",
+    "es": "No results",
+    "fr": "Aucun résultat"
+  },
+  "live": {
+    "en": "live",
+    "de": "live",
+    "es": "en directo",
+    "fr": "en direct"
+  },
+  "offline": {
+    "en": "offline",
+    "de": "offline",
+    "es": "desconectado",
+    "fr": "déconnecté"
+  },
+  "vod_failure_no_number": {
+    "en": "No VOD number",
+    "de": "Keine VOD Nummer",
+    "es": "No VOD number",
+    "fr": "No VOD number"
+  },
+  "press_n_next_page": {
+    "en": "Press <N> to show the next page of streamers or press any other key to quit.",
+    "de": "Drücke <N> um die nächste Seite Streamer anzuzeigen oder beliebige andere Taste zu beenden.",
+    "es": "Press <N> to show the next page of streamers or press any other key to quit.",
+    "fr": "Press <N> to show the next page of streamers or press any other key to quit."
+  },
+  "page": {
+    "en": "Page",
+    "de": "Seite",
+    "es": "Página",
+    "fr": "Page"
+  },
+  "no_more_streamers": {
+    "en": "No more streamers",
+    "de": "No more streamers",
+    "es": "No more streamers",
+    "fr": "No more streamers"
+  },
+  "install_fzf_first": {
+    "en": "You need to install fzf to use this feature.",
+    "de": "You need to install fzf to use this feature.",
+    "es": "You need to install fzf to use this feature.",
+    "fr": "You need to install fzf to use this feature."
+  }
+}
+EOF
+)"
+readonly TRANSLATIONS
+
+# -----------------------------------------
+# --------------- "Library" ---------------
+# -----------------------------------------
+
+#######################################
+# Cleans up cache and temporary file(s).
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+clean_up()
+{
+  # Clean up
+  rm -f "${CACHE_CHECK_JSON_TEXT_FILE}"
+
+  clean_up_tmp
+}
+
+#######################################
+# Cleans up temporary file(s).
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+clean_up_tmp()
+{
+  if [[ -n "${TMP_DIR:-}" ]] && [[ -d "${TMP_DIR}" ]]; then
+     rm -rf "${TMP_DIR}"
+  fi
+}
+
+#######################################
+# Downloads a file quietly using curl and passes the
+# TWITCH_API_KEY as a header to the server. Returns the
+# downloaded file.
+# Arguments:
+#   $1: file to download
+# Returns:
+#   downloaded file
+#######################################
+download_file()
+{
+  curl "${curlFlags}" --header "Client-ID: ${TWITCH_API_KEY}" \
+  --header "Authorization: Bearer ${apiToken}" "$1"
+}
+
+#######################################
+# Prints passed error message before premature exit.
+# Prints everything to >&2 (STDERR).
+# Arguments:
+#   $1: error message to print
+# Returns:
+#   none
+#######################################
+exit_script_on_failure()
+{
+  if [[ $# -gt 0 ]]; then
+    printf "\n %b%s%b: %s\n" "${RED}" "$(get_translation error)" "${NC}" "$1" >&2
+  fi
+
+  clean_up
+  exit 1
+}
+
+#######################################
+# Returns the game name for a specified game ID.
+# Attempts to get game name from cache, but if game
+# ID is not present, retrieves game name from Twitch API
+# and saves it in the cache for later.
+# Arguments:
+#   $1: game ID to get game name of
+# Returns:
+#   game name of specified ID
+#######################################
+get_game_name()
+{
+  # Add "id" prefix as jq does not accept numerical identifiers
+  local -r gameID="id$1"
+
+  # Attempt to extract game name from cached game ids
+  local gameName
+  gameName="$(jq -r ".data | add | .${gameID}" "${CACHE_GAME_ID_FILE}")"
+
+  # If game id not cached, fetch from Twitch API
+  if [[ "${gameName}" == "" ]] || [[ "${gameName}" == "null" ]]; then
+    local tmpJson
+    tmpJson="$(download_file "${TWITCH_API_URL}/games?id=$1")"
+    gameName="$(jq -r ".data[0].name" <<< "${tmpJson}")"
+
+    # Guard against wiping gameid cache
+    # This will happen when tmpJson is null as the result of too many Twitch
+    # API queries in a short amount of time
+    if [[ "${gameName}" == "" ]] || [[ "${gameName}" == "null" ]]; then
+      exit_script_on_failure "$(get_translation twitch_api_limit)"
+    fi
+
+    # Cache result for future reference
+    tmpJson="$(jq ".data[.data | length] |= . + {\"${gameID}\":\"${gameName}\"}" "${CACHE_GAME_ID_FILE}")"
+    printf "%s" "${tmpJson}" > "${CACHE_GAME_ID_FILE}"
+  fi
+
+  printf "%s" "${gameName}"
+}
+
+#######################################
+# Returns the user ID for a specified user login.
+# Attempts to get user ID from cache, but if user
+# ID is not present, retrieves user ID from Twitch API
+# and saves it in the cache for later.
+# Arguments:
+#   $1: user login to get user ID of
+# Returns:
+#   user ID of specified user login
+#######################################
+get_user_id()
+{
+  local -r userLogin="$(to_lowercase "$1")"
+
+  # Attempt to extract user ID from cached user logins
+  local userID
+  userID="$(jq -r ".data | add | .${userLogin}" "${CACHE_USER_ID_FILE}")"
+
+  # If user login not cached, fetch from Twitch API
+  if [[ "${userID}" == "" ]] || [[ "${userID}" == "null" ]]; then
+    local tmpJson
+    tmpJson="$(download_file "${TWITCH_API_URL}/users?login=${userLogin}")"
+    userID="$(jq -r ".data[0].id" <<< "${tmpJson}")"
+
+    # Guard against wiping user login cache
+    # This will happen when tmpJson is null as the result of too many Twitch
+    # API queries in a short amount of time
+    if [[ "${userID}" == "" ]] || [[ "${userID}" == "null" ]]; then
+      exit_script_on_failure "$(get_translation twitch_api_limit)"
+    fi
+
+    # Cache result for future reference
+    tmpJson="$(jq ".data[.data | length] |= . + {\"${userLogin}\":\"${userID}\"}" "${CACHE_USER_ID_FILE}")"
+    printf "%s" "${tmpJson}" > "${CACHE_USER_ID_FILE}"
+  fi
+
+  printf "%s" "${userID}"
+}
+
+#######################################
+# Gets a localized string of the requested key.
+# Arguments:
+#   $1: key of translation; e.g. flags_no_game
+# Returns:
+#   localized string
+#######################################
+get_translation()
+{
+  jq -r ".$1.${WTWITCH_LANG}" <<< "${TRANSLATIONS}"
+}
+
+#######################################
+# This is a simple wrapper around a case statement to
+# allow for simple string comparisons against globs.
+# Copyright (C) 2016-2019 Dylan Araps
+# Arguments:
+#   $1: string to check against glob
+#   $2: glob
+# Returns:
+#   true or false
+#######################################
+glob()
+{
+  # Disable this warning as it is the intended behavior.
+  # shellcheck disable=2254
+  case $1 in $2) return 0; esac; return 1
+}
+
+#######################################
+# Makes a temporary directory for the script to use.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+make_tmp()
+{
+  TMP_DIR="$(mktemp -d -t "${SCRIPT_NAME}_XXXXXXXX")"
+  readonly TMP_DIR
+}
+
+#######################################
+# Converts a string to lowercase.
+# Arguments:
+#   $1: string to convert
+# Returns:
+#   none
+#######################################
+to_lowercase() {
+  printf "%s\n" "${1,,}"
+}
+
+#######################################
+# Notifies the user if streaming failed.
+# Arguments:
+#   $1: name of streamer
+#   $2: error message to print
+# Returns:
+#   none
+#######################################
+stream_failure_notify()
+{
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".stream_failure_one.${WTWITCH_LANG}, .stream_failure_two.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  notify-send -i "gnome-twitch" "Wtwitch: ${localizedStrings[0]} $1 ${localizedStrings[1]}" "$2"
+  exit_script_on_failure
+}
+
+#######################################
+# Writes a setting value to the config file.
+# Arguments:
+#   $1: key
+#   $2: value
+# Returns:
+#   none
+#######################################
+write_setting()
+{
+  local -r tmpJson="$(jq "$1 = \"$2\"" "${CONFIG_FILE}")"
+  printf "%s" "${tmpJson}" > "${CONFIG_FILE}"
+}
+
+#######################################
+# Invalidates the cache generated from [c]heck command.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+invalidate_cache()
+{
+  write_setting ".lastSubscriptionUpdate" "null"
+}
+
+# -----------------------------------------
+# --------------- API Token ---------------
+# -----------------------------------------
+
+#######################################
+# Gets an OAuth token for the Twitch API.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+download_token()
+{
+  # Get token
+  local -r tmpJson="$(curl "${curlFlags}" -d "client_id=${TWITCH_API_KEY}&client_secret=${TWITCH_API_SECRET}&grant_type=client_credentials" "${TWITCH_ID_URL}")"
+
+  local -r newToken="$(jq -r ".access_token" <<< "${tmpJson}")"
+
+  if [[ -z "${newToken}" ]] || [[ "${newToken}" == "null" ]]; then
+    exit_script_on_failure "$(get_translation api_token_fetch_failure). $(get_translation check_internet)"
+  fi
+
+  # Update in-memory api token
+  apiToken="${newToken}"
+
+  # Add token to config and update token expiration date
+  write_setting ".apiToken" "${newToken}"
+  write_setting ".apiTokenExpiry" "$(LANG=C ${DATE_CMD} -d tomorrow +%s)"
+}
+
+# -----------------------------------------
+# --------------- Functions ---------------
+# -----------------------------------------
+
+#######################################
+# Changes the default player in $CONFIG_FILE that
+# gets passed to streamlink.
+# Arguments:
+#   $1: player to set as default
+# Returns:
+#   none
+#######################################
+change_player()
+{
+  local -r workingPlayers=("gnome-mpv" "mpv" "mplayer" "vlc")
+  local passedCheckMarker="false"
+
+  # Get localized strings
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".change_player_not_found.${WTWITCH_LANG}, .change_player_warning.${WTWITCH_LANG}, .change_player_player.${WTWITCH_LANG}, .change_player_warning_text.${WTWITCH_LANG}, .change_player_success.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  local -r playerName="$1"
+
+  # Check to make sure user has input player actually installed
+  if ! command -v "${playerName}" &> /dev/null; then
+    exit_script_on_failure "${localizedStrings[0]}: ${playerName}"
+  fi
+
+  # Check against known working players
+  for i in "${workingPlayers[@]}"; do
+    if [[ "${playerName}" == "${i}" ]]; then
+      passedCheckMarker="true"
+    fi
+  done
+
+  if [[ "${passedCheckMarker}" != "true" ]]; then
+    printf "\n %b%s%b: %s %s %s.\n" "${ORANGE}" "${localizedStrings[1]}" "${NC}" "${localizedStrings[2]}" "${playerName}" "${localizedStrings[3]}"
+  fi
+
+  write_setting ".player" "${playerName}"
+  printf "\n %s %s.\n" "${localizedStrings[4]}" "$1"
+}
+
+#######################################
+# Changes the default quality in $CONFIG_FILE that
+# gets passed to streamlink.
+# Arguments:
+#   $1: quality to set as default, e.g. "1080p60,720p60,best"
+# Returns:
+#   none
+#######################################
+change_quality()
+{
+  local -r acceptableQualities=("audio_only" "worst" "160p" "360p" "480p" "720p" "720p60" "1080p60" "best")
+  local passedCheckMarkerArray=()
+
+  local -r specifiedQuality="$(to_lowercase "$1")"
+
+  # User may try and enter fallback qualities; code should account for this
+  IFS=',' read -r -a qualityArray <<< "$specifiedQuality"
+
+  # For each quality the user has specified
+  for i in "${qualityArray[@]}"; do
+    # Check to make sure it's an acceptable quality
+    for j in "${acceptableQualities[@]}"; do
+      if [[ "${i}" == "${j}" ]]; then
+        passedCheckMarkerArray+=("true")
+      fi
+    done
+  done
+
+  # Make sure there are an equal number of "true" elements in passedCheckMarkers as there are qualities in specifiedQuality
+  if [[ ${#qualityArray[@]} -eq ${#passedCheckMarkerArray[@]} ]]; then
+    write_setting ".quality" "${specifiedQuality}"
+    printf "\n %s %s.\n" "$(get_translation change_quality_success)" "$1"
+  else
+    exit_script_on_failure "${specifiedQuality} $(get_translation change_quality_error)."
+  fi
+}
+
+#######################################
+# Caches a Twitch API response for all subscribed streamers.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+cache_online_subscription_json()
+{
+  CURRENT_TIME_UNIX="$(LANG=C ${DATE_CMD} +%s)"
+
+  # Check cache expiry time
+  local dateDiff="0"
+  local lastSubscriptionUpdate
+  lastSubscriptionUpdate="$(jq -r ".lastSubscriptionUpdate" "${CONFIG_FILE}")"
+
+  if [[ "${lastSubscriptionUpdate}" != "null" ]]; then
+    dateDiff="$(( CURRENT_TIME_UNIX - lastSubscriptionUpdate ))"
+  fi
+
+  # If the last subsription update is null (e.g. the subscriptions have never been checked), OR
+  # if the time between now and the last subscription update is greater than the cache expiry time, OR
+  # if the cache file does NOT exist yet
+  if  [[ "${lastSubscriptionUpdate}" == "null" ]] || \
+  [[ ${dateDiff} -gt ${CACHE_EXPIRY_TIME} ]] || \
+  [[ ! -f "${CACHE_CHECK_JSON_TEXT_FILE}" ]]; then
+    # Make request URL with all streamers followed by &, so the request URL looks something like:
+    # /streams?user_login=streamerone&user_login=streamertwo&user_login=streamerthree
+    local requestURL
+    requestURL="${TWITCH_API_URL}/streams?user_login=$(jq -r ".subscriptions[].streamer" "${CONFIG_FILE}" | awk 1 ORS="&user_login=")"
+    # Remove trailing &user_login=
+    requestURL="${requestURL%&user_login=}"
+
+    # Get data of all online streamers (sans game names)
+    local -r allStreamerJson="$(download_file "${requestURL}")"
+
+    printf "%s" "${allStreamerJson}" > "${CACHE_CHECK_JSON_TEXT_FILE}"
+
+    # Print usernames to cache file for easy mapfile-ing for tab completion
+    jq -r ".data[].user_name" <<< "${allStreamerJson}" > "${CACHE_ONLINE_SUBS_TEXT_FILE}"
+
+    # Update lastSubscriptionUpdate time
+    write_setting ".lastSubscriptionUpdate" "${CURRENT_TIME_UNIX}" &
+  fi
+}
+
+#######################################
+# Select and open online streams with FZF.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+open_selected_stream()
+{
+  if ! command -v "fzf" &> /dev/null; then
+    exit_script_on_failure "$(get_translation install_fzf_first)"
+  fi
+
+  stream="$(check_twitch_streams --online-only | fzf --ansi | cut -d: -f1 | sed 's/ *//')"
+
+  if [ -n "$stream" ]; then
+    watch_stream "$stream"
+  else
+    exit_script_on_failure "$(get_translation flags_no_streamer)"
+  fi
+}
+
+#######################################
+# Checks to see which subscribed Twitch streams
+# are online and prints the user's settings.
+# Arguments:
+#   $1: optional argument. if passed with value of "--online-only",
+#       all output will be omitted except for a list of online streamers.
+# Returns:
+#   none
+#######################################
+check_twitch_streams()
+{
+  # Reduce number of external program calls
+  CURRENT_TIME_UNIX="$(LANG=C ${DATE_CMD} +%s)"
+  LAST_SEEN_TEXT="$(get_translation last_seen)"
+  readonly LAST_SEEN_TEXT
+
+  # Get subscriptions
+  local userSubscriptions
+  mapfile -t userSubscriptions <<< "$(jq -r ".subscriptions[].streamer" "${CONFIG_FILE}")"
+
+  # Get localized strings
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".check_online.${WTWITCH_LANG}, .check_offline.${WTWITCH_LANG}, .check_settings.${WTWITCH_LANG}, .check_player.${WTWITCH_LANG}, .check_quality.${WTWITCH_LANG}, .no_subs.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  # Exit if user has no subscriptions
+  if [[ ${#userSubscriptions[@]} -eq 1 ]] && [[ -z "${userSubscriptions[0]}" ]]; then
+    exit_script_on_failure "${localizedStrings[5]}"
+  else
+    # Only print header for wtwitch [c], not wtwitch [o]
+    if [[ "${1:-}" != "--online-only" ]]; then
+      printf "\n %s:" "${localizedStrings[0]}"
+    fi
+  fi
+
+  # Get a cache of the current online streamers
+  cache_online_subscription_json
+  local -r allStreamerJson="$(<"${CACHE_CHECK_JSON_TEXT_FILE}")"
+
+  # Format the json cache into a pretty output
+  make_tmp
+  readonly TMP_ONLINE_TEXT_FILE="${TMP_DIR}/streamers_online.txt"
+  readonly TMP_OFFLINE_TEXT_FILE="${TMP_DIR}/streamers_offline.txt"
+
+  # Ensure that both TMP_ONLINE_TEXT_FILE and TMP_OFFLINE_TEXT_FILE get written to; sometimes all streamers are online or offline
+  touch "${TMP_ONLINE_TEXT_FILE}" "${TMP_OFFLINE_TEXT_FILE}"
+
+  # Figure out offline streamers in background
+  # --> always (without subshells) if DEBUGGING=on
+  # --> don't if DEBUGGING!=on and printOfflineSubscriptions=false
+  if [[ "${DEBUGGING}" == "on" ]]; then
+    get_offline_streams "${allStreamerJson}"
+  elif [[ "${printOfflineSubscriptions}" == "true" ]]; then
+    get_offline_streams "${allStreamerJson}" &
+  fi
+
+  # Pass each streamer json data to check_twitch_streams_helper to parse,
+  # get game name for, and print
+  local whileCounter=0
+
+  local streamerToProcess=""
+  streamerToProcess="$(jq -r ".data[${whileCounter}]" <<< "${allStreamerJson}")"
+
+  # If streamer data is empty (e.g. wtwitch user is offline), exit
+  [[ -z "${streamerToProcess}" ]] &&
+    exit_script_on_failure "$(get_translation info_fetch_failure). $(get_translation check_internet)"
+
+  # Don't use subshells when debugging is on
+  # Code is duplicated here because testing if DEBUGGING=on every iteration
+  # of the while loop takes a lot more time (~20-30% more)
+  if [[ "${DEBUGGING}" == "on" ]]; then
+    while [[ "${streamerToProcess}" != "null" ]]; do
+      check_twitch_streams_helper "${streamerToProcess}"
+
+      # Refresh data
+      whileCounter="$(( whileCounter + 1 ))"
+      streamerToProcess="$(jq -r ".data[${whileCounter}]" <<< "${allStreamerJson}")"
+    done
+  else
+    while [[ "${streamerToProcess}" != "null" ]]; do
+      check_twitch_streams_helper "${streamerToProcess}" &
+
+      # Refresh data
+      whileCounter="$(( whileCounter + 1 ))"
+      streamerToProcess="$(jq -r ".data[${whileCounter}]" <<< "${allStreamerJson}")"
+    done
+  fi
+
+  # Wait for all background processes, offline and online, to finish
+  wait
+
+  # Only print online streamers for wtwitch [o]
+  if [[ "${1:-}" == "--online-only" ]]; then
+    sort "${TMP_ONLINE_TEXT_FILE}" 2> /dev/null
+    # Fix issue with /tmp dir not deleting on exit/sigint when check_twitch_streams()
+    # is executed in a subshell, such as with wtwitch [o]
+    clean_up_tmp
+    return
+  fi
+
+  printf "\n"
+
+  sort "${TMP_ONLINE_TEXT_FILE}" 2> /dev/null
+
+  # Only print offline subs if set to true or debugging on
+  if [[ "${DEBUGGING}" == "on" ]] || [[ "${printOfflineSubscriptions}" == "true" ]]; then
+    printf "\n %s:\n" "${localizedStrings[1]}"
+    sort "${TMP_OFFLINE_TEXT_FILE}" 2> /dev/null
+  fi
+
+  # Print settings
+  printf "\n %s:\n   %s %s\n   %s %s\n" "${localizedStrings[2]}" "${localizedStrings[3]}" "${userPlayer}" "${localizedStrings[4]}" "${userQuality}"
+
+  # Wait for write_setting if it's still going
+  wait
+}
+
+#######################################
+# Used by check_twitch_streams to figure out the
+# streamers that are offline.
+# Arguments:
+#   $1: "${allStreamerJson}" to compare with user subscriptions
+# Returns:
+#   none
+#######################################
+get_offline_streams()
+{
+  # Don't use subshells if debugging is on
+  # Code is duplicated here because testing if DEBUGGING=on every iteration
+  # of the for loop takes a lot more time (~20-30% more)
+  if [[ "${DEBUGGING}" == "on" ]]; then
+    for streamerName in "${userSubscriptions[@]}"; do
+        get_offline_streams_helper "${streamerName}" "$1"
+    done
+  else
+    for streamerName in "${userSubscriptions[@]}"; do
+        get_offline_streams_helper "${streamerName}" "$1" &
+    done
+  fi
+}
+
+#######################################
+# Used by get_offline_streams to figure out the
+# streamers that are offline.
+# Arguments:
+#   $1: streamer to check
+#   $2: "${allStreamerJson}" to compare with streamer
+# Returns:
+#   none
+#######################################
+get_offline_streams_helper()
+{
+  local lastSeen=""
+  local -r lastSeenFile="${LAST_SEEN_DIRECTORY}/$1"
+
+  if [[ -f "${lastSeenFile}" ]]; then
+    lastSeen=", ${LAST_SEEN_TEXT} $(${DATE_CMD} -d "@$(<"${lastSeenFile}")" "+%x")"
+  fi
+
+  # If the streamer to check is not found in json, then it is offline
+  if [[ "$2" != *"$1"* ]]; then
+    printf "   %b%s%s%b\n" "${GREY}" "$1" "${lastSeen}" "${NC}" >> "${TMP_OFFLINE_TEXT_FILE}"
+  fi
+}
+
+#######################################
+# Used by check_twitch_streams to facilitate
+# multi-process fetching and parsing of json data.
+# Arguments:
+#   $1: json data for streamer to process
+# Returns:
+#   none
+#######################################
+check_twitch_streams_helper()
+{
+  local streamerData
+  mapfile -t streamerData <<< "$(jq -r ".user_name, .game_id, .title" <<< "$1")"
+
+  # Update last seen time value
+  printf "%s" "${CURRENT_TIME_UNIX}" > "${LAST_SEEN_DIRECTORY}/$(to_lowercase "${streamerData[0]}")"
+
+  # Get stream game name from game ID
+  local streamGame
+  streamGame="$(get_game_name "${streamerData[1]}")"
+
+  # Get streamer-set stream name
+  # Truncate stream name if necessary; some streamers have stream titles longer
+  # than the terminal width and cause ugly output
+  local -r maxTitleLength="$(( TERMINAL_WIDTH - TITLE_CHARACTERS - ${#streamGame} - ${#streamerData[0]} - 2 ))"
+  local streamName="${streamerData[2]:0:${maxTitleLength}}"
+
+  if [[ "${#streamName}" == "${maxTitleLength}" ]]; then
+    streamName+="…"
+  fi
+
+  printf "   %b%s%b: %s %b(%s)%b\n" "${LIGHTGREEN}" "${streamerData[0]}" "${NC}" "${streamName}" "${ORANGE}" "${streamGame}" "${NC}" >> "${TMP_ONLINE_TEXT_FILE}"
+}
+
+#######################################
+# Lists the top streamers for a specified game.
+# Arguments:
+#   $1: game to list top streamers of
+# Returns:
+#   none
+#######################################
+list_streamers_of_game()
+{
+  make_tmp
+  readonly TMP_STREAMERS_OF_GAME_TEXT_FILE="${TMP_DIR}/streamers_of_game.txt"
+
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".channels.${WTWITCH_LANG}, .no_channels.${WTWITCH_LANG}, .press_n_next_page.${WTWITCH_LANG}, .page.${WTWITCH_LANG}, .no_more_streamers.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  # Spanish has a different structure
+  if [[ "${WTWITCH_LANG}" == "es" ]] || [[ "${WTWITCH_LANG}" == "fr" ]]; then
+    printf "\n %s %s:\n" "${localizedStrings[0]}" "$1"
+  else
+    printf "\n %s %s:\n" "$1" "${localizedStrings[0]}"
+  fi
+
+  # Replace spaces in game name with %20
+  local gameName=${1// /%20}
+  # Replace ampersand in game name with %26
+  gameName=${gameName//&/%26}
+
+  # Get game_id
+  local twitchJson
+  twitchJson="$(download_file "${TWITCH_API_URL}/games?name=${gameName}")"
+  local -r gameID="$(jq -r ".data[0].id" <<< "${twitchJson}")"
+
+  # Reduce number of external program calls
+  VIEWERS_TEXT="$(get_translation viewers)"
+  readonly VIEWERS_TEXT
+
+  # Used to track if user wants to show the next page
+  local showMoreStreamers="true"
+  # Used to track pagination cursor
+  local paginationText=""
+  # Used to print page user is on
+  local currentPage=2
+  # Used to track what message to show if the json is empty (i.e. no streamers)
+  local printedStreamersOnce=false
+
+  while [[ "${showMoreStreamers}" == "true" ]]; do
+    # Calculate number of lines to print out. Try and fit it to the terminal height
+    # but display at least 15 streamers
+    local linesToPrint=15
+    local terminalHeight="$(( $(tput lines) - 6 ))"
+
+    if [[ "${terminalHeight}" -gt "${linesToPrint}" ]]; then
+      linesToPrint="${terminalHeight}"
+    fi
+
+    # Get streamers
+    twitchJson="$(download_file "${TWITCH_API_URL}/streams?game_id=${gameID}&first=${linesToPrint}${paginationText}")"
+
+    local whileCounter=0
+
+    local streamerName=""
+    streamerName="$(jq -r ".data[${whileCounter}].user_name" <<< "${twitchJson}")"
+
+    while [[ "${streamerName}" != "null" ]]; do
+      # Don't use subshells when debugging is on
+      if [[ "${DEBUGGING}" == "on" ]]; then
+        print_stream_info "${whileCounter}" "${twitchJson}" "${streamerName}" "${TMP_STREAMERS_OF_GAME_TEXT_FILE}"
+      else
+        print_stream_info "${whileCounter}" "${twitchJson}" "${streamerName}" "${TMP_STREAMERS_OF_GAME_TEXT_FILE}" &
+      fi
+
+      # Refresh data
+      whileCounter="$(( whileCounter + 1 ))"
+      streamerName="$(jq -r ".data[${whileCounter}].user_name" <<< "${twitchJson}")"
+    done
+
+    wait
+
+    if [[ -s "${TMP_STREAMERS_OF_GAME_TEXT_FILE}" ]] ; then
+      cat "${TMP_STREAMERS_OF_GAME_TEXT_FILE}" 2> /dev/null
+    else
+      if [[ "${printedStreamersOnce}" == "false" ]]; then
+        printf " %s %s.\n" "${localizedStrings[1]}" "$1"
+      else
+       printf " %s.\n" "${localizedStrings[4]}"
+      fi
+      exit
+    fi
+
+    printedStreamersOnce=true
+    printf "\n %s" "${localizedStrings[2]}"
+    read -rsn1 userResponse
+
+    case "${userResponse}" in
+      [Nn])
+        showMoreStreamers="true"
+        # Get pagination cursor
+        paginationText="&after=$(jq -r .pagination.cursor <<< "${twitchJson}")"
+        # Clear output file
+        printf "" > "${TMP_STREAMERS_OF_GAME_TEXT_FILE}"
+
+        printf "\n\n %s %s:\n" "${localizedStrings[3]}" "${currentPage}"
+        currentPage="$(( currentPage + 1 ))"
+        ;;
+      *)
+        showMoreStreamers="false"
+        printf "\n"
+        ;;
+    esac
+  done
+}
+
+#######################################
+# Facilitates multi-process parsing of json data.
+# Arguments:
+#   $1: index of streamer to print info of
+#   $2: json file containing streamer data
+#   $3: name of streamer
+#   $4: file to print to
+#   $5: if this argument exists, print game of stream
+# Returns:
+#   none
+#######################################
+print_stream_info()
+{
+  local streamerData
+  mapfile -t streamerData <<< "$(jq -r ".data[$1].viewer_count, .data[$1].game_id, .data[$1].title, .data[$1].is_live" <<< "$2")"
+
+  # Do not show streamer if blocked
+  [[ "${blocklist}" == *"$(to_lowercase "$3")"* ]] && exit
+
+  # If streamer data is empty, exit
+  [[ -z "${streamerData[1]:-}" ]] && exit
+
+  # Get streamer-set stream name
+  local streamName=""
+
+  # Format additional information (game name and viewers)
+  # Add game name to final string if $5 is present
+  if [[ -n "${5:-}" ]]; then
+    local -r gameNameText="$(get_game_name "${streamerData[1]}")"
+  fi
+
+  # If game name and viewer # are present, format (game name, viewer# viewers),
+  # Else if streamer is live, format (live)
+  # Else if viewer # is present, format (viewer# viewers),
+  # Else don't print anything
+  if [[ "${gameNameText:-null}" != "null" ]] && \
+  [[ "${streamerData[0]:-null}" != "null" ]]; then
+    local -r titleCharacters="$(( TITLE_CHARACTERS - ${#ORANGE}))"
+    local -r additionalText="${ORANGE}(${gameNameText}, ${streamerData[0]} ${VIEWERS_TEXT})"
+  elif [[ "${streamerData[3]}" == "true" ]]; then
+    local -r titleCharacters="$(( TITLE_CHARACTERS - ${#ORANGE}))"
+    local -r additionalText="${ORANGE}(${LIVE_TEXT})"
+  elif [[ "${streamerData[3]}" == "false" ]]; then
+    local -r titleCharacters="$(( TITLE_CHARACTERS - ${#GREY}))"
+    local -r additionalText="${GREY}(${OFFLINE_TEXT})"
+  elif [[ "${streamerData[0]:-null}" != "null" ]]; then
+    local -r titleCharacters="$(( TITLE_CHARACTERS - ${#ORANGE}))"
+    local -r additionalText="${ORANGE}(${streamerData[0]} ${VIEWERS_TEXT})"
+  else
+    local -r titleCharacters=0
+    local -r additionalText=""
+  fi
+
+  # Truncate stream name if necessary; some streamers have stream titles longer
+  # than the terminal width and cause ugly output
+  local -r maxTitleLength="$(( TERMINAL_WIDTH - titleCharacters - ${#3} - ${#additionalText} ))"
+  local streamName="${streamerData[2]:-}"
+  local streamName="${streamName:0:${maxTitleLength}}"
+
+  if [[ "${#streamName}" == "${maxTitleLength}" ]]; then
+    streamName+="…"
+  fi
+
+  printf "   %b%s%b: %s %b%b\n" "${TURQOISE}" "$3" "${NC}" "${streamName}" "${additionalText}" "${NC}" >> "$4"
+}
+
+#######################################
+# Prints a list of games from json.
+# Arguments:
+#   $1: json file containing game data
+#   $2: file to print to
+# Returns:
+#   none
+#######################################
+print_game_info()
+{
+  local whileCounter=0
+
+  local gameName=""
+  gameName="$(jq -r ".data[${whileCounter}].name" <<< "$1")"
+
+  while [[ "${gameName}" != "null" ]]; do
+    printf "   %s. %b%s%b\n" $(( whileCounter + 1 )) "${PURPLE}" "${gameName}" "${NC}" >> "$2"
+
+    # Refresh data
+    whileCounter="$(( whileCounter + 1 ))"
+    gameName="$(jq -r ".data[${whileCounter}].name" <<< "$1")"
+  done
+}
+
+#######################################
+# Lists the top games and streams on Twitch.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+list_top()
+{
+  make_tmp
+  readonly TMP_TOP_GAMES_TEXT_FILE="${TMP_DIR}/top_games.txt"
+  readonly TMP_TOP_STREAMS_TEXT_FILE="${TMP_DIR}/top_streams.txt"
+
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".top_games.${WTWITCH_LANG}, .top_streams.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  printf "\n %s:\n" "${localizedStrings[0]}"
+
+  # Start figuring out top streamers - don't use subshells when debugging is on
+  if [[ "${DEBUGGING}" == "on" ]]; then
+    list_top_streams
+  else
+    list_top_streams &
+  fi
+
+  # Figure out top games in foreground
+  local -r topGamesJson="$(download_file "${TWITCH_API_URL}/games/top")"
+  print_game_info "${topGamesJson}" "${TMP_TOP_GAMES_TEXT_FILE}"
+
+  # Wait for list_top_streams() to finish
+  wait
+
+  cat "${TMP_TOP_GAMES_TEXT_FILE}"
+
+  printf "\n %s:\n" "${localizedStrings[1]}"
+  cat "${TMP_TOP_STREAMS_TEXT_FILE}"
+}
+
+#######################################
+# Lists the top streams on Twitch.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+list_top_streams()
+{
+  local -r topStreamsJson="$(download_file "${TWITCH_API_URL}/streams?first=20")"
+
+  local whileCounter=0
+
+  local streamerName=""
+  streamerName="$(jq -r ".data[${whileCounter}].user_name" <<< "${topStreamsJson}")"
+
+  # Reduce number of external program calls
+  VIEWERS_TEXT="$(get_translation viewers)"
+  readonly VIEWERS_TEXT
+
+  while [[ "${streamerName}" != "null" ]]; do
+    # Don't use subshells when debugging is on
+    if [[ "${DEBUGGING}" == "on" ]]; then
+      print_stream_info "${whileCounter}" "${topStreamsJson}" "${streamerName}" "${TMP_TOP_STREAMS_TEXT_FILE}" --print-game
+    else
+      print_stream_info "${whileCounter}" "${topStreamsJson}" "${streamerName}" "${TMP_TOP_STREAMS_TEXT_FILE}" --print-game &
+    fi
+
+    # Refresh data
+    whileCounter="$(( whileCounter + 1 ))"
+    streamerName="$(jq -r ".data[${whileCounter}].user_name" <<< "${topStreamsJson}")"
+  done
+
+  wait
+}
+
+#######################################
+# Searches categories on Twitch for a specified search term.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+search_categories()
+{
+  make_tmp
+  readonly TMP_SEARCH_TEXT_FILE="${TMP_DIR}/search.txt"
+
+  printf "\n %s:\n" "$(get_translation search_results)"
+
+  # Replace spaces in search term with %20 for URL
+  local -r searchTerm=${1// /%20}
+
+  local -r searchJson="$(download_file "${TWITCH_API_URL}/search/categories?query=${searchTerm}&first=40")"
+
+  print_game_info "${searchJson}" "${TMP_SEARCH_TEXT_FILE}"
+
+  cat "${TMP_SEARCH_TEXT_FILE}" 2> /dev/null || printf " %s.\n" "$(get_translation no_results)"
+}
+
+#######################################
+# Searches channels on Twitch for a specified search term.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+search_channels()
+{
+  make_tmp
+  readonly TMP_SEARCH_TEXT_FILE="${TMP_DIR}/search.txt"
+
+  printf "\n %s:\n" "$(get_translation search_results)"
+
+  # Replace spaces in search term with %20 for URL
+  local -r searchTerm=${1// /%20}
+
+  local -r searchJson="$(download_file "${TWITCH_API_URL}/search/channels?query=${searchTerm}&first=40")"
+
+  local whileCounter=0
+
+  local channelName=""
+  channelName="$(jq -r ".data[${whileCounter}].display_name" <<< "${searchJson}")"
+
+  # Reduce number of external program calls
+  LIVE_TEXT="$(get_translation live)"
+  OFFLINE_TEXT="$(get_translation offline)"
+  readonly LIVE_TEXT
+  readonly OFFLINE_TEXT
+
+  while [[ "${channelName}" != "null" ]]; do
+    # Don't use subshells when debugging is on
+    if [[ "${DEBUGGING}" == "on" ]]; then
+      print_stream_info "${whileCounter}" "${searchJson}" "${channelName}" "${TMP_SEARCH_TEXT_FILE}"
+    else
+      print_stream_info "${whileCounter}" "${searchJson}" "${channelName}" "${TMP_SEARCH_TEXT_FILE}" &
+    fi
+
+    # Refresh data
+    whileCounter="$(( whileCounter + 1 ))"
+    channelName="$(jq -r ".data[${whileCounter}].display_name" <<< "${searchJson}")"
+  done
+
+  wait
+
+  cat "${TMP_SEARCH_TEXT_FILE}" 2> /dev/null || printf " %s.\n" "$(get_translation no_results)"
+}
+
+#######################################
+# Watch stream by name of streamer. Wrapper function for stream()
+# Arguments:
+#   $1: name of streamer to watch
+# Returns:
+#   none
+#######################################
+watch_stream()
+{
+  if [[ "${userQuality}" == "audio_only" ]] || [[ "${DEBUGGING}" == "on" ]]; then
+    stream "$1"
+  else
+    stream "$1" &> /dev/null &
+  fi
+}
+
+#######################################
+# Opens a stream with Streamlink.
+# Arguments:
+#   $1: name of streamer to watch
+# Returns:
+#   none
+#######################################
+stream()
+{
+  # Get localized strings
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".stream_failure_player_one.${WTWITCH_LANG}, .stream_failure_player_two.${WTWITCH_LANG}, .stream_failure_offline_one.${WTWITCH_LANG}, .stream_failure_offline_two.${WTWITCH_LANG}, .stream_failure_quality.${WTWITCH_LANG}, .stream_watching.${WTWITCH_LANG}, .stream_on_twitch.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  # Use VLC as backup player if mpv is not installed
+  if [[ ! -x "$(command -v "${userPlayer}")" ]]; then
+    if [[ -x "$(command -v "vlc")" ]]; then
+      userPlayer="vlc"
+    else
+      stream_failure_notify "$1" "${localizedStrings[0]} ${userPlayer} ${localizedStrings[1]}."
+    fi
+  fi
+
+  # Check to make sure streamer is online
+  # Get current info of streamer
+  local -r streamerJson="$(download_file "${TWITCH_API_URL}/streams?user_login=$1")"
+
+  if [[ "$(jq -r ".data[0].type" <<< "${streamerJson}")" == "null" ]]; then
+    stream_failure_notify "$1" "${localizedStrings[2]} $1 ${localizedStrings[3]}."
+  fi
+
+  # If using mpv: add window title, enable hardware dec, and use wayland if possible
+  if [[ "${userPlayer}" == "mpv" ]]; then
+    userPlayer+=" --hwdec=auto"
+
+    if [[ $(pgrep wayland) || $(pgrep sway) ]]; then
+      userPlayer+=" --gpu-context=wayland"
+    fi
+
+    if [[ "${WTWITCH_LANG}" == "de" ]]; then
+      local -r mpvWindowTitle="$1 ${localizedStrings[6]} ${localizedStrings[5]}"
+    else
+      local -r mpvWindowTitle="${localizedStrings[5]} $1 ${localizedStrings[6]}"
+    fi
+
+    streamlink -p "${userPlayer}" --title "${mpvWindowTitle}" --twitch-disable-ads "https://www.twitch.tv/$1" "${userQuality}" || stream_failure_notify "$1" "$1's ${localizedStrings[4]} ${userQuality}."
+  else
+    streamlink -p "${userPlayer}" --twitch-disable-ads "https://www.twitch.tv/$1" "${userQuality}" || stream_failure_notify "$1" "$1's ${localizedStrings[4]} ${userQuality}."
+  fi
+}
+
+#######################################
+# Subscribes to streamer(s).
+# Arguments:
+#   $@: streamer(s) to subscribe to
+# Returns:
+#   none
+#######################################
+subscribe()
+{
+  shift
+  local streamerToSubscribeTo
+  local tmpJson
+
+  while [[ $# -gt 0 ]]; do
+    streamerToSubscribeTo="$(to_lowercase "$1")"
+
+    # Check to make sure user isn't already subscribed
+    glob "$(<"${CONFIG_FILE}")" "*${streamerToSubscribeTo}*" &&
+      exit_script_on_failure "$(get_translation subscribe_failure) ${streamerToSubscribeTo}."
+
+    # Add subscription (can't use write_setting here due to unique jq syntax)
+    tmpJson="$(jq ".subscriptions[.subscriptions | length] |= . + {\"streamer\":\"$streamerToSubscribeTo\"}" "${CONFIG_FILE}")"
+    printf "%s" "${tmpJson}" > "${CONFIG_FILE}"
+
+    printf "\n %s %s.\n" "$(get_translation subscribe_success)" "$1"
+
+    shift
+  done
+
+  invalidate_cache
+}
+
+#######################################
+# Changes the printOfflineSubscriptions value in $CONFIG_FILE that
+# determines if wtwitch outputs offline streamers with [c]heck.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+toggle_offline()
+{
+  # Reverse value
+  if [[ "${printOfflineSubscriptions}" == "true" ]]; then
+    write_setting ".printOfflineSubscriptions" "false"
+    printf "\n %s.\n" "$(get_translation offline_subs_off)"
+  else
+    write_setting ".printOfflineSubscriptions" "true"
+    printf "\n %s.\n" "$(get_translation offline_subs_on)"
+  fi
+}
+
+#######################################
+# Changes the useColor value in $CONFIG_FILE that
+# determines if wtwitch output is colorful.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+toggle_colors()
+{
+  # Reverse "colors" value
+  if [[ "${useColors}" == "true" ]]; then
+    write_setting ".colors" "false"
+    printf "\n %s.\n" "$(get_translation colors_off)"
+  else
+    write_setting ".colors" "true"
+    # Hardcode color since all colors are deactivated right now
+    printf "\n %b%s.%b\n" "\e[1m\e[32m" "$(get_translation colors_on)" "${NC}"
+  fi
+
+  # Invalidate cache as it may or may not have colors
+  invalidate_cache
+}
+
+#######################################
+# Unsubscribes from streamer(s).
+# Arguments:
+#   $@: streamer(s) to unsubscribe from
+# Returns:
+#   none
+#######################################
+unsubscribe()
+{
+  shift
+  local streamerToUnsubscribeFrom
+  local tmpJson
+  local lastSeenFile
+
+  while [[ $# -gt 0 ]]; do
+    streamerToUnsubscribeFrom="$(to_lowercase "$1")"
+
+    # Check to make sure user is subscribed before unsubscribing
+    glob "$(<"${CONFIG_FILE}")" "*${streamerToUnsubscribeFrom}*" ||
+      exit_script_on_failure "$(get_translation unsubscribe_failure) ${streamerToUnsubscribeFrom}."
+
+    # Remove subscription
+    tmpJson="$(jq "del(.subscriptions[] | select(.streamer == \"${streamerToUnsubscribeFrom}\"))" "${CONFIG_FILE}")"
+    printf "%s" "${tmpJson}" > "${CONFIG_FILE}"
+
+    # Delete lastSeen file
+    lastSeenFile="${LAST_SEEN_DIRECTORY}/${streamerToUnsubscribeFrom}"
+    [[ -f "${lastSeenFile}" ]] && rm -f "${lastSeenFile}"
+
+    printf "\n %s %s.\n" "$(get_translation unsubscribe_success)" "$1"
+
+    shift
+  done
+
+  invalidate_cache
+}
+
+#######################################
+# Blocks streamer(s).
+# Arguments:
+#   $@: streamer(s) to block
+# Returns:
+#   none
+#######################################
+block()
+{
+  # Get localized strings
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".removed.${WTWITCH_LANG}, .added.${WTWITCH_LANG}, .from_blocklist.${WTWITCH_LANG}, .to_blocklist.${WTWITCH_LANG}, .blocklist.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  shift
+  local streamerToBlock
+
+  if [[ $# -gt 0 ]]; then
+    while [[ $# -gt 0 ]]; do
+      streamerToBlock="$(to_lowercase "$1")"
+
+      # If streamer is already blocked, un-block them
+      if [[ "${blocklist}" == *"${streamerToBlock}"* ]]; then
+        sed -i "/${streamerToBlock}/d" "${BLOCKLIST_FILE}"
+        printf "\n %s %s %s.\n" "${localizedStrings[0]}" "${streamerToBlock}"  "${localizedStrings[2]}"
+      else
+        printf "%s\n" "${streamerToBlock}" >> "${BLOCKLIST_FILE}"
+        printf "\n %s %s %s.\n"  "${localizedStrings[1]}" "${streamerToBlock}"  "${localizedStrings[3]}"
+      fi
+
+      shift
+    done
+  else
+    printf "\n %s:\n" "${localizedStrings[4]}"
+    sed -e 's/^/  /' "${BLOCKLIST_FILE}"
+  fi
+
+  invalidate_cache
+}
+
+
+#######################################
+# Lists the available VODs for a specified streamer.
+# Arguments:
+#   $1: streamer to show vods of
+#   $2: if exists, play the VOD # of that streamer
+# Returns:
+#   none
+#######################################
+list_vods()
+{
+  # Get localized strings
+  local localizedStrings
+  mapfile -t localizedStrings <<< "$(jq -r ".stream_failure_player_one.${WTWITCH_LANG}, .stream_failure_player_two.${WTWITCH_LANG}, .vod_failure_no_number.${WTWITCH_LANG}" <<< "${TRANSLATIONS}")"
+
+  shift
+  local -r streamer="$(to_lowercase "$1")"
+
+  # First get twitch user ID
+  local -r streamerID="$(get_user_id "${streamer}")"
+
+  if [[ "${streamerID}" == "" ]] || [[ "${streamerID}" == "null" ]]; then
+    exit 1
+  fi
+
+  # Get list of VODs
+  local tmpJson
+  tmpJson="$(download_file "${TWITCH_API_URL}/videos?user_id=${streamerID}")"
+
+  # If $2 doesn't exist, list all VODs. Otherwise, play vod #{$2}
+  if [[ $# -lt 2 ]]; then
+    # List all VODs
+    printf "\n %s VODs:\n" "$1"
+
+    make_tmp
+    readonly TMP_VOD_LIST_FILE="${TMP_DIR}/vods.txt"
+    touch "${TMP_VOD_LIST_FILE}"
+
+    local whileCounter=0
+    local vodData
+    vodData="$(jq -r .data[${whileCounter}] <<< "${tmpJson}")"
+
+    while [[ "${vodData}" != "null" ]]; do
+      # Do not use subshells when debugging
+      if [[ "${DEBUGGING}" == "on" ]]; then
+        print_vod_info "${whileCounter}" "${vodData}" "${TMP_VOD_LIST_FILE}"
+      else
+        print_vod_info "${whileCounter}" "${vodData}" "${TMP_VOD_LIST_FILE}" &
+      fi
+
+      whileCounter=$(( whileCounter + 1 ))
+      vodData="$(jq -r .data[${whileCounter}] <<< "${tmpJson}")"
+    done
+
+    wait
+
+    sort -n "${TMP_VOD_LIST_FILE}"
+  else
+    # Watch VOD #{$2}
+    # extract URL from data
+    local -r vodURL="$(jq -r .data[$(( $2 - 1 ))].url <<< "${tmpJson}")"
+
+    if [[ "${vodURL}" == "null" ]]; then
+      exit_script_on_failure "${localizedStrings[2]} $2."
+    fi
+
+    # Use VLC as backup player if mpv is not installed
+    if [[ ! -x "$(command -v "${userPlayer}")" ]]; then
+      if [[ -x "$(command -v "vlc")" ]]; then
+        userPlayer="vlc"
+      else
+        stream_failure_notify "${streamer} VOD" "${localizedStrings[0]} ${userPlayer} ${localizedStrings[1]}."
+      fi
+    fi
+
+    # If using mpv, add auto hwdec and title, and enable wayland if it's running
+    if [[ "${userPlayer}" == "mpv" ]]; then
+      userPlayer+=" --hwdec=auto"
+
+      if [[ $(pgrep wayland) || $(pgrep sway) ]]; then
+        userPlayer+=" --gpu-context=wayland"
+      fi
+
+      if [[ "${DEBUGGING}" == "on" ]]; then
+        ${userPlayer} --title="$(jq -r .data[$(( $2 - 1 ))].title <<< "${tmpJson}")" "${vodURL}"
+      else
+        ${userPlayer} --title="$(jq -r .data[$(( $2 - 1 ))].title <<< "${tmpJson}")" "${vodURL}" &> /dev/null &
+      fi
+    else
+      if [[ "${DEBUGGING}" == "on" ]]; then
+        "${userPlayer}" "${vodURL}"
+      else
+        "${userPlayer}" "${vodURL}" &> /dev/null &
+      fi
+    fi
+  fi
+}
+
+#######################################
+# Facilitates multi-process parsing of json data.
+# Arguments:
+#   $1: index of vod to print info of
+#   $2: json data containing vod data
+#   $3: file to print to
+# Returns:
+#   none
+#######################################
+print_vod_info()
+{
+  # Get title, date, duration
+  mapfile -t vodData <<< "$(jq -r ".title, .created_at, .duration" <<< "$2")"
+
+  local -r dateString="$(${DATE_CMD} -d "${vodData[1]}" "+%x %X")"
+
+  # Trim VOD title to fit terminal width
+  local -r titleCharacters=11
+  local -r maxTitleLength="$(( TERMINAL_WIDTH - titleCharacters - ${#vodData[2]} - ${#dateString} - ${#1} ))"
+  local -r vodTitle="${vodData[0]:0:${maxTitleLength}}"
+
+  printf "  %s. %b[%s]%b %s %b(%s)%b\n" "$(( $1 + 1 ))" "${TURQOISE}" "${dateString}" "${NC}" "${vodTitle}" "${ORANGE}" "${vodData[2]}" "${NC}" >> "$3"
+}
+
+# -----------------------------------------
+# ---------- Informational Texts ----------
+# -----------------------------------------
+
+#######################################
+# Prints information about how to use this script.
+# Copyright (C) 2016-2019 Dylan Araps
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+print_help()
+{
+  printf "%s" "\
+${SCRIPT_NAME} - terminal user interface for Twitch
+
+=> [w]atch [name]      - Watch [name] streamer.
+=> [s]ub [name(s)]     - Subscribe to [name] streamer.
+                         You can subscribe to multiple streamers in one command.
+=> [u]nsub [name(s)]   - Unsubscribe from [name] streamer.
+                         You can unsubscribe from multiple streamers in one command.
+=> [c]heck             - View your settings and the status of streamers you are
+                         subscribed to.
+=> [e] [search-term]   - Search games/categories for [search-term].
+=> [n] [search-term]   - Search streamers/channels for [search-term].
+=> [g]ame [name]       - View the top streamers for [name] game/category.
+=> [t]op               - View the top games and streamers on Twitch.
+=> [v]od [name] [#]    - List [name]'s VODs.
+=> [f]                 - Toggle the printing of offline subscriptions with [c]heck.
+=> [l]                 - Toggle the usage of colors in wtwitch output.
+=> [p]layer [program]  - Change the player program that gets passed to streamlink.
+=> [q]uality [quality] - Change the video quality that gets passed to streamlink.
+=> [b]lock [name(s)]   - Block [name] streamer(s), preventing them from appearing in
+                         any output. You can block multiple streamers in one command.
+                         You can also use this command to unblock streamer(s).
+=> [version]           - Print the current version of wtwitch.
+=> [h]elp              - Print this help.
+
+See \"man ${SCRIPT_NAME}\" or https://krathalan.net/wtwitch.html for more information.
+"
+
+  exit 0
+}
+
+#######################################
+# Prints information this script.
+# Arguments:
+#   none
+# Returns:
+#   none
+#######################################
+print_version()
+{
+  printf "%s" "\
+${SCRIPT_NAME} v${VERSION}
+
+Copyright (C) ${CONTRIBUTORS} 2019-$(${DATE_CMD} +%Y)
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+"
+exit 0
+}
+
+#######################################
+# Prints information about new command style.
+# Arguments:
+#   $1: user's command
+# Returns:
+#   none
+#######################################
+print_new_usage()
+{
+  printf "The commands for wtwitch have changed.
+Do not use hyphens anymore; simply execute \"%s %s\".\n" "${SCRIPT_NAME}" "${1##*-}"
+
+  exit 0
+}
+
+# -----------------------------------------
+# ------- Pre-script: check & load --------
+# -----------------------------------------
+
+# Check files -- create cache/config directories and required files
+# Creating LAST_SEEN_DIRECTORY also creates CACHE_FILE_DIRECTORY
+if [[ ! -d "${LAST_SEEN_DIRECTORY}" ]]; then
+  mkdir -p "${LAST_SEEN_DIRECTORY}"
+fi
+
+if [[ ! -d "${CONFIG_FILE_DIRECTORY}" ]]; then
+  mkdir -p "${CONFIG_FILE_DIRECTORY}"
+fi
+
+if [[ ! -f "${BLOCKLIST_FILE}" ]]; then
+  touch "${BLOCKLIST_FILE}"
+fi
+
+if [[ ! -f "${CACHE_GAME_ID_FILE}" ]]; then
+  printf "{\"data\": []}" > "${CACHE_GAME_ID_FILE}"
+fi
+
+if [[ ! -f "${CACHE_USER_ID_FILE}" ]]; then
+  printf "{\"data\": []}" > "${CACHE_USER_ID_FILE}"
+fi
+
+if [[ ! -f "${CONFIG_FILE}" ]]; then
+  # Default config
+  printf "{\"player\": \"mpv\",\"quality\": \"best\",\"colors\": \"true\",\"printOfflineSubscriptions\": \"true\",\"subscriptions\": []}" > "${CONFIG_FILE}"
+fi
+
+if [[ ! -f "${ENVIRONMENT_FILE}" ]]; then
+  printf '#!/usr/bin/env sh\n\n# You can put commands or variables here for wtwitch to source.\n# This is useful on macOS, for example, to set a custom PATH or PYTHONPATH\n# to support non-standard locations specifically for wtwitch.\n' > "${ENVIRONMENT_FILE}"
+fi
+
+# Don't check the user's file -- their mistakes are their own
+# shellcheck source=/dev/null
+source "${ENVIRONMENT_FILE}"
+
+# Load settings
+# apiToken must be malleable because it must be updated in-memory if it is expired
+# printOfflineSubscriptions must be malleable because it must be initialized to T/F if it is null (i.e. does not exist in config file yet)
+# userPlayer must be malleable because it must be updated if the user's default
+#   player is mpv and they don't have it installed but have vlc installed
+mapfile -t userSettings <<< "$(jq -r ".apiToken, .apiTokenExpiry, .colors, .printOfflineSubscriptions, .player, .quality" "${CONFIG_FILE}")"
+apiToken="${userSettings[0]}"
+readonly apiTokenExpiry="${userSettings[1]}"
+readonly useColors="${userSettings[2]}"
+printOfflineSubscriptions="${userSettings[3]}"
+userPlayer="${userSettings[4]}"
+readonly userQuality="${userSettings[5]}"
+blocklist="$(<"${BLOCKLIST_FILE}")"
+readonly blocklist
+
+# Set printOfflineSubscriptions to true by default
+if [[ "${printOfflineSubscriptions}" == "null" ]]; then
+  write_setting ".printOfflineSubscriptions" "true"
+  printOfflineSubscriptions="true"
+fi
+
+# Colors
+readonly NC="\e[0m" # No color/turn off all tput attributes
+# Deactivate colors if useColors is false
+if [[ "${useColors}" == "false" ]]; then
+  readonly GREY="${NC}"
+  readonly LIGHTGREEN="${NC}"
+  readonly ORANGE="${NC}"
+  readonly PURPLE="${NC}"
+  readonly RED="${NC}"
+  readonly TURQOISE="${NC}"
+else
+  readonly GREY="\e[90m"
+  readonly LIGHTGREEN="\e[92m"
+  readonly ORANGE="\e[93m"
+  readonly PURPLE="\e[95m"
+  readonly RED="\e[1m\e[91m"
+  readonly TURQOISE="\e[96m"
+fi
+
+# 'date' command
+case "$(uname -s)" in
+  Darwin|*BSD)
+    readonly DATE_CMD="gdate"
+    ;;
+  *)
+    readonly DATE_CMD="date"
+    ;;
+esac
+
+# Debugging
+if [[ -n "${WTWITCH_DEBUG:-}" ]]; then
+  # Avoid subshells, print full curl output, and more behavioral changes
+  readonly DEBUGGING="on"
+  readonly curlFlags="--verbose"
+
+  # Print log information
+  readonly _dashes="-----------------------------------------------------------"
+
+  if pacman -Q wtwitch &> /dev/null; then
+    readonly _packageinfo="installed via pacman"
+  else
+    readonly _packageinfo="script or unknown"
+  fi
+
+  if [[ -f /etc/os-release ]]; then
+    OS_NAME="$(grep -G "^NAME=" /etc/os-release)"
+    readonly OS_NAME
+  fi
+
+  printf "Starting wtwitch %s debug log\n\n" "${VERSION}"
+  printf "System: %s; %s\n" "${OS_NAME:-}" "$(uname -sr)"
+  printf "Package: %s\n" "${_packageinfo}"
+  printf "Dependencies: bash-%s %s\n" "${BASH_VERSION}" "$(jq --version) $(streamlink --version)"
+  printf "Date: %s\n\nCommand: wtwitch %s\n\n" "$(${DATE_CMD})" "$*"
+
+  printf "Environment file:"
+  if [[ -f "${ENVIRONMENT_FILE}" ]]; then
+    printf "\n\n%s\n-----End environment file-----\n\n" "$(<"${ENVIRONMENT_FILE}")"
+  else
+    printf " no\n\n"
+  fi
+
+  printf "Config file:\n%s\n\n" "$(jq -r "." "${CONFIG_FILE}")"
+  printf "%s\n                         Begin log\n%s\n\n" "${_dashes}" "${_dashes}"
+
+  # Print all commands
+  set -x
+else
+  readonly DEBUGGING="off"
+  readonly curlFlags="--silent"
+fi
+
+# Used to calculate output string lengths; see check_twitch_streams_helper()
+# and list_streamers_of_game_helper()
+TERMINAL_WIDTH="$(tput cols)"
+readonly TERMINAL_WIDTH
+
+# Default to English if language isn't supported
+case "${LANG%_*}" in
+  "de"|"es"|"fr")
+    readonly WTWITCH_LANG="${LANG%_*}"
+    ;;
+  *)
+    readonly WTWITCH_LANG="en"
+    ;;
+esac
+
+# -----------------------------------------
+# ---------- Parse user options -----------
+# -----------------------------------------
+
+# Check user input
+[[ -z "${1:-}" ]] && print_help
+
+# Used only for bash completion features
+[[ "$1" == "_completion_cache_online_subscription_json" ]] &&
+  cache_online_subscription_json &&
+  exit 0
+
+glob "$1" '[-]*' &&
+  print_new_usage "$1"
+
+glob "$1" '[g]*' && [[ -z "${2:-}" ]] &&
+  exit_script_on_failure "$(get_translation flags_no_game)"
+
+glob "$1" '[en]*' && [[ -z "${2:-}" ]] &&
+  exit_script_on_failure "$(get_translation flags_no_search_term)"
+
+glob "$1" '[p]*' && [[ -z "${2:-}" ]] &&
+  exit_script_on_failure "$(get_translation flags_no_player)"
+
+glob "$1" '[q]*' && [[ -z "${2:-}" ]] &&
+  exit_script_on_failure "$(get_translation flags_no_quality)"
+
+[[ "$1" != "version" ]] && glob "$1" '[suvw]*' && [[ -z "${2:-}" ]] &&
+  exit_script_on_failure "$(get_translation flags_no_streamer)"
+
+# If using a command that requires the Twitch API, update token
+if glob "$1" '[cengtvo]*'; then
+  # If the API token is empty, OR
+  # If the API token is null (e.g. there is no token), OR
+  # If the API token is expired
+  if [[ -z "${apiToken}" ]] || [[ "${apiToken}" == "null" ]] || \
+  [[ "$(LANG=C ${DATE_CMD} +%s)" -gt "${apiTokenExpiry}" ]]; then
+    download_token
+  fi
+fi
+
+case "$1" in
+  -h|--help|h*) print_help ;;
+  c*) check_twitch_streams ;;
+  o*) open_selected_stream ;;
+  g*) list_streamers_of_game "$2" ;;
+  e*) search_categories "$2" ;;
+  t*) list_top ;;
+  f*) toggle_offline ;;
+  l*) toggle_colors ;;
+  p*) change_player "$2" ;;
+  q*) change_quality "$2" ;;
+  n*) search_channels "$2" ;;
+  s*) subscribe "$@" ;;
+  u*) unsubscribe "$@" ;;
+  b*) block "$@" ;;
+  version) print_version ;;
+  v*) list_vods "$@" ;;
+  w*) watch_stream "$2" ;;
+  *) print_help ;;
+esac
+
+printf "%b" "${NC}" && exit 0

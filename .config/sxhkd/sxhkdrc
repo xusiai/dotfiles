@@ -46,7 +46,7 @@ ctrl + alt + shift + r
 
 # OPEN TERMINAL
 super + Return
-    alacritty
+    kitty
 
 # TOGGLE FULLSCREEN OR MONACLE
 super + f
@@ -72,10 +72,10 @@ alt + ctrl + q
 
 # OPEN BROWSER
 super + BackSpace
-    librewolf
+    firefox
     
 super + shift + w
-    librewolf
+    firefox
     
 # SHUFFLE WALLPAPER
 ctrl + alt + @w
@@ -143,7 +143,7 @@ super + x
 
 # LEAGUE
 super + l
-  bash -c "{ leagueoflegends run /opt/wine-lol/bin/wine $HOME/.local/share/leagueoflegends/launchhelper/lhinjector.exe; } & leagueoflegends start"
+  'bash -c "{ leagueoflegends run /opt/wine-lol/bin/wine $HOME/.local/share/leagueoflegends/launchhelper/lhinjector.exe; } & leagueoflegends start"'
 
 super + shift + l 
   leagueoflegends kill

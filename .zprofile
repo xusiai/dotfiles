@@ -1,6 +1,8 @@
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin/colorscripts:$PATH"
 export PATH="$HOME/.config/rofi/bin:$PATH"
+export PATH="$HOME/.spicetify:$PATH"
+export PATH="/opt/leagueoflegends:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export GTK_OVERLAY_SCROLLING=1

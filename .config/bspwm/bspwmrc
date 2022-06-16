@@ -50,14 +50,12 @@ dunst &
 mpDris2 &
 
 # POLKIT
-[ -n "$(pidof polkit-gnome-authentication-agent-1)" ] || /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
-# KDE CONNECT
+[ -n "$(pidof polkit-gnome-authentication-agent-1)" ] || /usr/libexec/polkit-gnome-authentication-agent-1 &
+#[ -n "$(pidof pipewire)" ] || pipewire -d &
+#[ -n "$(pidof pipewire-pulse)" ] || pipewire-pulse -d &
 [ -n "$(pidof kdeconnectd)" ] || kdeconnectd &
-[ -n "$(pidof spotify)" ] || spotify &
-[ -n "$(pidof obsidian)" ] || obsidian &
 [ -n "$(pidof xfce4-power-manager)" ] || xfce4-power-manager &
-[ -n "$(pidof mconnect)" ] || mconnect -d &
+
 
 # WALLPAPER
 feh --bg-scale $HOME/.local/share/wallpapers/wallhaven-5we787.jpg & 

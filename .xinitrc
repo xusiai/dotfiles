@@ -10,4 +10,9 @@ fi
 xrdb -merge "$HOME/.Xresources"
 #xrandr --output DP-2 --mode 2560x1440 --rate 144
 #xrandr --output HDMI-0 --same-as DP-2
+
+pipewire &
+pipewire-pulse &
+easyeffects --gapplication-service & 
+
 exec bspwm
