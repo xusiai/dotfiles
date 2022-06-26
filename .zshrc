@@ -163,4 +163,4 @@ alias sendtext="mconnectctl share-text /org/mconnect/device/0"
 eval "$(starship init zsh)"
 # setup starship custom prompt
 export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-export PATH=$PATH:/home/neko/.spicetify
+
