@@ -45,9 +45,6 @@ This repo hosts a collection of dotfiles for various Linux applications. If you 
  ##### Thunar
  <img src="assets/misc/GTK.png"></br> 
  
- ##### Obsidian
- <img src="assets/misc/obsidian.png"></br>
- 
  ##### Firefox
  <img src="assets/misc/fox.png"></br>  
  
