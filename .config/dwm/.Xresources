@@ -1,0 +1,58 @@
+Xft.antialias:	1
+Xft.hinting:	1
+Xft.autohint:	0
+Xft.dpi:        93
+Xft.hintstyle:	hintslight
+Xft.rgba:	    rgb
+Xft.lcdfilter:	lcddefault
+
+! window padding
+st.borderpx: 20
+
+!-- values between 0.1  - 1.0 --! 
+
+st.alpha: 1.0 
+!st.font:           Sarasa Mono K Nerd Font:Style=Bold:size=13
+st.font:           SAGA Heavy:size=12
+
+#define base00 #05080a 
+#define base01 #0A0D0F
+#define base02 #0f1214
+#define base03 #141719
+#define base04 #C4FFFE
+#define base05 #fff7ff
+#define base06 #f0e3ff
+#define base07 #e6d9fc
+#define base08 #ffc2d0
+#define base09 #d7caed
+#define base0A #b9fdcd
+#define base0B #ffffc6
+#define base0C #9eecdf
+#define base0D #93e6f5
+#define base0E #d7caed
+#define base0F #b9fdcd
+
+
+*foreground:   base05
+*background:   base00
+*cursorColor:  base07
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+
+

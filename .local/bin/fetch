@@ -14,7 +14,7 @@ v=$'\e[7m'
 sep=
 s=$d$f0$sep$t
 
-ds=󰠄
+ds=󰣐
 distro="$(uname -o | awk -F '"' '/PRETTY_NAME/ { print $2 }' /etc/os-release)"
 
 h=󰕮
@@ -23,8 +23,8 @@ wmname="$(xprop -id $(xprop -root -notype | awk '$1=="_NET_SUPPORTING_WM_CHECK:"
 k=󰻀
 kernel="$(uname -r | cut -d '-' -f1)"
 
-p=󰮯
-packages="$(pacman -Q | wc -l)"
+p=󰏖
+packages="$(xbps-query -m | wc -l)"
 
 sh=󰨊
 shell=$(basename $SHELL)

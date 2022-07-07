@@ -1,12 +1,12 @@
 [colors]
-	background = "#0A0D0F"
+	background = "#05080a"
 	foreground = "#FFFCFF"
 
 [global]
     follow = mouse
     width = 300
-    origin = top-right
-    offset = 20x56
+    origin = bottom-right
+    offset = 10x56
     indicate_hidden = yes
     shrink = no
     transparency = 0
@@ -17,9 +17,9 @@
     frame_width = 6
     outer_frame_width = 10
     corner_radius = 3
-    frame_color = "#0F1214"
-    outer_frame_color = "#0A0D0F"
-    separator_color = "#0F1214"
+    frame_color = "#0A0D0F"
+    outer_frame_color = "#05080a"
+    separator_color = "#0A0D0F"
     sort = yes
     idle_threshold = 120
     highlight = "#FFBDCB"
@@ -67,17 +67,17 @@
     context = ctrl+shift+period
 
 [urgency_low]
-    background =  "#0A0D0F"
-    frame_color = "#0F1214"
+    background =  "#05080a"
+    frame_color = "#0A0D0F"
     timeout = 10
 
 [urgency_normal]
-    background =  "#0A0D0F"
-    frame_color = "#0F1214"
+    background =  "#05080a"
+    frame_color = "#0A0D0F"
     timeout = 10
 
 [urgency_critical]
-    background = "#0A0D0F"
-    frame_color = "#0F1214"
+    background = "#05080a"
+    frame_color = "#0A0D0F"
     timeout = 0
 

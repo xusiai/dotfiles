@@ -43,7 +43,7 @@ setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
 
-# SOURCE PLUGINS
+# ANTIGEN
 source $HOME/antigen.zsh
 antigen use oh-my-zsh
 antigen bundle git
@@ -77,7 +77,8 @@ mcd () {
     cd $1
 }
 
-# TOOLBOX ALIASES
+# TOOLBOX
+alias sudo='doas'
 alias mtar='tar -zcvf' # mtar <archive_compress>
 alias utar='tar -zxvf' # utar <archive_decompress> <file_list>
 alias z='zip -r' # z <archive_compress> <file_list>
@@ -95,8 +96,11 @@ alias lsblkinfo="lsblk -o NAME,FSTYPE,LABEL,MOUNTPOINT,SIZE,MODEL"
 alias diskspace='du -cha --max-depth=1 / | grep -E "M|G"'
 alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > playlist.m3u"'
 alias s="sudo"
+alias dwmr="cd ~/.config/dwm/dwm/ && sudo rm config.h && sudo make install"
+alias sudo='doas'
 
-# NAVIGATION ALIASES
+
+# NAVIGATION
 alias ..="cd .."
 alias b="../"
 alias dl="cd ~/.config/XDG/DL/"
@@ -112,7 +116,7 @@ alias tm="cd /mnt/D1/TM/completed"
 alias x="exit"
 alias c="clear"
 
-# GIT ALIASES
+# GIT
 alias gc="git clone"
 alias gp="git push"
 alias ga="git add ."
@@ -123,7 +127,7 @@ alias gge="git config --global user.email"
 alias ggn="git config --global user.name"
 alias bspd="git clone https://github.com/Miusaky/bspdots.git"
 
-# APPLICATION ALIASES
+# APPS
 alias mdl="megadl --path /mnt/D1/TM/completed/"
 alias ydl="yt-dlp -o /mnt/D1/TM/completed/%(title)s-%(id)s.%(ext)s"
 alias wwc="wtwitch c"
@@ -131,11 +135,15 @@ alias ww="wtwitch w"
 alias mb="kitty +kitten ssh root@192.168.1.253"
 alias img="kitty +kitten icat" 
 alias rname="mnamer --no-overwrite --no-guess --batch --recurse"
+alias rnamet="mnamer --no-overwrite --no-guess --batch --recurse --test"
+alias rnametv="mnamer --no-overwrite --no-guess --batch --recurse --id-tvdb"
+alias rnametvt="mnamer --no-overwrite --no-guess --batch --recurse --test --id-tvdb"
+
 alias v='nvim'
 alias wtr="curl wttr.in/"
 alias clr="$HOME/.local/bin/clr >/dev/null 2>&1 && kill -USR1 $(pidof kitty)"
 
-# VOID ALIASES
+# VOID 
 alias xi="sudo xbps-install"
 alias xr="sudo xbps-remove -Ro"
 alias xu="sudo xbps-install -Su"
@@ -149,18 +157,9 @@ alias po="loginctl poweroff"
 alias rb="loginctl reboot"
 alias xl="xbps-query -m"
 
-# MCONNECT
-alias send="mconnectctl share-file /org/mconnect/device/0"
-alias sendurl="mconnectctl share-url /org/mconnect/device/0"
-alias sendtext="mconnectctl share-text /org/mconnect/device/0"
+# VM
+alias vmnet="sudo virsh net-start default"
 
 # PROMPT
-#SPACESHIP_USER_SHOW="always"
-#SPACESHIP_PROMPT_SEPARATE_LINE="false"
-#SPACESHIP_CHAR_SYMBOL=" "
-
-# init starship
 eval "$(starship init zsh)"
-# setup starship custom prompt
-export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
-
+export PATH=$PATH:/home/miu/.spicetify

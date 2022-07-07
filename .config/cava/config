@@ -147,14 +147,15 @@
 
 gradient = 1
 
-gradient_color_1 = '#F5E8FF'
-gradient_color_2 = '#FAEDFF'
-gradient_color_3 = '#D2C5E8'
-gradient_color_4 = '#B4F8C8'
-gradient_color_5 = '#FFDCAC'
-gradient_color_6 = '#FFB2AD'
-gradient_color_7 = '#FFBDCB'
-gradient_color_8 = '#F5D0D0'
+
+gradient_color_1 = '#b9fdcd'
+gradient_color_2 = '#ffffc6'
+gradient_color_3 = '#ffe1b1'
+gradient_color_4 = '#C4FFFE'
+gradient_color_5 = '#d7caed'
+gradient_color_6 = '#ffb7b2'
+gradient_color_7 = '#ffc2d0'
+gradient_color_8 = '#fad5d5'
 
 
 

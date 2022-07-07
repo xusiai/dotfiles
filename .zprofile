@@ -2,10 +2,11 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin/colorscripts:$PATH"
 export PATH="$HOME/.config/rofi/bin:$PATH"
 export PATH="$HOME/.spicetify:$PATH"
-export PATH="/opt/leagueoflegends:$PATH"
+export PATH="/opt/LEAGUEOFLEGENDS:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=nvim
 export GTK_OVERLAY_SCROLLING=1
+export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 export FZF_DEFAULT_OPTS='--color=bg+:#0A0D0F,bg:#0F1214,spinner:#FFFFC1,hl:#FFBDCB --color=fg:#FFFCFF,header:#FFBDCB,info:#D2C5E8,pointer:#FFDCAC --color=marker:#FFDCAC,fg+:#F5D0D0,prompt:#D2C5E8,hl+:#FFBDCB'
 
 if [ "$TERM" = "linux" ] ; then
@@ -29,6 +30,9 @@ if [ "$TERM" = "linux" ] ; then
     clear
 fi
 
+xrandr --output DP-2 --mode 2560x1440 --rate 144
+#xrandr --output HDMI-0 --same-as DP-2
+
 if [ -z "$DISPLAY" ] && [ "$(fgconsole)" -eq 1 ]; then
-   exec xinit  
+   sx dbus-launch --exit-with-session sh ~/.config/dwm/scripts/run.sh 
 fi
