@@ -90,9 +90,7 @@ This repo hosts a collection of dotfiles for various Linux applications. If you 
 
 
 ## ACKNOWLEDGEMENTS
-- [Siduck](https://github.com/siduck) whose dotfiles I've used for inspiration on several occasions :heart:
+- [Siduck](https://github.com/siduck) for Chadwm and St :heart:
 - [Saimoomedits](https://github.com/saimoomedits) for the beautiful ncmpcpp config :heart:
 - [Manas140](https://github.com/Manas140) for a few scripts :heart:
 - [Elenapan](https://github.com/elenapan) for the rofi-yt script :heart:
-
-<p align="center"><img src="https://raw.githubusercontent.com/catppuccin/catppuccin/dev/assets/misc/footers/gray0_ctp_on_line.svg?sanitize=true" /></p>
