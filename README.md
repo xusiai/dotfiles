@@ -4,16 +4,16 @@
 <!-- BADGES -->
    <p></p>
    <a href="">
-      <img src="https://img.shields.io/github/issues/miusaky/bspdots?color=F5D0D0&labelColor=0A0D0F&style=for-the-badge">
+      <img src="https://img.shields.io/github/issues/miusaky/dotfiles?color=F5D0D0&labelColor=0A0D0F&style=for-the-badge">
    </a>
    <a href="https://github.com/miusaky/bspdots/stargazers">
-      <img src="https://img.shields.io/github/stars/miusaky/bspdots?color=FFB2AD&labelColor=0A0D0F&style=for-the-badge">
+      <img src="https://img.shields.io/github/stars/miusaky/dotfiles?color=FFB2AD&labelColor=0A0D0F&style=for-the-badge">
    </a>
    <a href="https://github.com/miusaky/bspdots/">
-      <img src="https://badges.pufler.dev/visits/miusaky/bspdots?style=for-the-badge&color=FFFFC1&logoColor=white&labelColor=0A0D0F"/>
+      <img src="https://badges.pufler.dev/visits/miusaky/dotfiles?style=for-the-badge&color=FFFFC1&logoColor=white&labelColor=0A0D0F"/>
    </a>
    <a href="https://github.com/miusaky/bspdots/">
-      <img src="https://img.shields.io/github/repo-size/miusaky/bspdots?color=B4F8C8&labelColor=0A0D0F&style=for-the-badge">
+      <img src="https://img.shields.io/github/repo-size/miusaky/dotfiles?color=B4F8C8&labelColor=0A0D0F&style=for-the-badge">
   </a>
   <H3>  ━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━ </H3>
 </div>
@@ -21,7 +21,6 @@
 
 
 <img src="assets/dwm/wall.png"></br> 
-<img src="assets/bspwm/wall.png"></br> 
 <div align="center">  <H3>  ━━━━━━━━━━━━━━━  ❖  ━━━━━━━━━━━━━━━ </H3> <H3>Welcome!</H3> <H4>This repo hosts a collection of dotfiles for various Linux applications. If you like what you see and wish to use them there is a [wiki](https://github.com/Miusaky/dotfiles/wiki) to help you replicate the various setups. You can find additional screenshots below</H4> </div>
 
 
