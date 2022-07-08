@@ -10,9 +10,6 @@
       <img src="https://img.shields.io/github/stars/miusaky/dotfiles?color=FFB2AD&labelColor=0A0D0F&style=for-the-badge">
    </a>
    <a href="https://github.com/miusaky/dotfiles/">
-      <img src="https://badges.pufler.dev/visits/miusaky/dotfiles?style=for-the-badge&color=FFFFC1&logoColor=white&labelColor=0A0D0F"/>
-   </a>
-   <a href="https://github.com/miusaky/dotfiles/">
       <img src="https://img.shields.io/github/repo-size/miusaky/dotfiles?color=B4F8C8&labelColor=0A0D0F&style=for-the-badge">
   </a>
 </div>
