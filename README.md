@@ -19,7 +19,7 @@
 <img src="assets/dwm/wall.png"></br> 
 <div align="center">
 <H3>Welcome!</H3> 
-This repo hosts a collection of dotfiles for various Linux applications. If you like what you see and wish to use them there is a <a href="https://github.com/Miusaky/dotfiles/wiki">wiki</a> to help you replicate each setup. Additional screenshots can be found below.
+This repo hosts a collection of dotfiles for various Linux applications. If you like what you see and wish to use them there is a <a href="https://github.com/Miusaky/dotfiles/wiki">wiki</a> to help you replicate each setup. Additional screenshots can be found <a href="https://github.com/Miusaky/dotfiles#gallery">below</a>.
 </div>
 
 
