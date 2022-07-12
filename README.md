@@ -4,10 +4,10 @@
 <!-- BADGES -->
    <p></p>
    <a href="">
-      <img src="https://img.shields.io/github/issues/miusaky/dotfiles?color=F5D0D0&labelColor=0A0D0F&style=for-the-badge">
+      <img src="https://img.shields.io/github/issues/miusaky/dotfiles?color=F5D0D0&labelColor=05080A&style=for-the-badge">
    </a>
    <a href="https://github.com/miusaky/dotfiles/stargazers">
-      <img src="https://img.shields.io/github/stars/miusaky/dotfiles?color=B4F8C8&labelColor=0A0D0F&style=for-the-badge">
+      <img src="https://img.shields.io/github/stars/miusaky/dotfiles?color=B4F8C8&labelColor=05080A&style=for-the-badge">
    </a>
 </div>
 <p/>
