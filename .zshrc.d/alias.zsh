@@ -19,23 +19,30 @@ alias m3u='find -type f -iname "*.mp3" -or -iname "*.flac" -or -iname "*.m4a" > 
 alias s="sudo"
 alias dwmr="cd ~/.config/dwm/dwm/ && sudo rm config.h && sudo make install"
 alias sudo='doas'
-
+alias srv='ssh miu@192.168.1.245'
 
 # NAVIGATION
 alias ..="cd .."
 alias b="../"
-alias dl="cd ~/.config/XDG/DL/"
-alias dt="cd ~/.bspdots"
+alias dl="cd ~/DL"
+alias dt="cd ~/dotfiles/"
 alias cfg="cd ~/.config/"
-alias d1="cd /mnt/D1"
-alias d2="cd /mnt/D2"
-alias d3="cd /mnt/D3"
-alias d4="cd /mnt/D4"
-alias d5="cd /mnt/D5"
-alias d6="cd /mnt/D6"
-alias tm="cd /mnt/D1/TM/completed"
+alias d1="cd /mnt/NFS/D1"
+alias d2="cd /mnt/NFS/D2"
+alias d3="cd /mnt/NFS/D3"
+alias d4="cd /mnt/NFS/D4"
+alias d5="cd /mnt/NFS/D5"
+alias d6="cd /mnt/NFS/D6"
+alias tm="cd /mnt/NFS/D1/TM/completed"
+alias vp="cd ~/.local/VP" 
 alias x="exit"
 alias c="clear"
+
+# NVIM
+alias nvdwm="nvim $HOME/.config/dwm/dwm/config.def.h"
+alias nvzsh="nvim $HOME/.zshrc"
+alias nvzsha="nvim $HOME/.zshrc.d/alias.zsh"
+
 
 # GIT
 alias gc="git clone"
@@ -43,10 +50,12 @@ alias gp="git push"
 alias ga="git add ."
 alias gm="git commit -m"
 alias gcm='git commit -m "$(date)"'
+alias gu="git reset --soft HEAD~1"
 alias gsetup="git remote set-url origin"
 alias gge="git config --global user.email"
 alias ggn="git config --global user.name"
 alias bspd="git clone https://github.com/Miusaky/bspdots.git"
+alias gs="git status"
 
 # APPS
 alias mdl="megadl --path /mnt/D1/TM/completed/"
