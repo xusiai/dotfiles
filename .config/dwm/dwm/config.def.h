@@ -150,6 +150,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("thunar") },
     { MODKEY,               XK_p,                   spawn,          SHCMD("colorpicker") },
     { MODKEY,               XK_y,                   spawn,          SHCMD("yt") },
+    { MODKEY,               XK_v,                   spawn,          SHCMD("st -e v") },
+    { MODKEY,               XK_g,                   spawn,          SHCMD("code-oss") },
     { Mod1Mask|ControlMask, XK_w,                   spawn,          SHCMD("feh --bg-scale --randomize --recursive $HOME/.local/share/wallpapers") },
 
     { MODKEY,               XK_b,                   togglebar,      {0} },
