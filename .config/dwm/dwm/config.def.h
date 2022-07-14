@@ -26,7 +26,7 @@ static const int scalepreview       = 4;
 static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *fonts[]          = { "Sarasa Mono K Nerd Font:style=Bold:size=12",
+static const char *fonts[]          = { "SAGA Heavy:size=12",
                                         "Material Design Icons Desktop:size=13" };
 
 #include "themes/SAGA.h"
