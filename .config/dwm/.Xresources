@@ -12,8 +12,7 @@ st.borderpx: 20
 !-- values between 0.1  - 1.0 --! 
 
 st.alpha: 1.0 
-!st.font:           Sarasa Mono K Nerd Font:Style=Bold:size=13
-st.font:           SAGA Heavy:size=12
+st.font:           SAGA Heavy:size=13
 
 #define base00 #05080a 
 #define base01 #0A0D0F

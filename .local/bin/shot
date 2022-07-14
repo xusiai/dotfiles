@@ -15,7 +15,7 @@ crop(){
 }
 
 abort(){ 
-    dunstify -i face-crying "Banido" ; 
+    dunstify "canceled" ; 
     exit 1 ;
 }
 

@@ -20,6 +20,7 @@ alias s="sudo"
 alias dwmr="cd ~/.config/dwm/dwm/ && sudo rm config.h && sudo make install"
 alias sudo='doas'
 alias srv='ssh miu@192.168.1.245'
+alias dlink='find . -xtype l -delete'
 
 # NAVIGATION
 alias ..="cd .."
@@ -42,7 +43,6 @@ alias c="clear"
 alias nvdwm="nvim $HOME/.config/dwm/dwm/config.def.h"
 alias nvzsh="nvim $HOME/.zshrc"
 alias nvzsha="nvim $HOME/.zshrc.d/alias.zsh"
-
 
 # GIT
 alias gc="git clone"

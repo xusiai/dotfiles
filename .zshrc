@@ -1,11 +1,5 @@
-
 #! /bin/zsh
 SHELL=$(which zsh || echo '/bin/zsh')
-
-# HISTORY
-HISTFILE="$HOME/.cache/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=20000
 
 # ZNAP
 [[ -f ~/Git/zsh-snap/znap.zsh ]] ||
