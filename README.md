@@ -77,7 +77,7 @@ This repo hosts a collection of dotfiles for various Linux applications. If you 
 
 
 ## TODO
-- Improve nvchad theme.
+- [ ] Improve nvchad theme.
 
 
 ## ACKNOWLEDGEMENTS
