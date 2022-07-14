@@ -6,7 +6,7 @@ SHELL=$(which zsh || echo '/bin/zsh')
     git clone --depth 1 -- \
         https://github.com/marlonrichert/zsh-snap.git ~/Git/zsh-snap
 
-source ~/Git/zsh-snap/znap.zsh  # Start Znap
+source ~/Git/zsh-snap/znap.zsh
 
 znap source marlonrichert/zsh-autocomplete
 znap source zsh-users/zsh-autosuggestions
