@@ -3,7 +3,6 @@ while read -r opt
 do 
   setopt $opt
 done <<-EOF
-AUTOCD
 AUTO_MENU
 AUTO_PARAM_SLASH
 COMPLETE_IN_WORD

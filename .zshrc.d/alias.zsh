@@ -20,7 +20,7 @@ alias s="sudo"
 alias dwmr="cd ~/.config/dwm/dwm/ && sudo rm config.h && sudo make install"
 alias sudo='doas'
 alias srv='ssh miu@192.168.1.245'
-alias dlink='find . -xtype l -delete'
+alias clean='find . -xtype l -delete && find -empty -type d -delete'
 
 # NAVIGATION
 alias ..="cd .."

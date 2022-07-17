@@ -1,0 +1,8 @@
+feh -B black \
+-d \
+-N \
+--auto-zoom \
+--geometry 1280x720 \
+--draw-filename \
+--menu-font SAGA Heavy \
+--scale-down 

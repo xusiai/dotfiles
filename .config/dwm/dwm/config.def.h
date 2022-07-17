@@ -73,18 +73,18 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING) = title */
 
-    /* class                     instance    title       tags mask     iscentered   isfloating   monitor */
-    { "eww",                     NULL,       NULL,       0,            0,           1,           -1 },
-    { "St",                      NULL,       NULL,       0,            0,           1,           -1 },
-    { "thunar",                  NULL,       NULL,       0,            0,           1,           -1 },
-    { "feh",                     NULL,       NULL,       0,            0,           1,           -1 },
+    /* class                             instance    title       tags mask     iscentered   isfloating   monitor */
+    { "St",              	                  NULL,       NULL,       0,            -1,           1,           -1 },
+    { "Org.gnome.Nautilus",      NULL,       NULL,       0,            -1,           1,           -1 },
+    { "feh",                                 NULL,       NULL,       0,            -1,           1,           -1 },
     { "league of legends.exe",   NULL,       NULL,       2,            0,           1,           -1 },
-    { "leagueclientux.exe",      NULL,       NULL,       2,            0,           1,           -1 },
-    { "leagueclient.exe",        NULL,       NULL,       2,            0,           1,           -1 },
-    { "riotclientux.exe",        NULL,       NULL,       2,            0,           1,           -1 },
-    { "riotclientux.exe",        NULL,       NULL,       2,            0,           1,           -1 },
-    { "Org.gnome.Nautilus",      NULL,       NULL,       0,            0,           1,           -1 },
-    { "music",                   NULL,       NULL,       3,            0,           1,           -1 },
+    { "leagueclientux.exe",        NULL,       NULL,       2,            0,           1,           -1 },
+    { "leagueclient.exe",            NULL,       NULL,       2,            -1,           1,           -1 },
+    { "riotclientux.exe",             NULL,       NULL,       2,            -1,           1,           -1 },
+    { "riotclientux.exe",             NULL,       NULL,       2,            -1,           1,           -1 },
+    { "music",                             NULL,       NULL,       3,            -1,           1,           -1 },
+    { "Zenity",         		         NULL,       NULL,       2,            -1,           1,           -1 },
+    { "explorer.exe",       	         NULL,       NULL,       2,            -1,           1,           -1 },
     
 };
 
@@ -139,21 +139,21 @@ static Key keys[] = {
     { MODKEY|ShiftMask,     XK_r,                   spawn,          SHCMD("redshift -x")},
     { MODKEY|ShiftMask,     XK_x,                   spawn,          SHCMD("shot full")},
     { MODKEY,               XK_x,                   spawn,          SHCMD("shot crop")},
+    { MODKEY,               XK_p,                   spawn,          SHCMD("colorpicker") },
     { MODKEY,               XK_F1,                  spawn,          SHCMD("rofi -show drun -theme $HOME/.config/dwm/rofi/config.rasi") },
     { MODKEY,               XK_Return,              spawn,          SHCMD("st")},
     { MODKEY|ShiftMask,     XK_s,                   spawn,          SHCMD("st")},
     { MODKEY|ShiftMask,     XK_w,                   spawn,          SHCMD("firefox") },
     { MODKEY,               XK_BackSpace,           spawn,          SHCMD("firefox") },
     { MODKEY,               XK_j,                   spawn,          SHCMD("jellyfinmediaplayer") },
-    { MODKEY,               XK_l,                   spawn,          SHCMD("lol") },
+    { MODKEY,               XK_l,                   spawn,          SHCMD("leagueoflegends start") },
     { MODKEY|ShiftMask,     XK_l,                   spawn,          SHCMD("leagueoflegends kill") },
-    { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("thunar") },
-    { MODKEY,               XK_p,                   spawn,          SHCMD("colorpicker") },
+    { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("nautilus") },
     { MODKEY,               XK_y,                   spawn,          SHCMD("yt") },
     { MODKEY,               XK_v,                   spawn,          SHCMD("st -e v") },
     { MODKEY,               XK_g,                   spawn,          SHCMD("code-oss") },
     { Mod1Mask|ControlMask, XK_w,                   spawn,          SHCMD("feh --bg-scale --randomize --recursive $HOME/.local/share/wallpapers") },
-
+    
     { MODKEY,               XK_b,                   togglebar,      {0} },
     { MODKEY,               XK_space,               togglefloating, {0} },
     { MODKEY,               XK_f,                   togglefullscr,  {0} },
@@ -229,3 +229,4 @@ static Button buttons[] = {
     { ClkTabNext,           0,                        Button1,        movestack,      { .i = +1 } },
     { ClkTabClose,          0,                        Button1,        killclient,     {0} },
 };
+

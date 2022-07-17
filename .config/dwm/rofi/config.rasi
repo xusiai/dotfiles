@@ -1,5 +1,5 @@
 configuration {
-	font:							"SAGA Heavy 12";
+	font:							"SAGA Heavy 14";
     show-icons:                     false;
 	icon-theme: 					"Papirus-Dark";
     display-drun: 					"";

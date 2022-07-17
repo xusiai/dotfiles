@@ -23,11 +23,11 @@ case "$1" in
     full)
       full || abort
       xclip -selection c -t image/png "$pic"
-      dunstify -u normal -i "$pic" "Captured" $pic
+      dunstify -u normal -i "$pic" "saved to $dir" $pic
       ;;
     crop)
       crop || abort
       xclip -selection c -t image/png "$pic"
-      dunstify -u normal -i "$pic" "Captured" $pic
+      dunstify -u normal -i "$pic" "saved to $dir" $pic
       ;;
 esac
