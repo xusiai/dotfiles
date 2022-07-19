@@ -54,6 +54,7 @@ alias gge="git config --global user.email"
 alias ggn="git config --global user.name"
 alias bspd="git clone https://github.com/Miusaky/bspdots.git"
 alias gs="git status"
+alias gd="git diff HEAD --name-only"
 
 # APPS
 alias mdl="megadl --path /mnt/D1/TM/completed/"
