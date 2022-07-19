@@ -12,7 +12,7 @@ picom --config $HOME/.config/dwm/picom/picom.conf &
 feh --bg-scale --randomize --recursive $HOME/.local/share/wallpapers/ &
 /usr/libexec/polkit-gnome-authentication-agent-1 &
 mconnect -d &
-mpd &
-mpDris2 &
+#mpd &
+#mpDris2 &
 ~/.config/dwm/scripts/./bar.sh &
 while type dwm >/dev/null; do dwm && continue || break; done

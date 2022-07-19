@@ -12,7 +12,7 @@ st.borderpx: 20
 !-- values between 0.1  - 1.0 --! 
 
 st.alpha: 1.0 
-st.font:         SAGA Heavy:pixelsize=17
+st.font:         SAGA Heavy:pixelsize=20
 
 #define base00 #05080a 
 #define base01 #0A0D0F

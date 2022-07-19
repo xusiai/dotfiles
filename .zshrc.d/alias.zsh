@@ -5,10 +5,8 @@ alias utar='tar -zxvf' # utar <archive_decompress> <file_list>
 alias z='zip -r' # z <archive_compress> <file_list>
 alias uz='unzip' # uz <archive_decompress> -d <dir>
 alias sr='source ~/.zshrc'
-alias l="ls -l"
-alias la="ls -a"
-alias lla="ls -la"
-alias lt="ls --tree"
+alias lsl='exa --long --tree'
+alias ls='exa'
 alias grep='grep --color=auto'
 alias mv='mv -v'
 alias cp='cp -vr'
