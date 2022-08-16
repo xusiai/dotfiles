@@ -32,10 +32,11 @@ This repo hosts a collection of dotfiles for various Linux applications. If you 
  ##### Rofi
  <img src="assets/misc/rofi.png"></br> 
  <img src="assets/misc/powermenu.png"></br> 
- ##### Dunst
+
+##### Dunst
  <img src="assets/misc/dunst.png"></br> 
  
- ##### Thunar
+ ##### GTK
  <img src="assets/misc/GTK.png"></br> 
  
  ##### Firefox
