@@ -10,7 +10,7 @@ configuration {
     background:             #05080A;
     background-alt:         #0A0D0F;
     selected:               #FFC2D0;
-    selected-alt:           #0F1214;
+    selected-alt:           #141719;
     active:                 #05080A;
     urgent:                 #ffe1b1;
 
