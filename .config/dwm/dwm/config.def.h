@@ -149,7 +149,7 @@ static Key keys[] = {
     { MODKEY,               XK_j,                   spawn,          SHCMD("jellyfinmediaplayer") },
     { MODKEY,               XK_l,                   spawn,          SHCMD("leagueoflegends start") },
     { MODKEY|ShiftMask,     XK_l,                   spawn,          SHCMD("leagueoflegends kill") },
-    { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("nautilus") },
+    { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("thunar") },
     { MODKEY,               XK_y,                   spawn,          SHCMD("yt") },
     { MODKEY,               XK_v,                   spawn,          SHCMD("st -e v") },
     { MODKEY,               XK_g,                   spawn,          SHCMD("code-oss") },
