@@ -1,0 +1,14 @@
+{
+  "player": "mpv",
+  "quality": "best",
+  "colors": "true",
+  "printOfflineSubscriptions": "true",
+  "subscriptions": [
+    {
+      "streamer": "cincinbear"
+    }
+  ],
+  "apiToken": "9ie9e8wrhchosn8vnf5bmdrah3i26y",
+  "apiTokenExpiry": "1661467398",
+  "lastSubscriptionUpdate": "null"
+}
