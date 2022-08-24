@@ -1,0 +1,78 @@
+#compdef wtwitch
+
+local curcontext="$curcontext" ret=1
+local -a state line subs
+
+_arguments -C \
+  '1:cmd:->cmds' \
+  '2:name:->names' \
+  '*:: :->multiple' \
+  && ret=0
+
+subs=(
+  "${(f)$(jq -r ".subscriptions[].streamer" \
+  "${XDG_CONFIG_HOME:-${HOME}/.config}/wtwitch/config.json")}"
+)
+
+case $state in
+  (cmds)
+    local -a commands; commands=(
+      {w,watch}':watch [name] streamer'
+      {s,subscribe}':subscribe to [name] streamer'
+      {u,unsub}':unsubscribe from [name] streamer'
+      {c,check}':view your settings and the status of streamers you are subscribed to'
+      'e:search games/categories for [search-term]'
+      'n:search streamers/channels for [search-term]'
+      {g,game}':view the top streamers for [name] game/category'
+      {t,top}':view the top games and streamers on Twitch'
+      {v,vod}':list [name]s VODs'
+      'f:toggle the printing of offline subs with [c]heck'
+      'l:toggle the usage of colors in wtwitch output'
+      {p,player}':change the player program that gets passed to streamlink'
+      {q,quality}':change the video quality that gets passed to streamlink'
+      {b,block}':block [name] streamer(s), preventing them from appearing in any output'
+      'version:print the current version of wtwitch'
+      {h,help}':print this help'
+    )
+
+    _describe cmd commands && ret=0
+    ;;
+  (names)
+    case $line[1] in
+      w|watch)
+        wtwitch _completion_cache_online_subscription_json &> /dev/null
+        local online_subs_file; online_subs_file="${XDG_CACHE_DIR:-${HOME}/.cache}/wtwitch/online-subs"
+        local -a streamers; streamers=("${(fL)$(<$online_subs_file)}")
+
+        _describe online streamers && ret=0
+        ;;
+      u|unsub|v|vod)
+        _describe sublist subs && ret=0
+        ;;
+      q|quality)
+        local -a qualities=(
+          'audio_only'
+          'worst'
+          '160p'
+          '360p'
+          '480p'
+          '720p'
+          '720p60'
+          '1080p60'
+          'best'
+        )
+
+        _describe options qualities && ret=0
+        ;;
+    esac
+    ;;
+  (multiple)
+    case $line[1] in
+      u|unsub)
+        _describe sublist subs && ret=0
+        ;;
+    esac
+    ;;
+esac
+
+return ret
