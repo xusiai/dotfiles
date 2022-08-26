@@ -5,7 +5,7 @@
 [global]
     follow = mouse
     width = 300
-    origin = bottom-right
+    origin = top-right
     offset = 10x56
     indicate_hidden = yes
     shrink = no
@@ -22,7 +22,7 @@
     separator_color = "#0A0D0F"
     sort = yes
     idle_threshold = 120
-    highlight = "#FFBDCB"
+    highlight = "#ffc2df"
     progress_bar_frame_width = 0
 
 ########################################
