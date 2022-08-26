@@ -1,5 +1,5 @@
 #!/bin/sh
-
+session required /lib/security/pam_limits.so & 
 setxkbmap se
 xrdb merge $HOME/.config/dwm/.Xresources
 ksuperkey -e 'Super_L=Super_L|F1'

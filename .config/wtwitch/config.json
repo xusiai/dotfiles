@@ -6,6 +6,24 @@
   "subscriptions": [
     {
       "streamer": "cincinbear"
+    },
+    {
+      "streamer": "amouranth"
+    },
+    {
+      "streamer": "lec"
+    },
+    {
+      "streamer": "lcs"
+    },
+    {
+      "streamer": "lck"
+    },
+    {
+      "streamer": "lpl"
+    },
+    {
+      "streamer": "overwatchleague"
     }
   ],
   "apiToken": "9ie9e8wrhchosn8vnf5bmdrah3i26y",

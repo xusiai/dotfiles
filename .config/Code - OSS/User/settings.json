@@ -1,0 +1,8 @@
+{
+    "editor.minimap.enabled": false,
+    "window.menuBarVisibility": "toggle",
+    "workbench.productIconTheme": "icons-carbon",
+    "editor.fontFamily": "'SAGA','Droid Sans Mono', 'monospace', monospace",
+    "editor.fontLigatures": false,
+    "workbench.colorTheme": "SAGA"
+}

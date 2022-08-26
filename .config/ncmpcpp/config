@@ -1,7 +1,7 @@
 # dir
 ncmpcpp_directory = ~/.config/ncmpcpp
 lyrics_directory  = ~/.config/ncmpcpp/lyrics
-mpd_music_dir     = /mnt/SCND/M3U
+mpd_music_dir     = /nfs/D3/MUSIC/M3U
 
 # behaviour
 external_editor                  = nvim
