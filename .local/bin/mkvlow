@@ -2,6 +2,7 @@
 
 INPUT="$1"
 for i in *.* ; do
-	ffmpeg -i "$i" -c:v libx265 -crf 26 -preset faster -c:a aac -b:a 128k  scale=w=min(iw\,1280):h=-2 $i.mkv"
-	sleep 3
+        ffmpeg -i "$i" -c:v libx265 -crf 26 -preset faster -c:a aac -b:a 128k "$i.mkv"
+        sleep 3
 done
+

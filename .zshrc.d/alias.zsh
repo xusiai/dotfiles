@@ -59,7 +59,7 @@ alias gs="git status"
 alias gd="git diff HEAD --name-only"
 
 # APPS
-alias mdl="megadl --path /mnt/D1/TM/completed/"
+alias mdl="megadl --path /nfs/D1/TM/completed/"
 alias ydl="yt-dlp -o /mnt/D1/TM/completed/%(title)s-%(id)s.%(ext)s"
 alias wwc="wtwitch c"
 alias ww="wtwitch w"

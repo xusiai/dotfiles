@@ -135,6 +135,7 @@ static Key keys[] = {
     { 0,                    XK_F9,                  spawn,          SHCMD("playerctl previous")},
     { MODKEY,               XK_F7,                  spawn,          SHCMD("volume up")},
     { MODKEY,               XK_F9,                  spawn,          SHCMD("volume down")},
+    { MODKEY,               XK_m,                   spawn,          SHCMD("st -c music -e ncmpcpp")},
     { MODKEY,               XK_r,                   spawn,          SHCMD("redshift -O 4000K")},
     { MODKEY|ShiftMask,     XK_r,                   spawn,          SHCMD("redshift -x")},
     { MODKEY|ShiftMask,     XK_x,                   spawn,          SHCMD("shot full")},
