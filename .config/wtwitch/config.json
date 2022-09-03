@@ -2,7 +2,7 @@
   "player": "mpv",
   "quality": "best",
   "colors": "true",
-  "printOfflineSubscriptions": "true",
+  "printOfflineSubscriptions": "false",
   "subscriptions": [
     {
       "streamer": "cincinbear"
@@ -24,9 +24,75 @@
     },
     {
       "streamer": "overwatchleague"
+    },
+    {
+      "streamer": "vaushvidya"
+    },
+    {
+      "streamer": "destiny"
+    },
+    {
+      "streamer": "RicketToo"
+    },
+    {
+      "streamer": "ironicpseudonym"
+    },
+    {
+      "streamer": "extranacly"
+    },
+    {
+      "streamer": "coachblaker"
+    },
+    {
+      "streamer": "imls"
+    },
+    {
+      "streamer": "reknyne"
+    },
+    {
+      "streamer": "seeel"
+    },
+    {
+      "streamer": "huzzygames"
+    },
+    {
+      "streamer": "ofgsaiph"
+    },
+    {
+      "streamer": "valkrin"
+    },
+    {
+      "streamer": "pekinwoof"
+    },
+    {
+      "streamer": "kat_life"
+    },
+    {
+      "streamer": "quin69"
+    },
+    {
+      "streamer": "katevolved"
+    },
+    {
+      "streamer": "xfsn_saber"
+    },
+    {
+      "streamer": "midbeastlol"
+    },
+    {
+      "streamer": "faker"
+    },
+    {
+      "streamer": "aliena85"
+    },
+    {
+      "streamer": "scruffyshaman"
+    },
+    {
+      "streamer": "warcraft"
     }
   ],
-  "apiToken": "9ie9e8wrhchosn8vnf5bmdrah3i26y",
-  "apiTokenExpiry": "1661467398",
+  "apiToken": "lk7vt0hk040w8zpg75m2n5tvcbg3pk",
+  "apiTokenExpiry": "1662323638",
   "lastSubscriptionUpdate": "null"
 }
