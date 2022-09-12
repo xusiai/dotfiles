@@ -74,14 +74,8 @@ This repo hosts a collection of dotfiles for various Linux applications. If you 
 </details>
 
 
-
-
-## TODO
-- [ ] Improve nvchad theme.
-
-
 ## ACKNOWLEDGEMENTS
-- [Siduck](https://github.com/siduck) for Chadwm and St :heart:
+- [Siduck](https://github.com/siduck) for Chadwm :heart:
 - [Saimoomedits](https://github.com/saimoomedits) for the beautiful ncmpcpp config :heart:
 - [Manas140](https://github.com/Manas140) for a few scripts :heart:
 - [Elenapan](https://github.com/elenapan) for the rofi-yt and fetch scripts :heart:
