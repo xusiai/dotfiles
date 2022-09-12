@@ -26,7 +26,7 @@ static const int scalepreview       = 4;
 static const int tag_preview        = 0;        /* 1 means enable, 0 is off */
 static const int colorfultag        = 1;        /* 0 means use SchemeSel for selected non vacant tag */
 
-static const char *fonts[]          = { "SAGA Heavy:size=12",
+static const char *fonts[]          = { "SAGA:size=12",
                                         "Material Design Icons Desktop:size=13" };
 
 #include "themes/SAGA.h"
@@ -75,6 +75,7 @@ static const Rule rules[] = {
 
     /* class                             instance    title       tags mask     iscentered   isfloating   monitor */
     { "St",              	                  NULL,       NULL,       0,            -1,           1,           -1 },
+    { "wezterm",              	                  NULL,       NULL,       0,            -1,           1,           -1 },
     { "Org.gnome.Nautilus",      NULL,       NULL,       0,            -1,           1,           -1 },
     { "feh",                                 NULL,       NULL,       0,            -1,           1,           -1 },
     { "league of legends.exe",   NULL,       NULL,       2,            0,           1,           -1 },
@@ -135,24 +136,25 @@ static Key keys[] = {
     { 0,                    XK_F9,                  spawn,          SHCMD("playerctl previous")},
     { MODKEY,               XK_F7,                  spawn,          SHCMD("volume up")},
     { MODKEY,               XK_F9,                  spawn,          SHCMD("volume down")},
-    { MODKEY,               XK_m,                   spawn,          SHCMD("st -c music -e ncmpcpp")},
-    { MODKEY,               XK_r,                   spawn,          SHCMD("redshift -O 4000K")},
+    { MODKEY,               XK_m,                   spawn,          SHCMD("wezterm -c music -e ncmpcpp")},
+    { MODKEY,               XK_r,                   spawn,          SHCMD("redshift -O 4100K")},
     { MODKEY|ShiftMask,     XK_r,                   spawn,          SHCMD("redshift -x")},
     { MODKEY|ShiftMask,     XK_x,                   spawn,          SHCMD("shot full")},
     { MODKEY,               XK_x,                   spawn,          SHCMD("shot crop")},
     { MODKEY,               XK_p,                   spawn,          SHCMD("colorpicker") },
     { MODKEY,               XK_F1,                  spawn,          SHCMD("$HOME/.config/rofi/launcher/launcher.sh") },
     { MODKEY,               XK_Escape,                  spawn,          SHCMD("$HOME/.config/rofi/powermenu/powermenu.sh") },
-    { MODKEY,               XK_Return,              spawn,          SHCMD("st")},
-    { MODKEY|ShiftMask,     XK_s,                   spawn,          SHCMD("st")},
+    { MODKEY,               XK_Return,              spawn,          SHCMD("wezterm")},
+    { MODKEY,               XK_o,                   spawn,          SHCMD("obsidian")},
+    { MODKEY|ShiftMask,     XK_s,                   spawn,          SHCMD("wezterm")},
     { MODKEY|ShiftMask,     XK_w,                   spawn,          SHCMD("firefox") },
     { MODKEY,               XK_BackSpace,           spawn,          SHCMD("firefox") },
     { MODKEY,               XK_j,                   spawn,          SHCMD("jellyfinmediaplayer") },
-    { MODKEY,               XK_l,                   spawn,          SHCMD("leagueoflegends start") },
+    { MODKEY,               XK_l,                   spawn,          SHCMD("leagueoflegends --skip-riot start") },
     { MODKEY|ShiftMask,     XK_l,                   spawn,          SHCMD("leagueoflegends kill") },
     { MODKEY|ShiftMask,     XK_f,                   spawn,          SHCMD("thunar") },
     { MODKEY,               XK_y,                   spawn,          SHCMD("yt") },
-    { MODKEY,               XK_v,                   spawn,          SHCMD("st -e v") },
+    { MODKEY,               XK_v,                   spawn,          SHCMD("wezterm -e nvim") },
     { MODKEY,               XK_g,                   spawn,          SHCMD("code-oss") },
     { Mod1Mask|ControlMask, XK_w,                   spawn,          SHCMD("feh --bg-scale --randomize --recursive $HOME/.local/share/wallpapers") },
     

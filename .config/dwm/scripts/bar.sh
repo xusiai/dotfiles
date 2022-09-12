@@ -25,9 +25,9 @@ pkg_updates() {
   updates=$(xbps-install -un | wc -l)
 
   if [ -z "$updates" ]; then
-    printf "^c$green^󰎐 "
+    printf "^c$green^󰹻 "
   else
-    printf "^c$green^󰎐 ^c$white^$updates "
+    printf "^c$green^󰹻 ^c$white^$updates "
   fi
 }
 

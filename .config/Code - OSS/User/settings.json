@@ -2,7 +2,10 @@
     "editor.minimap.enabled": false,
     "window.menuBarVisibility": "toggle",
     "workbench.productIconTheme": "icons-carbon",
-    "editor.fontFamily": "'SAGA','Droid Sans Mono', 'monospace', monospace",
+    "editor.fontFamily": "'SAGA','Material Design Icons Desktop'",
+    "editor.fontWeight": "900",
     "editor.fontLigatures": false,
-    "workbench.colorTheme": "SAGA"
+    "terminal.integrated.gpuAcceleration": "canvas",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "SAGA",
 }

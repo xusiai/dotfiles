@@ -1,0 +1,138 @@
+# SAGA FOR HELIX
+
+# SYNTAX HIGHLIGHTING
+# -------------------
+"type" = "Blond"
+"type.enum.variant" = "PastelPeach"
+
+"constructor" = "PinkLace"
+
+"constant" = "PastelPeach"
+"constant.character" = "Celeste"
+"constant.character.escape" = "LavenderPink"
+
+"string" = "Menthol"
+"string.regexp" = "PastelPeach"
+"string.special" = "LavenderPink"
+
+"comment" = { fg = "overlay1", modifiers = ["italic"] }
+
+"variable" = "text"
+"variable.parameter" = { fg = "Orange", modifiers = ["italic"] }
+"variable.builtin" = "PastelMagenta"
+"variable.other.member" = "Celeste"
+
+"label" = "PinkLace" # LIFETIMES
+
+"punctuation" = "overlay2"
+
+"keyword" = "Mauve"
+"keyword.control.conditional" = { fg = "Mauve", modifiers = ["italic"] }
+
+"operator" = "PaleLavender"
+
+"function" = "Pecan"
+"function.builtin" = "PastelPeach"
+"function.macro" = "Celeste"
+
+"tag" = "Mauve"
+
+"namespace" = { fg = "Pecan", modifiers = ["italic"] }
+
+"special" = "Pecan" # FUZZY HIGHLIGHT
+
+"markup.heading.marker" = { fg = "PastelPeach", modifiers = ["bold"] }
+"markup.heading.1" = "lavender"
+"markup.heading.2" = "Mauve"
+"markup.heading.3" = "Menthol"
+"markup.heading.4" = "Blond"
+"markup.heading.5" = "LavenderPink"
+"markup.heading.6" = "Celeste"
+"markup.list" = "Mauve"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "PastelPeach", modifiers = ["underlined"] }
+"markup.link.text" = "Pecan"
+"markup.raw" = "CottonCandy"
+
+"diff.plus" = "Menthol"
+"diff.minus" = "PastelMagenta"
+"diff.delta" = "Blond"
+
+# UI
+# --------------
+"ui.background" = { fg = "text", bg = "Liquorice" }
+
+"ui.linenr" = { fg = "surface1" }
+"ui.linenr.selected" = { fg = "lavender" }
+
+"ui.statusline" = { fg = "overlay1", bg = "surface0" }
+"ui.statusline.inactive" = { fg = "overlay1", bg = "Charcoal" }
+"ui.statusline.normal" = { fg = "surface0", bg = "lavender", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "surface0", bg = "Menthol", modifiers = ["bold"]  }
+"ui.statusline.select" = { fg = "surface0", bg = "CottonCandy", modifiers = ["bold"]  }
+
+"ui.popup" = { fg = "text", bg = "surface0" }
+"ui.window" = { fg = "VampireBlack" }
+"ui.help" = { fg = "overlay2", bg = "surface0" }
+
+"ui.text" = "text" 
+"ui.text.focus" = { fg = "text", bg = "surface0", modifiers = ["bold"] }
+
+"ui.virtual" = "overlay0"
+"ui.virtual.ruler" = { bg = "surface0" }
+"ui.virtual.indent-guide" = "surface0"
+
+"ui.selection" = { bg = "surface1" }
+
+"ui.cursor" = { fg = "Liquorice", bg = "secondary_cursor" }
+"ui.cursor.primary" = { fg = "Liquorice", bg = "MistyRose" }
+"ui.cursor.match" = { fg = "PastelPeach", modifiers = ["bold"] }
+
+"ui.cursorline.primary" = { bg = "cursorline" }
+
+"ui.highlight" = { bg = "surface1" }
+
+"ui.menu" = { fg = "overlay2", bg = "surface0" }
+"ui.menu.selected" = { fg = "text", bg = "surface1", modifiers = ["bold"] }
+
+diagnostic = { modifiers = ["underlined"] }
+
+error = "PastelMagenta"
+warning = "Blond"
+info = "PaleLavender"
+hint = "Celeste"
+
+[palette]
+# SAGA colours
+MistyRose = "#ffe1e1"
+CottonCandy = "#ffc2df"
+LavenderPink = "#ffaecb"
+Mauve = "#dfbaff"
+PastelMagenta = "#ff9fbc"
+Orange = "#f5bd91"
+PastelPeach = "#ffc79b"
+Blond = "#fff6c3"
+Menthol = "#baf7b5"
+Celeste = "#b2fff3"
+PaleLavender = "#f3ceff"
+PinkLace = "#ffe2ff"
+Pecan = "#a8f5e9"
+Lavender = "#d5b0f5"
+
+text = "#fff6ff"
+subtext1 = "#fbf2fb"
+subtext0 = "#f7eef7"
+overlay2 = "#1d2022"
+overlay1 = "#191c1e"
+overlay0 = "#15181a"
+surface2 = "#111416"
+surface1 = "#0d1012"
+surface0 = "#090c0e"
+
+Liquorice = "#05080a"
+Charcoal = "#0f1214"
+VampireBlack = "#0A0D0F"
+
+cursorline = "#141719"
+secondary_cursor = "#181b1d" 

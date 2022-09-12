@@ -90,9 +90,12 @@
     },
     {
       "streamer": "warcraft"
+    },
+    {
+      "streamer": "colonelrpg"
     }
   ],
-  "apiToken": "lk7vt0hk040w8zpg75m2n5tvcbg3pk",
-  "apiTokenExpiry": "1662323638",
-  "lastSubscriptionUpdate": "null"
+  "apiToken": "5otlfv2k40y5z0s329ba0lk36i356s",
+  "apiTokenExpiry": "1663036787",
+  "lastSubscriptionUpdate": "1662950387"
 }

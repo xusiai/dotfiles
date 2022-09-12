@@ -3,4 +3,4 @@
 .config/dwm/dwm/*.o
 .config/dwm/dwm/*.orig
 .config/dwm/dwm/*.rej
-
+.local/share/wallpapers
