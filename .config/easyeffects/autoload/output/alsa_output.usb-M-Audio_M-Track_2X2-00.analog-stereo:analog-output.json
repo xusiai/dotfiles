@@ -1,6 +1,0 @@
-{
-    "device": "alsa_output.usb-M-Audio_M-Track_2X2-00.analog-stereo",
-    "device-description": "M-Track 2X2 Analog Stereo",
-    "device-profile": "analog-output",
-    "preset-name": "BASSWAVES"
-}
