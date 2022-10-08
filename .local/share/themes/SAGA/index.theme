@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=SAGA
+Comment=An adaptive Gtk+ theme based on adapta
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+Type=X-GNOME-Metatheme
+GtkTheme=SAGA
+MetacityTheme=SAGA
+IconTheme=SAGACONS
+CursorTheme=
+CursorSize=24
+ButtonLayout=:close
